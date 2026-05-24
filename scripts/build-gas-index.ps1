@@ -1,5 +1,5 @@
 param(
-  [string]$Version = "20260524-navigation-fix"
+  [string]$Version = "20260524-mobile-usability"
 )
 
 $ErrorActionPreference = "Stop"
