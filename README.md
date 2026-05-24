@@ -1,6 +1,6 @@
 # HR Lounge static homepage
 
-사내 URL 배포를 염두에 둔 정적 HR 홈페이지입니다. 별도 빌드 과정 없이 `index.html`, `styles.css`, `app.js`, `blog-data.json`, `assets/` 폴더를 같은 위치에 배포하면 됩니다.
+사내 URL 배포를 염두에 둔 HR 홈페이지입니다. 별도 빌드 과정 없이 `index.html`, `styles.css`, `app.js`, `blog-data.json`, `assets/`, `api/` 폴더를 같은 위치에 배포하면 됩니다.
 
 ## 파일 구성
 
@@ -8,6 +8,7 @@
 - `styles.css`: Framer풍 프리미엄 SaaS 스타일
 - `app.js`: 메뉴 데이터, 검색, 블로그 편집기, 카테고리 필터, 링크 설정
 - `blog-data.json`: GitHub/Vercel 정적 배포에서 공유할 블로그 글과 사이트 설정 데이터
+- `api/blog-data.js`: Vercel에서 관리자 로그인과 GitHub 자동 저장을 처리하는 서버 함수
 - `assets/hr-main-culture.jpg`: 홈페이지 메인 히어로 이미지 자산
 - `assets/hr-main-culture.png`: 원본 백업 이미지
 
@@ -23,11 +24,25 @@ const INTERNAL_BASE_URL = "https://hr.company.local";
 
 ## 블로그 편집
 
-상단의 `Culture`, `HR Guide`, `Work Tool`, `Help Desk` 메뉴는 블로그 페이지로 이동합니다. 로컬 정적 HTML에서는 브라우저 localStorage에 저장되고, GitHub/Vercel 같은 정적 배포본에서는 `blog-data.json`을 초기 데이터로 읽습니다. Google Apps Script 배포본에서는 `Code.gs`의 `getBlogState` / `saveBlogState`가 Script Properties에 공유 저장합니다.
+상단의 `Culture`, `HR Guide`, `Work Tool`, `Help Desk` 메뉴는 블로그 페이지로 이동합니다. 로컬 정적 HTML에서는 브라우저 localStorage에 저장되고, GitHub/Vercel 같은 배포본에서는 `blog-data.json`을 초기 데이터로 읽습니다. Vercel 환경변수를 설정하면 관리자 저장 시 `api/blog-data.js`가 GitHub의 `blog-data.json`을 자동 커밋합니다.
 
-글 작성, 수정, 삭제는 관리자 비밀번호 `1966`을 입력한 뒤 사용할 수 있습니다. Google Apps Script 배포본에서는 로그인 성공 시 발급되는 관리자 세션 토큰이 있어야 저장할 수 있습니다.
+글 작성, 수정, 삭제는 관리자 비밀번호를 입력한 뒤 사용할 수 있습니다. 로컬 미리보기에서는 기본 비밀번호 `1966`을 사용하고, Vercel 배포본에서는 `HR_LOUNGE_ADMIN_PASSWORD` 환경변수 값을 사용합니다.
 
-Vercel에 최신 글을 반영하려면 최신 글이 보이는 브라우저에서 관리자 로그인 후 `사이트 설정`의 `JSON 내보내기`를 눌러 `blog-data.json`을 내려받고, 프로젝트 루트의 `blog-data.json`을 그 파일로 교체한 뒤 GitHub에 푸시하세요.
+자동 저장을 설정하지 않은 경우에는 최신 글이 보이는 브라우저에서 관리자 로그인 후 `사이트 설정`의 `JSON 내보내기`를 눌러 `blog-data.json`을 내려받고, 프로젝트 루트의 `blog-data.json`을 그 파일로 교체한 뒤 GitHub에 푸시하세요.
+
+## Vercel 자동 저장 환경변수
+
+Vercel 프로젝트의 Settings > Environment Variables에 아래 값을 추가하면 관리자 저장 버튼이 GitHub 커밋까지 자동으로 수행합니다.
+
+- `HR_LOUNGE_ADMIN_PASSWORD`: 관리자 로그인 비밀번호
+- `HR_LOUNGE_SESSION_SECRET`: 관리자 세션 서명용 긴 임의 문자열
+- `GITHUB_TOKEN`: GitHub fine-grained token 또는 classic token. 대상 저장소의 Contents read/write 권한이 필요합니다.
+- `GITHUB_OWNER`: GitHub 계정 또는 조직명
+- `GITHUB_REPO`: 저장소 이름
+- `GITHUB_BRANCH`: 배포 브랜치. 생략하면 Vercel 배포 브랜치 또는 `main`을 사용합니다.
+- `GITHUB_DATA_PATH`: 생략 가능. 기본값은 `blog-data.json`입니다.
+
+환경변수를 추가한 뒤 Vercel에서 다시 배포하세요. 이후 관리자에서 글을 저장하면 브라우저에도 저장되고, GitHub의 `blog-data.json`에도 커밋됩니다. Vercel 반영은 GitHub 커밋 후 재배포 시간만큼 조금 늦게 보일 수 있습니다.
 
 ## 배포
 

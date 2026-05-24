@@ -1921,6 +1921,7 @@ const HEADING_HIGHLIGHT_CLASSES = [
 const ADMIN_AUTH_SESSION_KEY = "hr-lounge-admin-session-v1";
 const BLOG_STATE_STORAGE_KEY = "hrLoungeBlogState";
 const STATIC_BLOG_DATA_URL = "./blog-data.json?v=20260525-data";
+const REMOTE_BLOG_API_URL = "./api/blog-data";
 const LOCAL_PREVIEW_ADMIN_PASSWORD = "1966";
 const ONBOARDING_ACCESS_SESSION_KEY = "hr-lounge-onboarding-email";
 let isEditorUnlocked = false;
@@ -1941,6 +1942,66 @@ function setBlogStatus(message) {
 
 function isAdminSessionUsable(session) {
   return Boolean(session && session.user && session.user.email && (!session.expiresAt || Number(session.expiresAt) > Date.now()));
+}
+
+function canUseRemoteBlogApi() {
+  return typeof fetch === "function" && typeof window !== "undefined" && window.location.protocol !== "file:";
+}
+
+async function postRemoteBlogApi(payload) {
+  if (!canUseRemoteBlogApi()) {
+    return null;
+  }
+
+  let response;
+  try {
+    response = await fetch(REMOTE_BLOG_API_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    });
+  } catch (error) {
+    return null;
+  }
+
+  if (response.status === 404) {
+    return null;
+  }
+
+  const result = await response.json().catch(() => ({}));
+  if (!response.ok) {
+    throw new Error(result?.error || "원격 저장 API 요청에 실패했습니다.");
+  }
+  return result;
+}
+
+async function loginRemoteAdmin(password) {
+  const result = await postRemoteBlogApi({ action: "login", password });
+  if (!result) {
+    return null;
+  }
+  if (!result.token || !result.user) {
+    throw new Error("관리자 로그인 응답이 올바르지 않습니다.");
+  }
+  return {
+    token: result.token,
+    remote: true,
+    user: result.user,
+    expiresAt: Date.now() + Number(result.expiresIn || 21600) * 1000,
+  };
+}
+
+async function saveBlogStateToRemote(state) {
+  if (!adminSession?.remote || !adminSession?.token) {
+    return null;
+  }
+  return postRemoteBlogApi({
+    action: "save",
+    token: adminSession.token,
+    state,
+  });
 }
 
 function readEditorUnlockState() {
@@ -2123,18 +2184,23 @@ function loginEditorAdmin(password) {
     });
   }
 
-  if (password !== LOCAL_PREVIEW_ADMIN_PASSWORD) {
-    return Promise.reject(new Error("비밀번호가 올바르지 않습니다."));
-  }
-  return Promise.resolve({
-    token: `local-${Date.now()}`,
-    local: true,
-    user: {
-      email: "local-admin",
-      name: "관리자",
-      role: "admin",
-    },
-    expiresAt: Date.now() + 6 * 60 * 60 * 1000,
+  return loginRemoteAdmin(password).then((remoteSession) => {
+    if (remoteSession) {
+      return remoteSession;
+    }
+    if (password !== LOCAL_PREVIEW_ADMIN_PASSWORD) {
+      return Promise.reject(new Error("비밀번호가 올바르지 않습니다."));
+    }
+    return {
+      token: `local-${Date.now()}`,
+      local: true,
+      user: {
+        email: "local-admin",
+        name: "관리자",
+        role: "admin",
+      },
+      expiresAt: Date.now() + 6 * 60 * 60 * 1000,
+    };
   });
 }
 
@@ -3334,6 +3400,14 @@ function readLocalBlogState() {
   }
 }
 
+function writeLocalBlogState(state) {
+  try {
+    localStorage.setItem(BLOG_STATE_STORAGE_KEY, JSON.stringify(state));
+  } catch (error) {
+    // Local storage can be unavailable in private or embedded browser modes.
+  }
+}
+
 function getBlogStateTime(state) {
   const time = Date.parse(state?.updatedAt || "");
   return Number.isFinite(time) ? time : 0;
@@ -3379,6 +3453,7 @@ function persistBlogState() {
   const state = normalizeBlogState(blogState);
   blogState = state;
   setBlogStatus("저장 중");
+  writeLocalBlogState(state);
 
   if (hasAppsScriptBridge()) {
     return new Promise((resolve, reject) => {
@@ -3400,7 +3475,24 @@ function persistBlogState() {
     });
   }
 
-  localStorage.setItem(BLOG_STATE_STORAGE_KEY, JSON.stringify(state));
+  if (adminSession?.remote) {
+    setBlogStatus("GitHub 저장 중");
+    return saveBlogStateToRemote(state)
+      .then((result) => {
+        if (!result) {
+          setBlogStatus("브라우저에 저장됨");
+          return { ok: true, localOnly: true };
+        }
+        setBlogStatus("GitHub에 저장됨");
+        showToast("GitHub에 저장했습니다. Vercel 반영까지 잠시 걸릴 수 있습니다.");
+        return result;
+      })
+      .catch((error) => {
+        setBlogStatus("브라우저 저장됨 · GitHub 저장 실패");
+        throw error;
+      });
+  }
+
   setBlogStatus("브라우저에 저장됨");
   return Promise.resolve({ ok: true });
 }

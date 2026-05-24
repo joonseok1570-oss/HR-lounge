@@ -1,5 +1,5 @@
 param(
-  [string]$Version = "20260525-static-blog-data"
+  [string]$Version = "20260525-auto-github-save"
 )
 
 $ErrorActionPreference = "Stop"
