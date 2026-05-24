@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+  <title id="title">생산전략그룹 썸네일</title>
+  <desc id="desc">생산 계획, 품질, 인허가를 연결하는 생산전략그룹 소개 이미지</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fff4e8"/>
+      <stop offset="0.52" stop-color="#f8fbf4"/>
+      <stop offset="1" stop-color="#e7f4ef"/>
+    </linearGradient>
+    <linearGradient id="card" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fffdf8"/>
+      <stop offset="1" stop-color="#fff7ed"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="22" stdDeviation="24" flood-color="#4f3a25" flood-opacity="0.16"/>
+    </filter>
+    <pattern id="grid" width="42" height="42" patternUnits="userSpaceOnUse">
+      <path d="M 42 0 L 0 0 0 42" fill="none" stroke="#9fb7aa" stroke-opacity="0.13" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="675" fill="url(#bg)"/>
+  <rect width="1200" height="675" fill="url(#grid)"/>
+  <path d="M684 0h232L745 675H512z" fill="#dcefe8" opacity="0.5"/>
+  <path d="M0 0h504L374 675H0z" fill="#ffe8d1" opacity="0.38"/>
+  <g filter="url(#shadow)">
+    <rect x="650" y="112" width="382" height="430" rx="34" fill="url(#card)" stroke="#e2d1b8"/>
+    <rect x="690" y="161" width="302" height="28" rx="14" fill="#27302d"/>
+    <rect x="690" y="222" width="118" height="184" rx="16" fill="#f2eadf" stroke="#dfcdb8"/>
+    <rect x="837" y="222" width="118" height="184" rx="16" fill="#ecf3ee" stroke="#c8d9ce"/>
+    <rect x="690" y="437" width="265" height="54" rx="18" fill="#fffdf8" stroke="#e7d6bf"/>
+    <circle cx="730" cy="314" r="34" fill="#d96752" opacity="0.9"/>
+    <path d="M719 314l8 9 18-22" fill="none" stroke="#fffdf8" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M869 331h55M869 308h55M869 285h55" fill="none" stroke="#7b9a84" stroke-width="10" stroke-linecap="round"/>
+    <path d="M724 464h95M842 464h82" fill="none" stroke="#bf8b45" stroke-width="10" stroke-linecap="round"/>
+  </g>
+  <g filter="url(#shadow)">
+    <rect x="156" y="126" width="430" height="366" rx="32" fill="#fffdf8" stroke="#ead7bf"/>
+    <path d="M197 400h318" stroke="#d6c1a6" stroke-width="12" stroke-linecap="round"/>
+    <rect x="215" y="254" width="68" height="146" rx="10" fill="#d95f55" opacity="0.86"/>
+    <rect x="310" y="212" width="68" height="188" rx="10" fill="#24787c" opacity="0.88"/>
+    <rect x="405" y="282" width="68" height="118" rx="10" fill="#bf842d" opacity="0.84"/>
+    <circle cx="249" cy="194" r="28" fill="#fff3df" stroke="#f2c6a5"/>
+    <circle cx="344" cy="166" r="28" fill="#eef6f1" stroke="#bbd3c4"/>
+    <circle cx="439" cy="222" r="28" fill="#fff3df" stroke="#f2c6a5"/>
+    <path d="M249 254v-31M344 212v-18M439 282v-31" stroke="#5a5148" stroke-width="8" stroke-linecap="round"/>
+  </g>
+  <g>
+    <rect x="112" y="82" width="180" height="42" rx="21" fill="#fff3df" stroke="#efc39d"/>
+    <text x="202" y="110" text-anchor="middle" font-family="Pretendard, Arial, sans-serif" font-size="18" font-weight="800" fill="#a55a3d">TEAM INTRO</text>
+    <text x="112" y="584" font-family="Pretendard, Arial, sans-serif" font-size="72" font-weight="900" fill="#252927">생산전략그룹</text>
+    <text x="114" y="624" font-family="Pretendard, Arial, sans-serif" font-size="28" font-weight="700" fill="#5f6a61">생산 계획 · 품질 · 인허가를 연결하는 실행 조직</text>
+  </g>
+</svg>

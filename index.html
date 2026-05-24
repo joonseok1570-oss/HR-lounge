@@ -1,0 +1,489 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="사내 구성원을 위한 HR Lounge 홈페이지입니다. Culture, HR Guide, Work Tool, Help Desk 정보를 한 곳에서 제공합니다."
+    />
+    <title>HR Lounge | 사내 HR 홈페이지</title>
+    <link rel="stylesheet" href="./styles.css?v=20260524-navigation-fix" />
+  </head>
+  <body>
+    <header class="topbar" aria-label="상단 내비게이션">
+      <a class="brand" href="#home" aria-label="Solmedix HR Lounge 홈">
+        <img class="brand-logo" src="./assets/solmedix-logo.png" alt="Solmedix" />
+      </a>
+      <nav class="nav-links" aria-label="주요 메뉴">
+        <div class="nav-item">
+          <a class="nav-link" href="#blog/culture" data-blog-link="culture" aria-haspopup="true">Culture</a>
+          <div class="nav-dropdown" aria-label="Culture 세부 메뉴">
+            <a href="#post/culture-team-intro">
+              <span>팀 역할 안내</span>
+              <small>협업 흐름과 역할 범위</small>
+            </a>
+            <a href="#post/culture-production-strategy-group">
+              <span>생산전략그룹 소개</span>
+              <small>생산계획, 품질, 인허가</small>
+            </a>
+            <a href="#post/culture-sales-marketing-part">
+              <span>영업마케팅파트 소개</span>
+              <small>매출 성장과 시장 접점</small>
+            </a>
+            <a href="#post/culture-management-support-part">
+              <span>경영지원파트 소개</span>
+              <small>사업기획, 회계, 인사총무</small>
+            </a>
+            <a href="#post/culture-gallery">
+              <span>사내 행사 사진첩</span>
+              <small>워크샵, 송년회, 포상 기록</small>
+            </a>
+            <a class="nav-dropdown-all" href="#blog/culture">Culture 전체 글</a>
+          </div>
+        </div>
+        <div class="nav-item">
+          <a class="nav-link" href="#blog/hr-guide" data-blog-link="hr-guide" aria-haspopup="true">HR Guide</a>
+          <div class="nav-dropdown" aria-label="HR Guide 세부 메뉴">
+            <a href="#post/hr-guide-onboarding">
+              <span>신규입사자 온보딩</span>
+              <small>입사 전후 체크리스트</small>
+            </a>
+            <a href="#post/culture-org-chart">
+              <span>조직도, 배치도, 비상연락망</span>
+              <small>협업 상대, 좌석, 긴급 연락</small>
+            </a>
+            <a href="#post/hr-guide-benefits">
+              <span>연차와 복리후생</span>
+              <small>제도 기준과 신청 절차</small>
+            </a>
+            <a href="#post/hr-guide-annual-leave">
+              <span>연차 정산 기준</span>
+              <small>발생, 사용, 잔여 연차</small>
+            </a>
+            <a class="nav-dropdown-all" href="#blog/hr-guide">HR Guide 전체 글</a>
+          </div>
+        </div>
+        <div class="nav-item">
+          <a class="nav-link" href="#blog/work-tool" data-blog-link="work-tool" aria-haspopup="true">Work Tool</a>
+          <div class="nav-dropdown" aria-label="Work Tool 세부 메뉴">
+            <a href="#post/work-tool-google">
+              <span>Google Workspace</span>
+              <small>Drive, Mail, Calendar</small>
+            </a>
+            <a href="#post/work-tool-groupware">
+              <span>Groupware</span>
+              <small>전자결재와 사내 공지</small>
+            </a>
+            <a href="#post/work-tool-it-support">
+              <span>IT/총무 지원</span>
+              <small>Wifi, 프린트, 비품 요청</small>
+            </a>
+            <a class="nav-dropdown-all" href="#blog/work-tool">Work Tool 전체 글</a>
+          </div>
+        </div>
+        <div class="nav-item">
+          <a class="nav-link" href="#blog/help-desk" data-blog-link="help-desk" aria-haspopup="true">Help Desk</a>
+          <div class="nav-dropdown" aria-label="Help Desk 세부 메뉴">
+            <a href="#post/help-desk-faq">
+              <span>FAQ 먼저 확인</span>
+              <small>반복 문의 빠른 답변</small>
+            </a>
+            <a href="#post/help-desk-forms">
+              <span>서식 자동 발급</span>
+              <small>재직증명서, 경력증명서, 명함신청</small>
+            </a>
+            <a href="#post/help-desk-contact">
+              <span>문의 채널 안내</span>
+              <small>유형별 담당 채널</small>
+            </a>
+            <a class="nav-dropdown-all" href="#blog/help-desk">Help Desk 전체 글</a>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <nav class="main-page-toc" id="main-page-toc" aria-label="메인 페이지 목차">
+      <strong>목차</strong>
+      <a href="#home" data-main-toc-link="home" aria-current="page"><span>01</span>메인</a>
+      <a href="#content-search" data-main-toc-link="content-search"><span>02</span>검색</a>
+      <a href="#quick" data-main-toc-link="quick"><span>03</span>주요 메뉴</a>
+      <a href="#hr-year-calendar" data-main-toc-link="hr-year-calendar"><span>04</span>HR 캘린더</a>
+      <a href="#faq" data-main-toc-link="faq"><span>05</span>FAQ</a>
+    </nav>
+
+    <main>
+      <section class="hero" id="home" aria-label="HR 홈페이지 메인">
+        <div class="hero-memory-board">
+          <img
+            class="hero-image"
+            src="./assets/hr-main-culture.jpg"
+            alt="솔메딕스 워크샵, 송년회, 장기근속 포상 등 사내 문화 사진 콜라주"
+          />
+          <span class="hero-tape hero-tape-top" aria-hidden="true"></span>
+          <span class="hero-tape hero-tape-side" aria-hidden="true"></span>
+          <span class="hero-mini-photo hero-mini-photo-one" aria-hidden="true"></span>
+          <span class="hero-mini-photo hero-mini-photo-two" aria-hidden="true"></span>
+          <span class="hero-board-pin hero-board-pin-one" aria-hidden="true"></span>
+          <span class="hero-board-pin hero-board-pin-two" aria-hidden="true"></span>
+          <button
+            class="hero-image-trigger"
+            type="button"
+            aria-label="메인 사진 원본 크게 보기"
+          ></button>
+          <a class="hero-gallery-link" href="#blog/culture?topic=%EC%82%AC%EC%A7%84%EC%B2%A9" aria-label="사내 행사 사진첩으로 이동">
+            <span>사진첩 바로가기</span>
+          </a>
+        </div>
+        <div class="hero-shade" aria-hidden="true"></div>
+        <div class="hero-content reveal">
+          <p class="eyebrow">Internal HR Portal</p>
+          <h1 class="hero-title" aria-label="HR Lounge">
+            <span data-text="HR">HR</span>
+            <span data-text="Lounge">Lounge</span>
+          </h1>
+          <p class="hero-copy">
+            구성원의 온보딩부터 성장까지, 인사 제도와 업무 도구를<br />
+            <span class="hero-copy-nowrap">한 곳에서 연결하고 지원합니다.</span>
+          </p>
+          <div class="hero-category-strip" aria-label="주요 HR 메뉴 바로가기">
+            <a href="#blog/culture"><span>01</span>Culture</a>
+            <a href="#blog/hr-guide"><span>02</span>HR Guide</a>
+            <a href="#blog/work-tool"><span>03</span>Work Tool</a>
+            <a href="#blog/help-desk"><span>04</span>Help Desk</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="search-band" id="content-search" aria-label="HR 콘텐츠 검색">
+        <form class="hero-search" role="search" aria-label="HR 콘텐츠 검색">
+          <label class="sr-only" for="global-search">HR 콘텐츠 검색</label>
+          <input
+            id="global-search"
+            name="q"
+            type="search"
+            autocomplete="off"
+            placeholder="예: 연차, 연차 퇴직정산, 퇴직금, 취업규칙, 사진첩"
+          />
+          <button type="submit" aria-label="검색 실행">
+            <span aria-hidden="true"></span>
+          </button>
+        </form>
+        <div class="search-popular-panel" id="search-popular-panel" aria-label="인기 검색어와 인기글"></div>
+      </section>
+
+      <section class="quick-band" id="quick" aria-labelledby="quick-title">
+        <div class="section-head reveal">
+          <p class="eyebrow">Main Category</p>
+          <h2 id="quick-title">HR Lounge 주요 메뉴</h2>
+        </div>
+        <div class="category-feature-grid" id="category-feature-grid" aria-label="카테고리별 주요 콘텐츠"></div>
+      </section>
+
+      <section class="calendar-spotlight-band" id="hr-year-calendar" aria-labelledby="hr-year-calendar-title">
+        <button class="calendar-spotlight-card calendar-spotlight-trigger reveal" type="button" aria-label="HR 캘린더 크게 보기">
+          <div class="calendar-spotlight-copy">
+            <h2 id="hr-year-calendar-title">HR 캘린더</h2>
+          </div>
+          <div class="calendar-spotlight-media">
+            <img src="./assets/hr-year-calendar.svg?v=20260523-calendar-edit" alt="HR 캘린더 월별 일정표" />
+          </div>
+        </button>
+      </section>
+
+      <section class="faq-band" id="faq" aria-labelledby="faq-title">
+        <div class="faq-shell">
+          <div class="faq-copy reveal">
+            <p class="eyebrow">FAQ</p>
+            <h2 id="faq-title">자주 묻는 HR 질문</h2>
+            <p>
+              구성원이 반복해서 찾는 온보딩, 제도, 업무 도구, 서식 자동 발급 관련 답변을
+              빠르게 확인할 수 있습니다.
+            </p>
+          </div>
+          <div class="faq-list reveal" aria-label="자주 묻는 질문 목록">
+            <details open>
+              <summary>신규입사자는 어떤 순서로 온보딩 자료를 보면 되나요?</summary>
+              <p>신규입사자 가이드에서 입사 전, 입사 당일, 첫 주 체크리스트를 순서대로 확인하면 됩니다.</p>
+            </details>
+            <details>
+              <summary>연차와 복리후생 기준은 어디에서 확인하나요?</summary>
+              <p>HR Guide의 연차 제도, 복리후생 제도, 경조사 안내 게시글에서 최신 기준을 관리합니다.</p>
+            </details>
+            <details>
+              <summary>Google Workspace와 그룹웨어 안내는 어디에 있나요?</summary>
+              <p>Work Tool 메뉴에서 메일, 드라이브, 캘린더, 전자결재, 사내 게시판 사용법을 확인할 수 있습니다.</p>
+            </details>
+            <details>
+              <summary>서식 자동 발급이나 문의는 어디로 가면 되나요?</summary>
+              <p>Help Desk 메뉴에서 FAQ와 재직증명서, 경력증명서, 명함신청 자동 발급 절차를 모아 관리합니다.</p>
+            </details>
+          </div>
+        </div>
+      </section>
+
+      <section class="blog-page" id="blog-page" hidden aria-label="HR 블로그">
+        <div class="blog-shell">
+          <aside class="blog-sidebar" aria-label="블로그 카테고리">
+            <a class="blog-back" href="#home">홈으로</a>
+            <div class="blog-category-list" id="blog-category-list"></div>
+          </aside>
+
+          <section class="blog-workspace" aria-labelledby="blog-title">
+            <div class="blog-head">
+              <div>
+                <p class="eyebrow">HR Lounge Blog</p>
+                <h2 id="blog-title">Culture</h2>
+                <p id="blog-description">HR Lounge 콘텐츠를 블로그 형식으로 작성하고 관리합니다.</p>
+              </div>
+            </div>
+
+            <div class="blog-layout">
+              <section class="post-list-panel" aria-label="게시글 목록">
+                <div class="topic-bar">
+                  <div class="topic-filter" id="topic-filter" aria-label="게시글 주제 필터"></div>
+                  <span id="post-count-label">0개 글</span>
+                </div>
+                <div class="blog-current-scope" id="blog-current-scope" aria-live="polite"></div>
+                <div class="blog-list-toolbar" aria-label="게시글 검색과 정렬">
+                  <label class="blog-list-search">
+                    <span class="sr-only">현재 목록에서 검색</span>
+                    <input id="blog-list-search-input" type="search" placeholder="현재 목록에서 검색" autocomplete="off" />
+                  </label>
+                  <div class="blog-sort-segmented" aria-label="게시글 정렬">
+                    <button type="button" data-blog-sort="basic" aria-pressed="true">기본순</button>
+                    <button type="button" data-blog-sort="latest" aria-pressed="false">최신순</button>
+                    <button type="button" data-blog-sort="popular" aria-pressed="false">인기순</button>
+                    <button type="button" data-blog-sort="title" aria-pressed="false">가나다순</button>
+                  </div>
+                </div>
+                <div class="taxonomy-guide" id="taxonomy-guide" aria-label="현재 카테고리 분류 안내"></div>
+                <div class="content-section-divider" id="content-section-divider" aria-hidden="true">
+                  <span>게시글 목록</span>
+                </div>
+                <div class="blog-head-actions post-list-actions">
+                  <button class="editor-button primary" type="button" id="new-post-button">글 작성</button>
+                </div>
+                <div class="post-list" id="post-list"></div>
+              </section>
+
+              <article class="post-detail-panel" id="post-detail-panel" hidden aria-label="게시글 상세">
+                <div class="post-detail-actions">
+                  <button class="post-back-button" type="button" id="post-back-button" aria-label="이전 화면으로 이동">
+                    <span aria-hidden="true"></span>
+                  </button>
+                  <form class="detail-search-form" id="detail-search-form" role="search" aria-label="전체 글 검색">
+                    <input id="detail-search-input" type="search" placeholder="전체 글 검색" autocomplete="off" />
+                    <button type="submit" aria-label="검색"></button>
+                  </form>
+                  <div class="post-detail-action-group" aria-label="게시글 작업">
+                    <button class="editor-button" type="button" id="close-detail-button">목록으로</button>
+                    <button class="editor-button danger" type="button" id="delete-detail-post-button">삭제</button>
+                    <button class="editor-button primary" type="button" id="edit-post-button">수정</button>
+                  </div>
+                </div>
+                <div class="post-detail" id="post-detail"></div>
+              </article>
+
+              <article class="editor-panel" id="editor-panel" hidden aria-label="글 편집기">
+                <div class="editor-intro">
+                  <div>
+                    <p class="eyebrow">Article Studio</p>
+                    <h3>수준 높은 HR 아티클 작성</h3>
+                    <p>목록, 상세 본문, 태그와 추천 글이 함께 발행되는 기사형 글쓰기 도구입니다.</p>
+                  </div>
+                  <div class="template-actions" aria-label="글 템플릿과 미리보기">
+                    <button class="editor-button primary" type="button" data-template="premium">프리미엄 아티클</button>
+                    <button class="editor-button" type="button" data-template="guide">가이드 템플릿</button>
+                    <button class="editor-button" type="button" data-template="faq">FAQ 템플릿</button>
+                    <button class="editor-button" type="button" id="preview-post-button">미리보기</button>
+                  </div>
+                </div>
+
+                <div class="editor-meta">
+                  <label>
+                    <span>제목</span>
+                    <input id="post-title-input" type="text" placeholder="글 제목" />
+                  </label>
+                  <label>
+                    <span>요약</span>
+                    <input id="post-summary-input" type="text" placeholder="목록에 보일 한 줄 설명" />
+                  </label>
+                  <label>
+                    <span>작성자</span>
+                    <input id="post-author-input" type="text" placeholder="예: People Team" />
+                  </label>
+                  <label>
+                    <span>태그</span>
+                    <input id="post-tags-input" type="text" placeholder="예: #온보딩 #인사제도 #서식" />
+                  </label>
+                  <label>
+                    <span>중분류</span>
+                    <select id="post-group-select" aria-label="글 중분류"></select>
+                  </label>
+                  <label>
+                    <span>소분류</span>
+                    <select id="post-subcategory-select" aria-label="글 소분류"></select>
+                  </label>
+                  <div class="cover-upload-field">
+                    <span>대표 이미지</span>
+                    <input id="post-image-input" type="hidden" />
+                    <input id="cover-image-file-input" class="sr-only" type="file" accept="image/*" />
+                    <div class="cover-upload-control">
+                      <button class="editor-button" type="button" id="cover-upload-button">이미지 선택</button>
+                      <button class="editor-button" type="button" id="clear-cover-button">삭제</button>
+                      <span id="cover-upload-label">선택된 이미지 없음</span>
+                    </div>
+                    <div class="cover-preview" id="cover-preview" hidden aria-hidden="true"></div>
+                  </div>
+                  <div class="wide-field related-post-field">
+                    <span>함께 보면 좋은 글</span>
+                    <div class="related-post-options" id="related-post-options" aria-label="함께 보면 좋은 글 선택"></div>
+                    <small>선택한 글만 게시 화면 하단에 노출됩니다.</small>
+                  </div>
+                </div>
+
+                <div class="editor-toolbar" aria-label="글 서식 도구">
+                  <select id="font-family-select" aria-label="글꼴">
+                    <option value="S-Core Dream">S-Core Dream</option>
+                    <option value="Pretendard">Pretendard</option>
+                    <option value="Malgun Gothic">맑은 고딕</option>
+                    <option value="Georgia">Georgia</option>
+                    <option value="Arial">Arial</option>
+                  </select>
+                  <select id="font-size-select" aria-label="글자 크기">
+                    <option value="3">본문</option>
+                    <option value="4">크게</option>
+                    <option value="5">제목</option>
+                    <option value="2">작게</option>
+                  </select>
+                  <select id="block-format-select" aria-label="문단 스타일">
+                    <option value="">문단</option>
+                    <option value="p">본문</option>
+                    <option value="h2">큰 제목</option>
+                    <option value="h3">소제목</option>
+                    <option value="h4">작은 제목</option>
+                  </select>
+                  <select id="heading-highlight-select" aria-label="소제목 강조">
+                    <option value="">소제목 강조</option>
+                    <option value="none">강조 없음</option>
+                    <option value="brush">브러시 밑줄</option>
+                    <option value="marker">형광펜</option>
+                    <option value="accent">오렌지 포인트</option>
+                    <option value="box">포인트 박스</option>
+                    <option value="side">왼쪽 라인</option>
+                  </select>
+                  <button type="button" data-command="undo" title="실행 취소">↶</button>
+                  <button type="button" data-command="redo" title="다시 실행">↷</button>
+                  <span class="toolbar-divider" aria-hidden="true"></span>
+                  <button type="button" data-command="bold" title="굵게">B</button>
+                  <button type="button" data-command="italic" title="기울임">I</button>
+                  <button type="button" data-command="underline" title="밑줄">U</button>
+                  <button type="button" data-command="strikeThrough" title="취소선">S</button>
+                  <span class="toolbar-divider" aria-hidden="true"></span>
+                  <button type="button" data-command="justifyLeft" title="왼쪽 정렬">좌</button>
+                  <button type="button" data-command="justifyCenter" title="가운데 정렬">중</button>
+                  <button type="button" data-command="justifyRight" title="오른쪽 정렬">우</button>
+                  <button type="button" data-command="justifyFull" title="양쪽 정렬">양</button>
+                  <button type="button" data-command="outdent" title="내어쓰기">내어</button>
+                  <button type="button" data-command="indent" title="들여쓰기">들여</button>
+                  <span class="toolbar-divider" aria-hidden="true"></span>
+                  <button type="button" data-command="insertUnorderedList" title="글머리 기호">•</button>
+                  <button type="button" data-command="insertOrderedList" title="번호 목록">1.</button>
+                  <button type="button" id="insert-quote-button" title="인용문 삽입">인용</button>
+                  <label class="color-tool" title="글자색">
+                    <span>글자</span>
+                    <input id="text-color-input" type="color" value="#211c18" />
+                  </label>
+                  <label class="color-tool" title="음영색">
+                    <span>음영</span>
+                    <input id="highlight-color-input" type="color" value="#fff3df" />
+                  </label>
+                  <input id="table-rows-input" class="table-size" type="number" min="1" max="12" value="3" aria-label="표 행" />
+                  <input id="table-cols-input" class="table-size" type="number" min="1" max="8" value="3" aria-label="표 열" />
+                  <button type="button" id="insert-table-button" title="표 삽입">표</button>
+                  <select id="table-style-select" aria-label="표 스타일">
+                    <option value="basic">기본표</option>
+                    <option value="soft">부드러운표</option>
+                    <option value="zebra">줄무늬표</option>
+                    <option value="grid">그리드표</option>
+                    <option value="accent">포인트표</option>
+                    <option value="card">카드형표</option>
+                    <option value="compact">컴팩트표</option>
+                  </select>
+                  <button type="button" id="insert-link-button" title="링크 삽입">링크삽입</button>
+                  <button type="button" id="insert-link-preview-button" title="URL 미리보기 삽입">URL첨부</button>
+                  <button type="button" data-command="unlink" title="링크 해제">링크해제</button>
+                  <span class="toolbar-divider" aria-hidden="true"></span>
+                  <button type="button" id="insert-summary-box-button" title="요약 박스 삽입">요약박스</button>
+                  <button type="button" id="insert-fact-box-button" title="핵심 정보 박스 삽입">핵심정보</button>
+                  <button type="button" id="insert-card-list-button" title="추천 리스트 삽입">추천목록</button>
+                  <button type="button" id="insert-toc-block-button" title="목차 삽입">목차</button>
+                  <button type="button" id="insert-figure-block-button" title="이미지 캡션 블록 삽입">캡션</button>
+                  <button type="button" id="insert-checklist-button" title="체크리스트 삽입">체크리스트</button>
+                  <button type="button" id="insert-cta-box-button" title="강조 안내 박스 삽입">안내박스</button>
+                  <select id="divider-style-select" aria-label="구분선 스타일">
+                    <option value="soft">부드러운 선</option>
+                    <option value="dots">점선 포인트</option>
+                    <option value="gradient">그라데이션</option>
+                    <option value="tape">테이프 라벨</option>
+                    <option value="wave">물결 라인</option>
+                  </select>
+                  <button type="button" id="insert-divider-button" title="구분선 삽입">구분선</button>
+                  <input id="editor-image-file-input" class="sr-only" type="file" accept="image/*" />
+                  <button type="button" id="insert-image-button" title="본문 이미지 삽입">이미지</button>
+                  <button type="button" id="set-cover-from-editor-button" title="선택 이미지를 대표 이미지로 지정">대표</button>
+                  <label class="image-size-tool" title="선택 이미지 크기">
+                    <span>크기</span>
+                    <input id="image-width-range" type="range" min="25" max="100" step="5" value="70" disabled aria-label="선택 이미지 크기" />
+                  </label>
+                  <button type="button" id="remove-editor-image-button" title="선택 이미지 삭제">사진삭제</button>
+                  <button type="button" data-command="removeFormat" title="서식 지우기">지우기</button>
+                </div>
+
+                <div id="post-editor" class="post-editor" contenteditable="true" spellcheck="true"></div>
+                <aside class="editor-preview" id="editor-preview" hidden aria-label="글 미리보기"></aside>
+
+                <div class="editor-actions">
+                  <button class="editor-button danger" type="button" id="delete-post-button">삭제</button>
+                  <div>
+                    <button class="editor-button" type="button" id="cancel-edit-button">취소</button>
+                    <button class="editor-button primary" type="button" id="save-post-button">업로드</button>
+                  </div>
+                </div>
+              </article>
+
+              <article class="editor-panel site-settings-panel" id="site-settings-panel" hidden tabindex="-1" aria-label="사이트 설정"></article>
+            </div>
+          </section>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div>
+        <strong>HR Lounge</strong>
+        <span>People, culture and work support in one place.</span>
+      </div>
+      <a href="#home">맨 위로</a>
+    </footer>
+
+    <button class="site-settings-entry" type="button" id="site-settings-button" aria-label="사이트 설정 열기">사이트 설정</button>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <div class="image-lightbox" id="image-lightbox" role="dialog" aria-modal="true" aria-label="이미지 원본 보기" hidden>
+      <button class="image-lightbox-close" type="button" aria-label="원본 사진 닫기"></button>
+      <div class="image-lightbox-tools" aria-label="사진 확대 축소">
+        <button class="image-lightbox-zoom" type="button" data-lightbox-zoom="out" aria-label="축소">-</button>
+        <span id="image-lightbox-zoom-value" aria-live="polite">100%</span>
+        <button class="image-lightbox-zoom" type="button" data-lightbox-zoom="in" aria-label="확대">+</button>
+      </div>
+      <div class="image-lightbox-stage" id="image-lightbox-stage">
+        <div class="image-lightbox-canvas" id="image-lightbox-canvas">
+          <img id="image-lightbox-media" alt="" />
+        </div>
+      </div>
+    </div>
+
+    <script src="./app.js?v=20260524-navigation-fix"></script>
+  </body>
+</html>

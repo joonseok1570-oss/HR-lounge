@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+  <title id="title">경영지원파트 썸네일</title>
+  <desc id="desc">사업기획, 재무회계, 인사총무, 과제관리를 연결하는 경영지원파트 소개 이미지</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fff4e8"/>
+      <stop offset="0.52" stop-color="#fffdf8"/>
+      <stop offset="1" stop-color="#e8f4ef"/>
+    </linearGradient>
+    <linearGradient id="paper" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fffdf8"/>
+      <stop offset="1" stop-color="#fff2e4"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="22" stdDeviation="24" flood-color="#523e23" flood-opacity="0.14"/>
+    </filter>
+    <pattern id="grid" width="42" height="42" patternUnits="userSpaceOnUse">
+      <path d="M 42 0 L 0 0 0 42" fill="none" stroke="#9fb7aa" stroke-opacity="0.12" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="675" fill="url(#bg)"/>
+  <rect width="1200" height="675" fill="url(#grid)"/>
+  <path d="M716 0h244L800 675H548z" fill="#dcefe8" opacity="0.5"/>
+  <path d="M0 0h492L348 675H0z" fill="#ffe1c7" opacity="0.36"/>
+  <g filter="url(#shadow)">
+    <rect x="136" y="130" width="365" height="392" rx="30" fill="url(#paper)" stroke="#ead7bf"/>
+    <rect x="178" y="178" width="188" height="28" rx="14" fill="#fff3df" stroke="#efc39d"/>
+    <path d="M180 260h262M180 312h210M180 364h248M180 416h170" stroke="#d6c1a6" stroke-width="12" stroke-linecap="round"/>
+    <circle cx="415" cy="443" r="44" fill="#eef6f1" stroke="#bbd3c4" stroke-width="3"/>
+    <path d="M396 443l14 14 28-34" fill="none" stroke="#24787c" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <g filter="url(#shadow)">
+    <rect x="650" y="124" width="384" height="398" rx="34" fill="#fffdf8" stroke="#d7c6af"/>
+    <circle cx="842" cy="248" r="72" fill="#fff3df" stroke="#efc39d" stroke-width="3"/>
+    <circle cx="758" cy="394" r="48" fill="#eef6f1" stroke="#bbd3c4" stroke-width="3"/>
+    <circle cx="928" cy="394" r="48" fill="#f4f0ff" stroke="#d9ddff" stroke-width="3"/>
+    <path d="M813 305l-34 50M871 305l34 50" stroke="#8fa38f" stroke-width="10" stroke-linecap="round"/>
+    <text x="842" y="260" text-anchor="middle" font-family="Pretendard, Arial, sans-serif" font-size="42" font-weight="900" fill="#252927">₩</text>
+    <path d="M731 394h54M901 394h54" stroke="#d95f55" stroke-width="11" stroke-linecap="round"/>
+    <path d="M758 367v54M928 367v54" stroke="#bf842d" stroke-width="11" stroke-linecap="round"/>
+  </g>
+  <g>
+    <rect x="112" y="82" width="188" height="42" rx="21" fill="#fff3df" stroke="#efc39d"/>
+    <text x="206" y="110" text-anchor="middle" font-family="Pretendard, Arial, sans-serif" font-size="18" font-weight="800" fill="#a55a3d">TEAM INTRO</text>
+    <text x="112" y="584" font-family="Pretendard, Arial, sans-serif" font-size="72" font-weight="900" fill="#252927">경영지원파트</text>
+    <text x="114" y="624" font-family="Pretendard, Arial, sans-serif" font-size="28" font-weight="700" fill="#5f6a61">사업기획 · 재무회계 · 인사총무를 연결하는 운영 허브</text>
+  </g>
+</svg>

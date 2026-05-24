@@ -1,0 +1,172 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1080" viewBox="0 0 1600 1080" role="img" aria-labelledby="title desc">
+  <title id="title">HR 캘린더</title>
+  <desc id="desc">연말정산, 평가, 보상, 연차촉진, 법정교육, 건강검진, 조직 운영 일정을 월별로 정리한 HR 연간 캘린더</desc>
+  <defs>
+    <linearGradient id="paper" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#fffaf3"/>
+      <stop offset="0.48" stop-color="#f7f9fc"/>
+      <stop offset="1" stop-color="#eef7f1"/>
+    </linearGradient>
+    <linearGradient id="wash" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#fff4e5" stop-opacity="0.9"/>
+      <stop offset="0.55" stop-color="#eef3ff" stop-opacity="0.75"/>
+      <stop offset="1" stop-color="#e8f6ee" stop-opacity="0.9"/>
+    </linearGradient>
+    <filter id="cardShadow" x="-20%" y="-20%" width="140%" height="150%">
+      <feDropShadow dx="0" dy="18" stdDeviation="18" flood-color="#263241" flood-opacity="0.11"/>
+    </filter>
+    <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="10" stdDeviation="12" flood-color="#263241" flood-opacity="0.10"/>
+    </filter>
+    <pattern id="dotPattern" width="34" height="34" patternUnits="userSpaceOnUse">
+      <circle cx="3" cy="3" r="1.6" fill="#cfd7e6" opacity="0.38"/>
+    </pattern>
+    <style>
+      .base { font-family: Pretendard, "Noto Sans KR", "Apple SD Gothic Neo", Arial, sans-serif; }
+      .title { fill: #171b25; font-size: 74px; font-weight: 900; letter-spacing: -1px; }
+      .subtitle { fill: #566071; font-size: 27px; font-weight: 800; }
+      .badge-text { fill: #6073ff; font-size: 18px; font-weight: 900; letter-spacing: 0.5px; }
+      .legend-text { fill: #394150; font-size: 20px; font-weight: 850; }
+      .month { fill: #171b25; font-size: 36px; font-weight: 900; }
+      .item { fill: #3d4654; font-size: 18px; font-weight: 800; }
+      .note { fill: #798395; font-size: 18px; font-weight: 750; }
+      .tax { fill: #556176; }
+      .pay { fill: #1f7d7a; }
+      .review { fill: #d95f55; }
+      .leave { fill: #648868; }
+      .edu { fill: #c6801f; }
+      .org { fill: #596f9f; }
+      .health { fill: #2f8f79; }
+    </style>
+  </defs>
+
+  <rect width="1600" height="1080" rx="44" fill="url(#paper)"/>
+  <rect width="1600" height="1080" fill="url(#dotPattern)" opacity="0.72"/>
+  <path d="M0 880 C240 790 410 905 650 815 C910 720 1110 845 1600 765 L1600 1080 L0 1080 Z" fill="url(#wash)" opacity="0.72"/>
+  <circle cx="200" cy="95" r="210" fill="#ffd6b2" opacity="0.22"/>
+  <circle cx="1370" cy="150" r="250" fill="#d9efe3" opacity="0.28"/>
+
+  <g class="base">
+    <rect x="64" y="46" width="242" height="38" rx="19" fill="#eef1ff"/>
+    <text class="badge-text" x="86" y="72">SOLMEDIX HR LOUNGE</text>
+    <text class="title" x="64" y="142">HR Calendar</text>
+    <text class="subtitle" x="68" y="184">평가, 보상, 연차, 교육, 건강검진까지 한 화면에서 확인하는 연간 로드맵</text>
+
+    <g filter="url(#softShadow)">
+      <rect x="952" y="46" width="574" height="96" rx="26" fill="#ffffff" opacity="0.92"/>
+      <circle cx="988" cy="78" r="8" fill="#5b6f9d"/>
+      <text class="legend-text" x="1010" y="85">세무·급여</text>
+      <circle cx="1130" cy="78" r="8" fill="#1f7d7a"/>
+      <text class="legend-text" x="1152" y="85">보상</text>
+      <circle cx="1250" cy="78" r="8" fill="#d95f55"/>
+      <text class="legend-text" x="1272" y="85">평가</text>
+      <circle cx="1370" cy="78" r="8" fill="#648868"/>
+      <text class="legend-text" x="1392" y="85">연차</text>
+      <circle cx="988" cy="115" r="8" fill="#c6801f"/>
+      <text class="legend-text" x="1010" y="122">교육·준법</text>
+      <circle cx="1130" cy="115" r="8" fill="#2f8f79"/>
+      <text class="legend-text" x="1152" y="122">건강</text>
+      <circle cx="1250" cy="115" r="8" fill="#6b7fb5"/>
+      <text class="legend-text" x="1272" y="122">조직·채용</text>
+    </g>
+
+    <g transform="translate(64 220)" filter="url(#cardShadow)">
+      <rect width="320" height="218" rx="22" fill="#ffffff" opacity="0.94"/>
+      <text class="month" x="28" y="80">1월</text>
+      <circle cx="36" cy="118" r="6" fill="#5b6f9d"/><text class="item tax" x="54" y="124">연말정산 간소화</text>
+      <circle cx="36" cy="150" r="6" fill="#648868"/><text class="item leave" x="54" y="156">전년도 근태 마감</text>
+      <circle cx="36" cy="182" r="6" fill="#6b7fb5"/><text class="item org" x="54" y="188">연간 HR 계획</text>
+    </g>
+
+    <g transform="translate(426 220)" filter="url(#cardShadow)">
+      <rect width="320" height="218" rx="22" fill="#ffffff" opacity="0.94"/>
+      <text class="month" x="28" y="80">2월</text>
+      <circle cx="36" cy="118" r="6" fill="#1f7d7a"/><text class="item pay" x="54" y="124">연봉계약 갱신</text>
+      <circle cx="36" cy="150" r="6" fill="#1f7d7a"/><text class="item pay" x="54" y="156">보상안 커뮤니케이션</text>
+      <circle cx="36" cy="182" r="6" fill="#6b7fb5"/><text class="item org" x="54" y="188">조직·인력 계획</text>
+    </g>
+
+    <g transform="translate(788 220)" filter="url(#cardShadow)">
+      <rect width="320" height="218" rx="22" fill="#ffffff" opacity="0.94"/>
+      <text class="month" x="28" y="80">3월</text>
+      <circle cx="36" cy="118" r="6" fill="#1f7d7a"/><text class="item pay" x="54" y="124">연봉인상 반영</text>
+      <circle cx="36" cy="150" r="6" fill="#d95f55"/><text class="item review" x="54" y="156">평가 목표 오픈</text>
+      <circle cx="36" cy="182" r="6" fill="#6b7fb5"/><text class="item org" x="54" y="188">신규·전환 배치</text>
+    </g>
+
+    <g transform="translate(1150 220)" filter="url(#cardShadow)">
+      <rect width="320" height="218" rx="22" fill="#ffffff" opacity="0.94"/>
+      <text class="month" x="28" y="80">4월</text>
+      <circle cx="36" cy="118" r="6" fill="#d95f55"/><text class="item review" x="54" y="124">사전신고서 마감</text>
+      <circle cx="36" cy="150" r="6" fill="#6b7fb5"/><text class="item org" x="54" y="156">1분기 온보딩 점검</text>
+      <circle cx="36" cy="182" r="6" fill="#c6801f"/><text class="item edu" x="54" y="188">법정교육 계획</text>
+    </g>
+
+    <g transform="translate(64 462)" filter="url(#cardShadow)">
+      <rect width="320" height="218" rx="22" fill="#ffffff" opacity="0.94"/>
+      <text class="month" x="28" y="80">5월</text>
+      <circle cx="36" cy="118" r="6" fill="#d95f55"/><text class="item review" x="54" y="124">평가 기준 리마인드</text>
+      <circle cx="36" cy="150" r="6" fill="#2f8f79"/><text class="item health" x="54" y="156">건강검진 안내</text>
+      <circle cx="36" cy="182" r="6" fill="#648868"/><text class="item leave" x="54" y="188">휴가 성수기 계획</text>
+    </g>
+
+    <g transform="translate(426 462)" filter="url(#cardShadow)">
+      <rect width="320" height="218" rx="22" fill="#ffffff" opacity="0.94"/>
+      <text class="month" x="28" y="80">6월</text>
+      <circle cx="36" cy="118" r="6" fill="#6b7fb5"/><text class="item org" x="54" y="124">상반기 이슈 정리</text>
+      <circle cx="36" cy="150" r="6" fill="#5b6f9d"/><text class="item tax" x="54" y="156">급여 데이터 점검</text>
+      <circle cx="36" cy="182" r="6" fill="#6b7fb5"/><text class="item org" x="54" y="188">조직문화 펄스</text>
+    </g>
+
+    <g transform="translate(788 462)" filter="url(#cardShadow)">
+      <rect width="320" height="218" rx="22" fill="#ffffff" opacity="0.94"/>
+      <text class="month" x="28" y="80">7월</text>
+      <circle cx="36" cy="118" r="6" fill="#648868"/><text class="item leave" x="54" y="124">연차촉진 1차</text>
+      <circle cx="36" cy="150" r="6" fill="#d95f55"/><text class="item review" x="54" y="156">하반기 목표 정렬</text>
+      <circle cx="36" cy="182" r="6" fill="#c6801f"/><text class="item edu" x="54" y="188">법정교육 시작</text>
+    </g>
+
+    <g transform="translate(1150 462)" filter="url(#cardShadow)">
+      <rect width="320" height="218" rx="22" fill="#ffffff" opacity="0.94"/>
+      <text class="month" x="28" y="80">8월</text>
+      <circle cx="36" cy="118" r="6" fill="#d95f55"/><text class="item review" x="54" y="124">중간점검 시작</text>
+      <circle cx="36" cy="150" r="6" fill="#c6801f"/><text class="item edu" x="54" y="156">평가 시즌 알림</text>
+      <circle cx="36" cy="182" r="6" fill="#6b7fb5"/><text class="item org" x="54" y="188">리더 피드백 가이드</text>
+    </g>
+
+    <g transform="translate(64 704)" filter="url(#cardShadow)">
+      <rect width="320" height="218" rx="22" fill="#ffffff" opacity="0.94"/>
+      <text class="month" x="28" y="80">9월</text>
+      <circle cx="36" cy="118" r="6" fill="#d95f55"/><text class="item review" x="54" y="124">중간점검 마감</text>
+      <circle cx="36" cy="150" r="6" fill="#1f7d7a"/><text class="item pay" x="54" y="156">보상 후보 리뷰</text>
+      <circle cx="36" cy="182" r="6" fill="#6b7fb5"/><text class="item org" x="54" y="188">채용·온보딩 회고</text>
+    </g>
+
+    <g transform="translate(426 704)" filter="url(#cardShadow)">
+      <rect width="320" height="218" rx="22" fill="#ffffff" opacity="0.94"/>
+      <text class="month" x="28" y="80">10월</text>
+      <circle cx="36" cy="118" r="6" fill="#648868"/><text class="item leave" x="54" y="124">연차촉진 2차</text>
+      <circle cx="36" cy="150" r="6" fill="#c6801f"/><text class="item edu" x="54" y="156">퇴직연금 교육</text>
+      <circle cx="36" cy="182" r="6" fill="#2f8f79"/><text class="item health" x="54" y="188">건강검진 독려</text>
+    </g>
+
+    <g transform="translate(788 704)" filter="url(#cardShadow)">
+      <rect width="320" height="218" rx="22" fill="#ffffff" opacity="0.94"/>
+      <text class="month" x="28" y="80">11월</text>
+      <circle cx="36" cy="118" r="6" fill="#d95f55"/><text class="item review" x="54" y="124">최종평가 준비</text>
+      <circle cx="36" cy="150" r="6" fill="#6b7fb5"/><text class="item org" x="54" y="156">내년 인력 계획</text>
+      <circle cx="36" cy="182" r="6" fill="#648868"/><text class="item leave" x="54" y="188">연말 근태 점검</text>
+    </g>
+
+    <g transform="translate(1150 704)" filter="url(#cardShadow)">
+      <rect width="320" height="218" rx="22" fill="#ffffff" opacity="0.94"/>
+      <text class="month" x="28" y="80">12월</text>
+      <circle cx="36" cy="112" r="6" fill="#d95f55"/><text class="item review" x="54" y="118">최종평가</text>
+      <circle cx="36" cy="142" r="6" fill="#648868"/><text class="item leave" x="54" y="148">연차촉진 3차</text>
+      <circle cx="36" cy="172" r="6" fill="#5b6f9d"/><text class="item tax" x="54" y="178">연말정산 사전안내</text>
+      <circle cx="36" cy="202" r="6" fill="#6b7fb5"/><text class="item org" x="54" y="208">조직개편 준비</text>
+    </g>
+
+    <text class="note" x="66" y="992">※ 세부 시행일은 매년 공지와 회사 운영 기준에 따라 조정될 수 있습니다.</text>
+  </g>
+</svg>
