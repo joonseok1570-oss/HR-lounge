@@ -1919,12 +1919,15 @@ const HEADING_HIGHLIGHT_CLASSES = [
   "article-heading-side",
 ];
 const ADMIN_AUTH_SESSION_KEY = "hr-lounge-admin-session-v1";
+const BLOG_STATE_STORAGE_KEY = "hrLoungeBlogState";
+const STATIC_BLOG_DATA_URL = "./blog-data.json?v=20260525-data";
 const LOCAL_PREVIEW_ADMIN_PASSWORD = "1966";
 const ONBOARDING_ACCESS_SESSION_KEY = "hr-lounge-onboarding-email";
 let isEditorUnlocked = false;
 let adminSession = null;
 let editorUnlockDialog = null;
 let pendingEditorAction = null;
+let siteSettingsOpenedFromHiddenBlogPage = false;
 
 function hasAppsScriptBridge() {
   return typeof google !== "undefined" && google.script && google.script.run;
@@ -3323,7 +3326,42 @@ function normalizeBlogState(state) {
   };
 }
 
-function loadBlogState() {
+function readLocalBlogState() {
+  try {
+    return JSON.parse(localStorage.getItem(BLOG_STATE_STORAGE_KEY) || "null");
+  } catch (error) {
+    return null;
+  }
+}
+
+function getBlogStateTime(state) {
+  const time = Date.parse(state?.updatedAt || "");
+  return Number.isFinite(time) ? time : 0;
+}
+
+function selectStaticBlogState(localState, fileState) {
+  if (!localState) {
+    return fileState || null;
+  }
+  if (!fileState) {
+    return localState;
+  }
+  return getBlogStateTime(fileState) > getBlogStateTime(localState) ? fileState : localState;
+}
+
+async function loadStaticBlogData() {
+  try {
+    const response = await fetch(STATIC_BLOG_DATA_URL, { cache: "no-store" });
+    if (!response.ok) {
+      return null;
+    }
+    return await response.json();
+  } catch (error) {
+    return null;
+  }
+}
+
+async function loadBlogState() {
   if (hasAppsScriptBridge()) {
     return new Promise((resolve) => {
       google.script.run
@@ -3333,11 +3371,8 @@ function loadBlogState() {
     });
   }
 
-  try {
-    return Promise.resolve(JSON.parse(localStorage.getItem("hrLoungeBlogState") || "null"));
-  } catch (error) {
-    return Promise.resolve(null);
-  }
+  const [localState, fileState] = await Promise.all([Promise.resolve(readLocalBlogState()), loadStaticBlogData()]);
+  return selectStaticBlogState(localState, fileState);
 }
 
 function persistBlogState() {
@@ -3365,9 +3400,34 @@ function persistBlogState() {
     });
   }
 
-  localStorage.setItem("hrLoungeBlogState", JSON.stringify(state));
+  localStorage.setItem(BLOG_STATE_STORAGE_KEY, JSON.stringify(state));
   setBlogStatus("브라우저에 저장됨");
   return Promise.resolve({ ok: true });
+}
+
+function downloadBlogDataFile(state) {
+  const json = `${JSON.stringify(state, null, 2)}\n`;
+  const blob = new Blob([json], { type: "application/json;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = "blog-data.json";
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+  window.setTimeout(() => URL.revokeObjectURL(url), 1000);
+}
+
+function exportBlogDataFile() {
+  if (!requestEditorAccess(exportBlogDataFile)) {
+    return;
+  }
+  if (siteSettingsPanel && !siteSettingsPanel.hidden) {
+    blogState.siteSettings = collectSiteSettingsFromPanel();
+  }
+  blogState = normalizeBlogState(blogState);
+  downloadBlogDataFile(blogState);
+  showToast("blog-data.json 파일을 내보냈습니다.");
 }
 
 function setTextIfPresent(selector, value) {
@@ -3711,6 +3771,7 @@ function renderSiteSettingsPanel() {
         </div>
         <div class="site-settings-top-actions">
           <button class="editor-button" type="button" data-settings-cancel>${escapeHtml(settings.buttons.settingsCancel)}</button>
+          <button class="editor-button" type="button" data-export-blog-data>JSON 내보내기</button>
           <button class="editor-button primary" type="button" data-settings-save>${escapeHtml(settings.buttons.settingsSave)}</button>
         </div>
       </header>
@@ -3852,6 +3913,7 @@ function renderSiteSettingsPanel() {
           <button class="editor-button danger" type="button" data-settings-reset>${escapeHtml(settings.buttons.settingsReset)}</button>
           <div>
             <button class="editor-button" type="button" data-settings-cancel>${escapeHtml(settings.buttons.settingsCancel)}</button>
+            <button class="editor-button" type="button" data-export-blog-data>JSON 내보내기</button>
             <button class="editor-button primary" type="button" data-settings-save>${escapeHtml(settings.buttons.settingsSave)}</button>
           </div>
         </div>
@@ -3921,6 +3983,10 @@ function showSiteSettingsPanel() {
   if (!requestEditorAccess(showSiteSettingsPanel)) {
     return;
   }
+  siteSettingsOpenedFromHiddenBlogPage = Boolean(blogPage?.hidden);
+  if (blogPage) {
+    blogPage.hidden = false;
+  }
   hideEditorPanel();
   if (postDetailPanel) {
     postDetailPanel.hidden = true;
@@ -3937,6 +4003,10 @@ function hideSiteSettingsPanel() {
   if (siteSettingsPanel) {
     siteSettingsPanel.hidden = true;
   }
+  if (siteSettingsOpenedFromHiddenBlogPage && blogPage) {
+    blogPage.hidden = true;
+  }
+  siteSettingsOpenedFromHiddenBlogPage = false;
   document.body.classList.remove("is-site-settings-open");
 }
 
@@ -6919,6 +6989,10 @@ function bindEditorTools() {
       resetSiteSettings();
       return;
     }
+    if (event.target.closest("[data-export-blog-data]")) {
+      exportBlogDataFile();
+      return;
+    }
     if (event.target.closest("[data-settings-cancel]")) {
       hideSiteSettingsPanel();
     }
@@ -7170,6 +7244,9 @@ async function initBlogSystem() {
   bindBlogListControls();
   const storedState = await loadBlogState();
   blogState = normalizeBlogState(storedState || defaultBlogState);
+  if (typeof window !== "undefined") {
+    window.hrLoungeGetBlogData = () => normalizeBlogState(blogState);
+  }
   blogReady = true;
   applySiteSettings();
   renderNavDropdowns();

@@ -1,5 +1,5 @@
 param(
-  [string]$Version = "20260524-mobile-usability"
+  [string]$Version = "20260525-static-blog-data"
 )
 
 $ErrorActionPreference = "Stop"
