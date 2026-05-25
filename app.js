@@ -2004,6 +2004,24 @@ async function saveBlogStateToRemote(state) {
   });
 }
 
+async function uploadBlogImageToRemote(dataUrl, options = {}) {
+  if (!adminSession?.remote || !adminSession?.token || !String(dataUrl || "").startsWith("data:image/")) {
+    return dataUrl;
+  }
+
+  const result = await postRemoteBlogApi({
+    action: "uploadImage",
+    token: adminSession.token,
+    image: dataUrl,
+    fileName: options.fileName || "image",
+    kind: options.kind || "image",
+  });
+  if (!result?.url) {
+    throw new Error("이미지 업로드 응답이 올바르지 않습니다.");
+  }
+  return result.url;
+}
+
 function readEditorUnlockState() {
   try {
     const storedSession = JSON.parse(sessionStorage.getItem(ADMIN_AUTH_SESSION_KEY) || "null");
@@ -3483,8 +3501,15 @@ function persistBlogState() {
           setBlogStatus("브라우저에 저장됨");
           return { ok: true, localOnly: true };
         }
+        if (result.state) {
+          applySavedRemoteState(result.state);
+        }
         setBlogStatus("GitHub에 저장됨");
-        showToast("GitHub에 저장했습니다. Vercel 반영까지 잠시 걸릴 수 있습니다.");
+        showToast(
+          result.migratedImageCount
+            ? `GitHub에 저장하고 이미지 ${result.migratedImageCount}개를 파일로 정리했습니다.`
+            : "GitHub에 저장했습니다. Vercel 반영까지 잠시 걸릴 수 있습니다."
+        );
         return result;
       })
       .catch((error) => {
@@ -3495,6 +3520,22 @@ function persistBlogState() {
 
   setBlogStatus("브라우저에 저장됨");
   return Promise.resolve({ ok: true });
+}
+
+function applySavedRemoteState(state) {
+  if (!state) {
+    return;
+  }
+  blogState = normalizeBlogState(state);
+  writeLocalBlogState(blogState);
+  applySiteSettings();
+  renderNavDropdowns();
+  renderBlogCategories();
+  renderCategoryFeatures();
+  renderPostList();
+  if (currentPostId) {
+    renderPostDetail(getCurrentPost());
+  }
 }
 
 function downloadBlogDataFile(state) {
@@ -5794,9 +5835,10 @@ async function handleCoverImageFile(file) {
   try {
     setBlogStatus("이미지 처리 중");
     const dataUrl = await optimizeImageFile(file, { maxWidth: 1400, quality: 0.8 });
-    postImageInput.value = dataUrl;
-    updateCoverPreview(dataUrl);
-    setBlogStatus(getSiteSettings().buttons.coverSelected);
+    const imageUrl = await uploadBlogImageToRemote(dataUrl, { fileName: file.name, kind: "cover" });
+    postImageInput.value = imageUrl;
+    updateCoverPreview(imageUrl);
+    setBlogStatus(imageUrl === dataUrl ? getSiteSettings().buttons.coverSelected : "대표 이미지 업로드됨");
   } catch (error) {
     showToast(error.message || "대표 이미지를 처리하지 못했습니다.");
     syncEditorAccessStatus();
@@ -5811,8 +5853,9 @@ async function handleEditorImageFile(file) {
   try {
     setBlogStatus("이미지 처리 중");
     const dataUrl = await optimizeImageFile(file, { maxWidth: 1200, quality: 0.78 });
-    insertImageHtml(dataUrl);
-    setBlogStatus("본문 이미지 삽입됨");
+    const imageUrl = await uploadBlogImageToRemote(dataUrl, { fileName: file.name, kind: "content" });
+    insertImageHtml(imageUrl);
+    setBlogStatus(imageUrl === dataUrl ? "본문 이미지 삽입됨" : "본문 이미지 업로드됨");
   } catch (error) {
     showToast(error.message || "본문 이미지를 처리하지 못했습니다.");
     syncEditorAccessStatus();

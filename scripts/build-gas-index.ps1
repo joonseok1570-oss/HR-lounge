@@ -1,5 +1,5 @@
 param(
-  [string]$Version = "20260525-auto-github-save"
+  [string]$Version = "20260525-upload-images"
 )
 
 $ErrorActionPreference = "Stop"
