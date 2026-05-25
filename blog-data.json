@@ -1,6 +1,6 @@
 {
   "version": 36,
-  "updatedAt": "2026-05-25T03:14:01.843Z",
+  "updatedAt": "2026-05-25T03:33:13.198Z",
   "siteSettings": {
     "hero": {
       "eyebrow": "Internal HR Portal",
@@ -650,7 +650,9 @@
         "생산기획파트",
         "품질경영파트",
         "인허가파트",
-        "생산직"
+        "생산직",
+        "팀",
+        "소개"
       ],
       "takeaways": [
         "생산전략그룹은 생산계획, 품질경영, 인허가 대응, 현장 생산을 연결하는 실행 조직입니다.",
@@ -660,9 +662,9 @@
       "relatedPostIds": [
         "culture-team-intro"
       ],
-      "image": "./assets/production-strategy-thumb.jpg",
+      "image": "./assets/uploads/20260525/image-abebe73c3b72fc38.jpg",
       "order": 2,
-      "updatedAt": "2026-05-22T00:00:00+09:00",
+      "updatedAt": "2026-05-25T03:33:10.084Z",
       "content": "\n  <p class=\"article-lead\">생산전략그룹은 제품이 안정적으로 생산되고, 품질 기준과 인허가 요건을 충족하며, 실제 현장에서 계획대로 움직일 수 있도록 연결하는 실행 조직입니다. 생산계획, 원가, 재고, 생산성, 품질시스템, 인허가 대응을 한 흐름으로 묶어 제품이 개발 이후에도 지속적으로 공급될 수 있게 관리합니다.</p>\n  <div class=\"article-pill-row\">\n    <span class=\"article-pill\">#생산전략그룹</span>\n    <span class=\"article-pill\">#생산기획파트</span>\n    <span class=\"article-pill\">#품질경영파트</span>\n    <span class=\"article-pill\">#인허가파트</span>\n    <span class=\"article-pill\">#생산직</span>\n  </div>\n  <p class=\"article-source-note\">해당 글은 2026년도 사전목표신고서를 기반으로 작성되었습니다.</p>\n  <h2>생산전략그룹 조직 구성</h2>\n  <div class=\"article-org-chart\">\n    <div class=\"article-org-node article-org-root\">\n      <span class=\"article-org-role\">생산전략그룹</span>\n      <strong>강호철 상무</strong>\n      <span class=\"article-org-name\">그룹장</span>\n    </div>\n    <div class=\"article-org-branches\">\n      <div class=\"article-org-node\">\n        <span class=\"article-org-role\">생산기획파트</span>\n        <ul class=\"article-org-members\">\n          <li>박지호 선임</li>\n          <li>이숙진 책임</li>\n          <li>신현경 선임</li>\n          <li>박서연 주임</li>\n        </ul>\n      </div>\n      <div class=\"article-org-node\">\n        <span class=\"article-org-role\">품질경영파트</span>\n        <ul class=\"article-org-members\">\n          <li>김용 파트장</li>\n          <li>이은지 주임</li>\n        </ul>\n      </div>\n      <div class=\"article-org-node\">\n        <span class=\"article-org-role\">인허가파트</span>\n        <ul class=\"article-org-members\">\n          <li>이혜령 파트장</li>\n        </ul>\n      </div>\n      <div class=\"article-org-node\">\n        <span class=\"article-org-role\">생산직</span>\n        <ul class=\"article-org-members\">\n          <li>장윤미</li>\n          <li>이슬기</li>\n        </ul>\n      </div>\n    </div>\n  </div>\n  <h2>그룹 목표 구조</h2>\n  <p>사전 목표신고서 기준으로 생산전략그룹은 품질경영파트, 인허가파트, 생산기획파트가 각각 명확한 업무 비중을 가지고 움직입니다. 공통적으로 중요한 기준은 일정 준수, 정해진 기간 내 완료, 안정적인 운영, 그리고 실적을 데이터로 확인할 수 있는 관리 체계입니다.</p>\n  <div class=\"article-metric-grid\">\n    <div class=\"article-metric\">\n      <strong>01.</strong>\n      <span>생산기획파트</span>\n      <p>원가 절감, 안전재고, 생산계획 달성, 생산성 향상, 설비관리, 양산 이관, MOSAIC Factory 운영</p>\n    </div>\n    <div class=\"article-metric\">\n      <strong>02.</strong>\n      <span>품질경영파트</span>\n      <p>외부/내부 심사 대응, CAPA와 고객불만, QMS 정기검토, VMP, GMP 교육과 자격관리</p>\n    </div>\n    <div class=\"article-metric\">\n      <strong>03.</strong>\n      <span>인허가파트</span>\n      <p>국내 인허가, 해외 인허가, 자료 대응, CDMO RA 컨설팅, 유관 부서 지원</p>\n    </div>\n  </div>\n  <h2>파트별 주요 역할</h2>\n  <div class=\"article-card-grid\">\n    <div class=\"article-card\">\n      <strong>생산기획파트</strong>\n      <p>생산 원가 절감, 재고 안정화, 생산계획 달성, 생산성 향상, 설비관리, 개발품 팩토리 이관을 중심으로 생산 운영의 뼈대를 잡습니다.</p>\n      <span class=\"article-card-meta\">계획 · 원가 · 재고 · 생산성 · 이관</span>\n    </div>\n    <div class=\"article-card\">\n      <strong>품질경영파트</strong>\n      <p>외부/내부 심사 대응, CAPA와 고객불만 처리, QMS 문서 정기검토와 변경관리, 밸리데이션, GMP 교육을 통해 품질 시스템의 신뢰도를 관리합니다.</p>\n      <span class=\"article-card-meta\">QMS · CAPA · 심사 · 교육</span>\n    </div>\n    <div class=\"article-card\">\n      <strong>인허가파트</strong>\n      <p>국내외 인허가, 임상 및 기술자료 대응, CDMO RA 컨설팅과 지원업무를 담당해 제품이 필요한 규제 기준을 충족하도록 준비합니다.</p>\n      <span class=\"article-card-meta\">국내외 인허가 · 자료 대응 · RA</span>\n    </div>\n    <div class=\"article-card\">\n      <strong>생산직</strong>\n      <p>근태, 생산량, 주기 시간, 중단 시간, 환경 및 자재 관리처럼 현장 생산성과 공정 안정성에 직접 연결되는 지표를 관리합니다.</p>\n      <span class=\"article-card-meta\">현장 생산 · 생산성 · 공정 안정</span>\n    </div>\n  </div>\n  <h2>구성원별 주요 업무</h2>\n  <div class=\"article-card-grid article-member-card-grid\">\n    <div class=\"article-card\">\n      <strong>강호철 상무</strong>\n      <p>생산전략그룹 전체 목표와 우선순위를 정렬하고, 생산기획·품질경영·인허가·현장 생산이 같은 방향으로 움직이도록 그룹 운영을 총괄합니다.</p>\n      <span class=\"article-card-meta\">그룹장 · 목표 정렬 · 의사결정</span>\n    </div>\n    <div class=\"article-card\">\n      <strong>박지호 선임</strong>\n      <p>MOSAIC Factory 생산관리시스템 운영, 안전재고 확보, 생산성 향상, CDMO 대응, 공정관리와 데이터 정리를 중심으로 생산 기반을 관리합니다.</p>\n      <span class=\"article-card-meta\">MOSAIC · 안전재고 · 공정관리</span>\n    </div>\n    <div class=\"article-card\">\n      <strong>이숙진 책임</strong>\n      <p>생산 현황 모니터링, 생산 운영 및 이관 관리, 앵커 사출 공정 안정화, 품질 시스템 및 협력 관리를 담당합니다.</p>\n      <span class=\"article-card-meta\">생산 모니터링 · 이관 · 공정 안정화</span>\n    </div>\n    <div class=\"article-card\">\n      <strong>신현경 선임 · 박서연 주임</strong>\n      <p>현장 생산성과 근태, 생산량, 주기 시간, 중단 시간, 환경 및 자재 관리처럼 매일의 생산 안정성에 직접 연결되는 지표를 관리합니다.</p>\n      <span class=\"article-card-meta\">생산성 · 근태 · 현장 지표</span>\n    </div>\n    <div class=\"article-card\">\n      <strong>김용 파트장 · 이은지 주임</strong>\n      <p>품질경영파트의 심사 대응, CAPA와 고객불만, QMS 문서관리, 밸리데이션, GMP 교육과 자격관리 업무를 수행합니다.</p>\n      <span class=\"article-card-meta\">품질경영 · CAPA · GMP</span>\n    </div>\n    <div class=\"article-card\">\n      <strong>이혜령 파트장</strong>\n      <p>국내외 인허가와 의료자료, CDMO RA 컨설팅, 제품별 허가 자료 준비와 유관 부서 지원업무를 담당합니다.</p>\n      <span class=\"article-card-meta\">인허가 · RA · 자료 대응</span>\n    </div>\n  </div>\n"
     },
     {
