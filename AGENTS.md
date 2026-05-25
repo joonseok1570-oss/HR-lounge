@@ -11,6 +11,8 @@
 - 이미지는 `blog-data.json`에 `data:image`로 넣지 않는다.
 - 관리자에서 업로드한 이미지는 `assets/uploads/`에 파일로 저장하고, `blog-data.json`에는 `./assets/uploads/...` 경로만 저장한다.
 - 기존에 JSON 안에 들어간 `data:image`는 저장 API 또는 `scripts/migrate-blog-images.js`로 파일 분리한다.
+- 관리자 `사이트 설정` 화면에는 `저장용량 현황`을 표시한다. 데이터 파일 기준 권장 3MB, 저장 요청 기준 최대 4.5MB를 함께 보여준다.
+- 상단 메뉴와 좌측 목차 표시명은 관리자 `사이트 설정 > 상단/좌측 메뉴`에서 수정한다. 카테고리 slug와 글의 내부 taxonomy 값은 필터/기존 글 연결용이므로 바꾸지 말고, 화면 표시명만 `siteSettings`로 덮어쓴다.
 
 ## Do Not Revert To Old Flow
 

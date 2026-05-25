@@ -1,5 +1,5 @@
 param(
-  [string]$Version = "20260525-upload-images"
+  [string]$Version = "20260525-core-values-folder"
 )
 
 $ErrorActionPreference = "Stop"

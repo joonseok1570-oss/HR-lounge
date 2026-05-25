@@ -1,6 +1,6 @@
 {
-  "version": 34,
-  "updatedAt": "2026-05-25T00:43:26.571Z",
+  "version": 36,
+  "updatedAt": "2026-05-25T02:15:00.000Z",
   "siteSettings": {
     "hero": {
       "eyebrow": "Internal HR Portal",
@@ -735,6 +735,34 @@
       "order": 7,
       "updatedAt": "2026-05-23T03:50:28.396Z",
       "content": "<h2><br></h2>"
+    },
+    {
+      "id": "culture-core-values",
+      "category": "culture",
+      "group": "Core Value(핵심가치)",
+      "subcategory": "우리가 일하고 성장하는 방식",
+      "note": "데이터 기반 전문성, 주도적 실행, 존중 협업",
+      "title": "Core Values: 우리가 일하고 성장하는 방식",
+      "summary": "데이터로 증명하는 전문성, 책임 있는 주도적 실행, 존중 기반의 협업을 통해 우리의 일하는 방식을 정리합니다.",
+      "author": "People Team",
+      "tags": [
+        "Core Values",
+        "핵심가치",
+        "데이터기반",
+        "Ownership",
+        "협업",
+        "조직문화"
+      ],
+      "takeaways": [
+        "전문성은 경험과 감각을 넘어 데이터와 근거로 더 나은 판단을 내리는 역량입니다.",
+        "자율적으로 일한다는 것은 더 큰 책임을 가지고 끝까지 실행한다는 의미입니다.",
+        "존중 기반의 협업은 개인 역량을 넘어 One Team의 성과를 만드는 방식입니다."
+      ],
+      "relatedPostIds": [],
+      "image": "",
+      "order": 9,
+      "updatedAt": "2026-05-25T02:15:00.000Z",
+      "content": "\n  <p class=\"article-lead\">핵심가치는 우리가 어떤 기준으로 판단하고, 어떤 태도로 실행하며, 어떤 방식으로 함께 성과를 만드는지를 설명하는 일의 기준입니다. 이 글은 세 가지 Core Values를 실제 업무 장면에서 바로 적용할 수 있도록 의미와 행동 가이드로 정리했습니다.</p>\n  <div class=\"article-pill-row\">\n    <span class=\"article-pill\">#CoreValues</span>\n    <span class=\"article-pill\">#핵심가치</span>\n    <span class=\"article-pill\">#데이터기반</span>\n    <span class=\"article-pill\">#주도적실행</span>\n    <span class=\"article-pill\">#존중협업</span>\n  </div>\n\n  <div class=\"core-values-hero\">\n    <span class=\"core-values-badge\">Core Values</span>\n    <div class=\"core-values-hero-copy\">\n      <strong>우리가 일하고 성장하는 방식</strong>\n      <p>좋은 성과는 우연히 만들어지지 않습니다. 우리는 데이터를 통해 더 정확하게 판단하고, 책임 있게 실행하며, 서로의 전문성과 역할을 존중하는 협업으로 개인의 역량을 넘어서는 결과를 만듭니다.</p>\n    </div>\n    <div class=\"core-values-equation\">\n      <span class=\"core-values-equation-item\">Data로 판단</span>\n      <span class=\"core-values-equation-arrow\">&gt;</span>\n      <span class=\"core-values-equation-item\">Ownership으로 실행</span>\n      <span class=\"core-values-equation-arrow\">&gt;</span>\n      <span class=\"core-values-equation-item\">Respect로 확장</span>\n    </div>\n  </div>\n\n  <div class=\"article-summary-box core-values-summary\">\n    <h3>핵심가치 한눈에 보기</h3>\n    <ul>\n      <li><strong>Data-Driven Expertise</strong>는 감이 아니라 근거로 문제를 정의하고 더 나은 판단을 내리는 전문성입니다.</li>\n      <li><strong>Ownership &amp; Disciplined Execution</strong>은 맡은 일을 자신의 일처럼 책임지고 끝까지 실행하는 태도입니다.</li>\n      <li><strong>Respectful Collaboration</strong>은 동료의 전문성과 역할을 존중하며 One Team으로 성과를 만드는 방식입니다.</li>\n    </ul>\n  </div>\n\n  <h2>핵심가치 운영 원리</h2>\n  <div class=\"core-values-flow\">\n    <div class=\"core-values-flow-step\">\n      <span class=\"core-values-flow-index\">01</span>\n      <strong class=\"core-values-flow-label\">문제를 근거로 정의한다</strong>\n      <p>목적, 현상, 원인, 지표를 분리해 바라보고 의사결정의 기준을 명확히 합니다.</p>\n    </div>\n    <div class=\"core-values-flow-step\">\n      <span class=\"core-values-flow-index\">02</span>\n      <strong class=\"core-values-flow-label\">책임 있게 끝까지 실행한다</strong>\n      <p>우선순위를 정하고, 이슈를 빠르게 공유하며, 결과가 나올 때까지 주도적으로 움직입니다.</p>\n    </div>\n    <div class=\"core-values-flow-step\">\n      <span class=\"core-values-flow-index\">03</span>\n      <strong class=\"core-values-flow-label\">협업으로 성과를 키운다</strong>\n      <p>내 역할을 넘어 전체 흐름을 보고, 필요한 정보를 투명하게 공유해 팀의 성과를 높입니다.</p>\n    </div>\n  </div>\n\n  <h2>3가지 Core Values</h2>\n  <div class=\"core-values-map\">\n    <div class=\"core-value-card core-value-card-data\">\n      <span class=\"core-value-number\">1</span>\n      <span class=\"core-value-label\">Data-Driven Expertise</span>\n      <strong class=\"core-value-title\">데이터로 증명하는 전문성</strong>\n      <span class=\"core-value-korean\">데이터와 논리적 근거를 바탕으로 사고하고 실행합니다.</span>\n      <p class=\"core-value-meaning\">진정한 전문성은 단순한 경험이나 감각이 아니라, 명확한 근거를 바탕으로 문제를 정의하고 더 나은 판단을 내리는 역량에서 비롯됩니다. 우리는 정량적·정성적 데이터를 통해 현상을 객관적으로 바라보고, 검증 가능한 근거를 바탕으로 의사결정의 정확도와 비즈니스 성과를 높입니다.</p>\n      <p class=\"core-value-meaning\">데이터가 충분하지 않은 상황에서도 막연히 기다리지 않습니다. 필요한 정보를 주도적으로 찾고, 합리적인 가설을 세우며, 실행과 검증을 통해 더 나은 답을 만들어갑니다.</p>\n      <span class=\"core-value-guide-title\">행동 가이드</span>\n      <ul class=\"core-value-guide\">\n        <li>모든 기획과 제안에는 목적, 근거, 지표, 기대효과를 명확히 제시합니다.</li>\n        <li>단순한 의견이 아니라 데이터를 통해 문제의 원인과 실행 가능한 해결책을 도출합니다.</li>\n        <li>데이터가 부족한 상황에서도 가설을 세우고 검증하며 필요한 정보를 주도적으로 확보합니다.</li>\n        <li>결과 해석은 개인의 선호보다 사실, 지표, 비즈니스 임팩트를 기준으로 판단합니다.</li>\n      </ul>\n    </div>\n\n    <div class=\"core-value-card core-value-card-ownership\">\n      <span class=\"core-value-number\">2</span>\n      <span class=\"core-value-label\">Ownership &amp; Disciplined Execution</span>\n      <strong class=\"core-value-title\">책임 있는 주도적 실행</strong>\n      <span class=\"core-value-korean\">맡은 일을 자신의 일처럼 책임지고 끝까지 주도적으로 실행합니다.</span>\n      <p class=\"core-value-meaning\">조직에서의 신뢰는 지시받은 일을 수행하는 데서 그치지 않습니다. 진정한 책임감은 업무의 목적과 결과를 이해하고, 필요한 일을 스스로 판단하며, 끝까지 완수하는 태도에서 나옵니다.</p>\n      <p class=\"core-value-meaning\">우리는 업무를 수동적으로 기다리지 않고, 문제를 먼저 발견하고 대안을 제시합니다. 기본적인 약속을 지키며, 주어진 시간 안에서 높은 몰입도로 성과를 만들어냅니다.</p>\n      <span class=\"core-value-guide-title\">행동 가이드</span>\n      <ul class=\"core-value-guide\">\n        <li>맡은 업무는 목적, 범위, 기대결과를 명확히 이해하고 끝까지 책임지고 완수합니다.</li>\n        <li>지시를 기다리기보다 필요한 일을 먼저 파악하고 문제와 개선 기회를 제안합니다.</li>\n        <li>출퇴근 시간, 회의 시간, 업무 마감 일정 등 구성원 간의 기본 약속을 준수합니다.</li>\n        <li>업무의 우선순위를 스스로 판단하고 제한된 시간 안에서 높은 몰입도로 실행합니다.</li>\n        <li>지연, 오류, 리스크가 발생하면 즉시 공유하고 원인과 대안을 함께 제시합니다.</li>\n        <li>결과가 기대에 미치지 못했을 때 변명보다 원인 분석과 개선 행동에 집중합니다.</li>\n      </ul>\n    </div>\n\n    <div class=\"core-value-card core-value-card-collaboration\">\n      <span class=\"core-value-number\">3</span>\n      <span class=\"core-value-label\">Respectful Collaboration</span>\n      <strong class=\"core-value-title\">존중 기반의 협업</strong>\n      <span class=\"core-value-korean\">동료의 전문성과 역할을 존중하며 One Team으로 성과를 만듭니다.</span>\n      <p class=\"core-value-meaning\">뛰어난 개인의 역량도 중요하지만 더 큰 성과는 서로를 신뢰하고 협력하는 팀워크에서 나옵니다. 우리는 구성원 간의 인격적 존중과 배려를 바탕으로 건강한 협업 문화를 만듭니다.</p>\n      <p class=\"core-value-meaning\">협업은 단순히 사이좋게 일하는 것이 아닙니다. 각자가 자신의 역할을 책임 있게 수행하면서도 전체 프로세스와 동료의 업무 흐름을 고려하는 것입니다.</p>\n      <span class=\"core-value-guide-title\">행동 가이드</span>\n      <ul class=\"core-value-guide\">\n        <li>의견이 다를 때는 감정적 대립이 아니라 사실, 논리, 비즈니스 관점에 기반해 소통합니다.</li>\n        <li>자신의 업무 범위에만 머무르지 않고 전체 프로세스와 동료의 업무 효율을 고려합니다.</li>\n        <li>동료의 전문성, 시간, 역할을 존중하며 공동의 목표 달성을 위해 협업합니다.</li>\n        <li>필요한 정보는 투명하게 공유하고 병목이나 리스크가 생기지 않도록 선제적으로 소통합니다.</li>\n        <li>팀의 성과를 위해 필요한 경우 역할의 경계를 넘어 적극적으로 기여합니다.</li>\n      </ul>\n    </div>\n  </div>\n\n  <h2>업무 장면별 적용 체크</h2>\n  <div class=\"core-values-action-board\">\n    <div class=\"core-values-action-item\">\n      <strong class=\"core-values-action-title\">기획과 제안</strong>\n      <p>목적, 근거, 지표, 기대효과가 명확한지 확인합니다. 데이터가 부족하면 필요한 정보와 검증 방법을 먼저 정의합니다.</p>\n    </div>\n    <div class=\"core-values-action-item\">\n      <strong class=\"core-values-action-title\">실행과 마감</strong>\n      <p>우선순위와 완료 기준을 분명히 하고, 일정 지연이나 리스크는 숨기지 않고 빠르게 공유합니다.</p>\n    </div>\n    <div class=\"core-values-action-item\">\n      <strong class=\"core-values-action-title\">회의와 의사결정</strong>\n      <p>개인의 선호보다 사실, 논리, 비즈니스 임팩트를 기준으로 논의합니다. 의견 차이는 문제 해결의 재료로 다룹니다.</p>\n    </div>\n    <div class=\"core-values-action-item\">\n      <strong class=\"core-values-action-title\">부서 간 협업</strong>\n      <p>내 업무의 전후 공정을 함께 보고 필요한 정보를 선제적으로 공유합니다. 공동 성과를 위해 역할의 경계를 유연하게 넘습니다.</p>\n    </div>\n  </div>\n\n  <blockquote class=\"article-fact\">\n    <p><strong>한 문장으로 정리하면</strong> 우리는 근거로 판단하고, 책임으로 실행하며, 존중으로 함께 성장합니다.</p>\n  </blockquote>\n"
     }
   ]
 }

@@ -4,6 +4,8 @@ const DEFAULT_DATA_PATH = "blog-data.json";
 const DEFAULT_BRANCH = "main";
 const DEFAULT_UPLOAD_DIR = "assets/uploads";
 const SESSION_TTL_SECONDS = 6 * 60 * 60;
+const BLOG_DATA_RECOMMENDED_BYTES = 3 * 1024 * 1024;
+const BLOG_DATA_MAX_BYTES = Math.floor(4.5 * 1024 * 1024);
 
 function sendJson(response, statusCode, payload) {
   response.statusCode = statusCode;
@@ -161,6 +163,17 @@ async function requestGitHub(url, options, config) {
   return data;
 }
 
+async function requestGitHubOptional(url, options, config) {
+  try {
+    return await requestGitHub(url, options, config);
+  } catch (error) {
+    if (error.statusCode === 404) {
+      return null;
+    }
+    throw error;
+  }
+}
+
 function encodeGitHubPath(path) {
   return path.split("/").map(encodeURIComponent).join("/");
 }
@@ -186,6 +199,90 @@ async function getCurrentFile(config, path = config.path) {
     }
     throw error;
   }
+}
+
+async function getDirectoryContents(config, directoryPath) {
+  const url = `${buildContentUrl(config, directoryPath)}?ref=${encodeURIComponent(config.branch)}`;
+  const contents = await requestGitHubOptional(url, { method: "GET" }, config);
+  return Array.isArray(contents) ? contents : [];
+}
+
+async function getUploadDirectoryUsage(config) {
+  const uploadDir = String(config.uploadDir || DEFAULT_UPLOAD_DIR).replace(/^\/+|\/+$/g, "");
+  const pendingDirectories = [uploadDir];
+  const files = [];
+
+  while (pendingDirectories.length) {
+    const directoryPath = pendingDirectories.shift();
+    const contents = await getDirectoryContents(config, directoryPath);
+    contents.forEach((item) => {
+      if (item.type === "dir") {
+        pendingDirectories.push(item.path);
+        return;
+      }
+      if (item.type === "file") {
+        files.push({
+          path: item.path,
+          sizeBytes: Number(item.size || 0),
+          htmlUrl: item.html_url || "",
+        });
+      }
+    });
+  }
+
+  const totalBytes = files.reduce((sum, file) => sum + file.sizeBytes, 0);
+  const largestFile = files.reduce((largest, file) => (file.sizeBytes > (largest?.sizeBytes || 0) ? file : largest), null);
+  return {
+    path: uploadDir,
+    count: files.length,
+    sizeBytes: totalBytes,
+    largestFile,
+  };
+}
+
+async function getStorageUsage() {
+  const config = getGitHubConfig();
+  assertGitHubConfig(config);
+
+  const [dataFile, uploads] = await Promise.all([getCurrentFile(config), getUploadDirectoryUsage(config)]);
+  const dataFileSize = Number(dataFile?.size || 0);
+  const totalBytes = dataFileSize + uploads.sizeBytes;
+  const maxPercent = BLOG_DATA_MAX_BYTES ? Math.round((dataFileSize / BLOG_DATA_MAX_BYTES) * 100) : 0;
+  const recommendedPercent = BLOG_DATA_RECOMMENDED_BYTES
+    ? Math.round((dataFileSize / BLOG_DATA_RECOMMENDED_BYTES) * 100)
+    : 0;
+
+  let status = "safe";
+  let statusLabel = "여유 있음";
+  if (dataFileSize >= BLOG_DATA_MAX_BYTES * 0.9) {
+    status = "danger";
+    statusLabel = "최대치 근접";
+  } else if (dataFileSize >= BLOG_DATA_RECOMMENDED_BYTES) {
+    status = "warning";
+    statusLabel = "권장 초과";
+  } else if (dataFileSize >= BLOG_DATA_RECOMMENDED_BYTES * 0.7) {
+    status = "watch";
+    statusLabel = "주의 구간";
+  }
+
+  return {
+    ok: true,
+    updatedAt: new Date().toISOString(),
+    dataFile: {
+      path: config.path,
+      sizeBytes: dataFileSize,
+      recommendedBytes: BLOG_DATA_RECOMMENDED_BYTES,
+      maxBytes: BLOG_DATA_MAX_BYTES,
+      recommendedPercent,
+      maxPercent,
+    },
+    uploads,
+    total: {
+      sizeBytes: totalBytes,
+    },
+    status,
+    statusLabel,
+  };
 }
 
 function getImageExtension(mimeType) {
@@ -431,6 +528,17 @@ async function handleUploadImage(body, response) {
   sendJson(response, 200, result);
 }
 
+async function handleUsage(body, response) {
+  const session = verifySessionToken(body.token || "");
+  if (!session?.user) {
+    sendJson(response, 401, { error: "관리자 세션이 만료되었거나 올바르지 않습니다." });
+    return;
+  }
+
+  const result = await getStorageUsage();
+  sendJson(response, 200, result);
+}
+
 module.exports = async function handler(request, response) {
   if (request.method === "GET") {
     sendJson(response, 200, {
@@ -459,6 +567,10 @@ module.exports = async function handler(request, response) {
     }
     if (body.action === "uploadImage") {
       await handleUploadImage(body, response);
+      return;
+    }
+    if (body.action === "usage") {
+      await handleUsage(body, response);
       return;
     }
     sendJson(response, 400, { error: "지원하지 않는 작업입니다." });

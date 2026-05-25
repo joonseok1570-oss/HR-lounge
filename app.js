@@ -48,6 +48,12 @@ const hrTaxonomy = {
         { title: "인증", note: "벤처기업인증, 연구소인정서, 의료기기제조업인증서, 가족친화인증 등" },
       ],
     },
+    {
+      label: "Core Value(핵심가치)",
+      items: [
+        { title: "우리가 일하고 성장하는 방식", note: "데이터 기반 전문성, 주도적 실행, 존중 협업" },
+      ],
+    },
   ],
   "hr-guide": [
     {
@@ -981,6 +987,7 @@ const defaultSiteSettings = {
     featuredLabel: "Featured Articles",
     blogEyebrow: "HR Lounge Blog",
     postListTitle: "주제별 HR 추천",
+    sidebarTitle: "HR Lounge",
   },
   hrCalendar: {
     title: "HR Calendar",
@@ -1017,6 +1024,20 @@ const defaultSiteSettings = {
     "help-desk": {
       label: "Help Desk",
       description: "FAQ와 재직증명서, 경력증명서, 명함신청 등 서식 자동 발급을 빠르게 찾는 도움말 공간입니다.",
+    },
+  },
+  taxonomy: {
+    culture: {
+      groups: [{ label: "팀 소개" }, { label: "사진첩" }, { label: "동영상" }, { label: "비즈니스 공유" }, { label: "Core Value(핵심가치)" }],
+    },
+    "hr-guide": {
+      groups: [{ label: "온보딩" }, { label: "제도 안내" }, { label: "HR Year Calendar" }],
+    },
+    "work-tool": {
+      groups: [{ label: "Google Workspace" }, { label: "Groupware" }, { label: "IT/총무 지원" }],
+    },
+    "help-desk": {
+      groups: [{ label: "FAQ와 서식 자동 발급" }],
     },
   },
   faq: {
@@ -1506,7 +1527,7 @@ const managementSupportPartContent = `
 `;
 
 const defaultBlogState = {
-  version: 34,
+  version: 36,
   updatedAt: new Date().toISOString(),
   siteSettings: defaultSiteSettings,
   posts: [
@@ -1601,6 +1622,23 @@ const defaultBlogState = {
       updatedAt: new Date().toISOString(),
       content:
         "<h2>문화 기록은 왜 필요한가요?</h2><p>사내 행사는 지나가면 사라지는 경험이지만, 잘 정리된 기록은 신규 구성원이 회사 분위기를 이해하는 데 큰 도움이 됩니다. 사진첩은 단순한 앨범이 아니라 조직의 맥락을 전하는 자료입니다.</p><h2>사진첩 구성 기준</h2><ul><li>행사명, 일자, 장소, 참여 대상을 먼저 적습니다.</li><li>대표 사진 3~5장을 상단에 배치합니다.</li><li>행사의 목적과 기억할 장면을 짧은 문장으로 남깁니다.</li></ul><h2>공유 전 체크리스트</h2><p>외부 공개가 가능한 사진인지, 개인이 원하지 않는 사진이 포함되어 있지 않은지, 원본 파일 권한이 회사 내부로 제한되어 있는지 확인합니다.</p>",
+    },
+    {
+      id: "culture-core-values",
+      category: "culture",
+      group: "Core Value(핵심가치)",
+      subcategory: "우리가 일하고 성장하는 방식",
+      note: "데이터 기반 전문성, 주도적 실행, 존중 협업",
+      title: "Core Values: 우리가 일하고 성장하는 방식",
+      summary: "데이터로 증명하는 전문성, 책임 있는 주도적 실행, 존중 기반의 협업을 통해 우리의 일하는 방식을 정리합니다.",
+      author: "People Team",
+      tags: ["Core Values", "핵심가치", "데이터기반", "Ownership", "협업", "조직문화"],
+      takeaways: ["전문성은 경험과 감각을 넘어 데이터와 근거로 더 나은 판단을 내리는 역량입니다.", "자율적으로 일한다는 것은 더 큰 책임을 가지고 끝까지 실행한다는 의미입니다.", "존중 기반의 협업은 개인 역량을 넘어 One Team의 성과를 만드는 방식입니다."],
+      relatedPostIds: [],
+      image: "",
+      order: 9,
+      updatedAt: "2026-05-25T02:15:00.000Z",
+      content: "\n  <p class=\"article-lead\">핵심가치는 우리가 어떤 기준으로 판단하고, 어떤 태도로 실행하며, 어떤 방식으로 함께 성과를 만드는지를 설명하는 일의 기준입니다. 이 글은 세 가지 Core Values를 실제 업무 장면에서 바로 적용할 수 있도록 의미와 행동 가이드로 정리했습니다.</p>\n  <div class=\"article-pill-row\">\n    <span class=\"article-pill\">#CoreValues</span>\n    <span class=\"article-pill\">#핵심가치</span>\n    <span class=\"article-pill\">#데이터기반</span>\n    <span class=\"article-pill\">#주도적실행</span>\n    <span class=\"article-pill\">#존중협업</span>\n  </div>\n\n  <div class=\"core-values-hero\">\n    <span class=\"core-values-badge\">Core Values</span>\n    <div class=\"core-values-hero-copy\">\n      <strong>우리가 일하고 성장하는 방식</strong>\n      <p>좋은 성과는 우연히 만들어지지 않습니다. 우리는 데이터를 통해 더 정확하게 판단하고, 책임 있게 실행하며, 서로의 전문성과 역할을 존중하는 협업으로 개인의 역량을 넘어서는 결과를 만듭니다.</p>\n    </div>\n    <div class=\"core-values-equation\">\n      <span class=\"core-values-equation-item\">Data로 판단</span>\n      <span class=\"core-values-equation-arrow\">&gt;</span>\n      <span class=\"core-values-equation-item\">Ownership으로 실행</span>\n      <span class=\"core-values-equation-arrow\">&gt;</span>\n      <span class=\"core-values-equation-item\">Respect로 확장</span>\n    </div>\n  </div>\n\n  <div class=\"article-summary-box core-values-summary\">\n    <h3>핵심가치 한눈에 보기</h3>\n    <ul>\n      <li><strong>Data-Driven Expertise</strong>는 감이 아니라 근거로 문제를 정의하고 더 나은 판단을 내리는 전문성입니다.</li>\n      <li><strong>Ownership &amp; Disciplined Execution</strong>은 맡은 일을 자신의 일처럼 책임지고 끝까지 실행하는 태도입니다.</li>\n      <li><strong>Respectful Collaboration</strong>은 동료의 전문성과 역할을 존중하며 One Team으로 성과를 만드는 방식입니다.</li>\n    </ul>\n  </div>\n\n  <h2>핵심가치 운영 원리</h2>\n  <div class=\"core-values-flow\">\n    <div class=\"core-values-flow-step\">\n      <span class=\"core-values-flow-index\">01</span>\n      <strong class=\"core-values-flow-label\">문제를 근거로 정의한다</strong>\n      <p>목적, 현상, 원인, 지표를 분리해 바라보고 의사결정의 기준을 명확히 합니다.</p>\n    </div>\n    <div class=\"core-values-flow-step\">\n      <span class=\"core-values-flow-index\">02</span>\n      <strong class=\"core-values-flow-label\">책임 있게 끝까지 실행한다</strong>\n      <p>우선순위를 정하고, 이슈를 빠르게 공유하며, 결과가 나올 때까지 주도적으로 움직입니다.</p>\n    </div>\n    <div class=\"core-values-flow-step\">\n      <span class=\"core-values-flow-index\">03</span>\n      <strong class=\"core-values-flow-label\">협업으로 성과를 키운다</strong>\n      <p>내 역할을 넘어 전체 흐름을 보고, 필요한 정보를 투명하게 공유해 팀의 성과를 높입니다.</p>\n    </div>\n  </div>\n\n  <h2>3가지 Core Values</h2>\n  <div class=\"core-values-map\">\n    <div class=\"core-value-card core-value-card-data\">\n      <span class=\"core-value-number\">1</span>\n      <span class=\"core-value-label\">Data-Driven Expertise</span>\n      <strong class=\"core-value-title\">데이터로 증명하는 전문성</strong>\n      <span class=\"core-value-korean\">데이터와 논리적 근거를 바탕으로 사고하고 실행합니다.</span>\n      <p class=\"core-value-meaning\">진정한 전문성은 단순한 경험이나 감각이 아니라, 명확한 근거를 바탕으로 문제를 정의하고 더 나은 판단을 내리는 역량에서 비롯됩니다. 우리는 정량적·정성적 데이터를 통해 현상을 객관적으로 바라보고, 검증 가능한 근거를 바탕으로 의사결정의 정확도와 비즈니스 성과를 높입니다.</p>\n      <p class=\"core-value-meaning\">데이터가 충분하지 않은 상황에서도 막연히 기다리지 않습니다. 필요한 정보를 주도적으로 찾고, 합리적인 가설을 세우며, 실행과 검증을 통해 더 나은 답을 만들어갑니다.</p>\n      <span class=\"core-value-guide-title\">행동 가이드</span>\n      <ul class=\"core-value-guide\">\n        <li>모든 기획과 제안에는 목적, 근거, 지표, 기대효과를 명확히 제시합니다.</li>\n        <li>단순한 의견이 아니라 데이터를 통해 문제의 원인과 실행 가능한 해결책을 도출합니다.</li>\n        <li>데이터가 부족한 상황에서도 가설을 세우고 검증하며 필요한 정보를 주도적으로 확보합니다.</li>\n        <li>결과 해석은 개인의 선호보다 사실, 지표, 비즈니스 임팩트를 기준으로 판단합니다.</li>\n      </ul>\n    </div>\n\n    <div class=\"core-value-card core-value-card-ownership\">\n      <span class=\"core-value-number\">2</span>\n      <span class=\"core-value-label\">Ownership &amp; Disciplined Execution</span>\n      <strong class=\"core-value-title\">책임 있는 주도적 실행</strong>\n      <span class=\"core-value-korean\">맡은 일을 자신의 일처럼 책임지고 끝까지 주도적으로 실행합니다.</span>\n      <p class=\"core-value-meaning\">조직에서의 신뢰는 지시받은 일을 수행하는 데서 그치지 않습니다. 진정한 책임감은 업무의 목적과 결과를 이해하고, 필요한 일을 스스로 판단하며, 끝까지 완수하는 태도에서 나옵니다.</p>\n      <p class=\"core-value-meaning\">우리는 업무를 수동적으로 기다리지 않고, 문제를 먼저 발견하고 대안을 제시합니다. 기본적인 약속을 지키며, 주어진 시간 안에서 높은 몰입도로 성과를 만들어냅니다.</p>\n      <span class=\"core-value-guide-title\">행동 가이드</span>\n      <ul class=\"core-value-guide\">\n        <li>맡은 업무는 목적, 범위, 기대결과를 명확히 이해하고 끝까지 책임지고 완수합니다.</li>\n        <li>지시를 기다리기보다 필요한 일을 먼저 파악하고 문제와 개선 기회를 제안합니다.</li>\n        <li>출퇴근 시간, 회의 시간, 업무 마감 일정 등 구성원 간의 기본 약속을 준수합니다.</li>\n        <li>업무의 우선순위를 스스로 판단하고 제한된 시간 안에서 높은 몰입도로 실행합니다.</li>\n        <li>지연, 오류, 리스크가 발생하면 즉시 공유하고 원인과 대안을 함께 제시합니다.</li>\n        <li>결과가 기대에 미치지 못했을 때 변명보다 원인 분석과 개선 행동에 집중합니다.</li>\n      </ul>\n    </div>\n\n    <div class=\"core-value-card core-value-card-collaboration\">\n      <span class=\"core-value-number\">3</span>\n      <span class=\"core-value-label\">Respectful Collaboration</span>\n      <strong class=\"core-value-title\">존중 기반의 협업</strong>\n      <span class=\"core-value-korean\">동료의 전문성과 역할을 존중하며 One Team으로 성과를 만듭니다.</span>\n      <p class=\"core-value-meaning\">뛰어난 개인의 역량도 중요하지만 더 큰 성과는 서로를 신뢰하고 협력하는 팀워크에서 나옵니다. 우리는 구성원 간의 인격적 존중과 배려를 바탕으로 건강한 협업 문화를 만듭니다.</p>\n      <p class=\"core-value-meaning\">협업은 단순히 사이좋게 일하는 것이 아닙니다. 각자가 자신의 역할을 책임 있게 수행하면서도 전체 프로세스와 동료의 업무 흐름을 고려하는 것입니다.</p>\n      <span class=\"core-value-guide-title\">행동 가이드</span>\n      <ul class=\"core-value-guide\">\n        <li>의견이 다를 때는 감정적 대립이 아니라 사실, 논리, 비즈니스 관점에 기반해 소통합니다.</li>\n        <li>자신의 업무 범위에만 머무르지 않고 전체 프로세스와 동료의 업무 효율을 고려합니다.</li>\n        <li>동료의 전문성, 시간, 역할을 존중하며 공동의 목표 달성을 위해 협업합니다.</li>\n        <li>필요한 정보는 투명하게 공유하고 병목이나 리스크가 생기지 않도록 선제적으로 소통합니다.</li>\n        <li>팀의 성과를 위해 필요한 경우 역할의 경계를 넘어 적극적으로 기여합니다.</li>\n      </ul>\n    </div>\n  </div>\n\n  <h2>업무 장면별 적용 체크</h2>\n  <div class=\"core-values-action-board\">\n    <div class=\"core-values-action-item\">\n      <strong class=\"core-values-action-title\">기획과 제안</strong>\n      <p>목적, 근거, 지표, 기대효과가 명확한지 확인합니다. 데이터가 부족하면 필요한 정보와 검증 방법을 먼저 정의합니다.</p>\n    </div>\n    <div class=\"core-values-action-item\">\n      <strong class=\"core-values-action-title\">실행과 마감</strong>\n      <p>우선순위와 완료 기준을 분명히 하고, 일정 지연이나 리스크는 숨기지 않고 빠르게 공유합니다.</p>\n    </div>\n    <div class=\"core-values-action-item\">\n      <strong class=\"core-values-action-title\">회의와 의사결정</strong>\n      <p>개인의 선호보다 사실, 논리, 비즈니스 임팩트를 기준으로 논의합니다. 의견 차이는 문제 해결의 재료로 다룹니다.</p>\n    </div>\n    <div class=\"core-values-action-item\">\n      <strong class=\"core-values-action-title\">부서 간 협업</strong>\n      <p>내 업무의 전후 공정을 함께 보고 필요한 정보를 선제적으로 공유합니다. 공동 성과를 위해 역할의 경계를 유연하게 넘습니다.</p>\n    </div>\n  </div>\n\n  <blockquote class=\"article-fact\">\n    <p><strong>한 문장으로 정리하면</strong> 우리는 근거로 판단하고, 책임으로 실행하며, 존중으로 함께 성장합니다.</p>\n  </blockquote>\n",
     },
     {
       id: "hr-guide-onboarding",
@@ -1812,6 +1850,7 @@ const expandedBlogCategories = new Set();
 
 const blogPage = document.querySelector("#blog-page");
 const blogCategoryList = document.querySelector("#blog-category-list");
+const blogSidebarTitle = document.querySelector(".blog-sidebar-title");
 const blogTitle = document.querySelector("#blog-title");
 const blogDescription = document.querySelector("#blog-description");
 const blogStatus = document.querySelector("#blog-status");
@@ -1920,10 +1959,12 @@ const HEADING_HIGHLIGHT_CLASSES = [
 ];
 const ADMIN_AUTH_SESSION_KEY = "hr-lounge-admin-session-v1";
 const BLOG_STATE_STORAGE_KEY = "hrLoungeBlogState";
-const STATIC_BLOG_DATA_URL = "./blog-data.json?v=20260525-data";
+const STATIC_BLOG_DATA_URL = "./blog-data.json?v=20260525-core-values-folder";
 const REMOTE_BLOG_API_URL = "./api/blog-data";
 const LOCAL_PREVIEW_ADMIN_PASSWORD = "1966";
 const ONBOARDING_ACCESS_SESSION_KEY = "hr-lounge-onboarding-email";
+const BLOG_DATA_RECOMMENDED_BYTES = 3 * 1024 * 1024;
+const BLOG_DATA_MAX_BYTES = Math.floor(4.5 * 1024 * 1024);
 let isEditorUnlocked = false;
 let adminSession = null;
 let editorUnlockDialog = null;
@@ -1966,7 +2007,7 @@ async function postRemoteBlogApi(payload) {
     return null;
   }
 
-  if (response.status === 404) {
+  if ([404, 405, 501].includes(response.status)) {
     return null;
   }
 
@@ -2001,6 +2042,16 @@ async function saveBlogStateToRemote(state) {
     action: "save",
     token: adminSession.token,
     state,
+  });
+}
+
+async function loadRemoteStorageUsage() {
+  if (!adminSession?.remote || !adminSession?.token) {
+    return null;
+  }
+  return postRemoteBlogApi({
+    action: "usage",
+    token: adminSession.token,
   });
 }
 
@@ -2084,6 +2135,10 @@ function syncAdminControlsVisibility() {
     siteSettingsButton.textContent = isEditorUnlocked ? settings.buttons.siteSettings : "관리자 로그인";
     siteSettingsButton.setAttribute("aria-label", isEditorUnlocked ? "사이트 설정 열기" : "관리자 로그인");
   }
+
+  document.querySelectorAll("[data-admin-menu-edit]").forEach((button) => {
+    button.hidden = !isEditorUnlocked;
+  });
 }
 
 function hideEditorUnlockDialog() {
@@ -2258,6 +2313,114 @@ function escapeHtml(value) {
     .replaceAll("'", "&#039;");
 }
 
+function getUtf8ByteLength(value) {
+  const text = String(value || "");
+  if (typeof TextEncoder !== "undefined") {
+    return new TextEncoder().encode(text).length;
+  }
+  return unescape(encodeURIComponent(text)).length;
+}
+
+function formatStorageBytes(bytes, options = {}) {
+  const value = Number(bytes || 0);
+  if (value >= 1024 * 1024 || options.forceMb) {
+    const mb = value / (1024 * 1024);
+    return `${mb >= 10 || Number.isInteger(mb) ? mb.toFixed(0) : mb.toFixed(1)}MB`;
+  }
+  if (value >= 1024) {
+    return `${Math.max(1, Math.round(value / 1024))}KB`;
+  }
+  return `${Math.round(value)}B`;
+}
+
+function getLocalStorageUsage() {
+  const state = normalizeBlogState(blogState || defaultBlogState);
+  const stateJson = `${JSON.stringify(state, null, 2)}\n`;
+  const dataFileSize = getUtf8ByteLength(stateJson);
+  const dataImageMatches = stateJson.match(/data:image\//g) || [];
+  return {
+    ok: true,
+    localOnly: true,
+    updatedAt: new Date().toISOString(),
+    dataFile: {
+      path: "blog-data.json",
+      sizeBytes: dataFileSize,
+      recommendedBytes: BLOG_DATA_RECOMMENDED_BYTES,
+      maxBytes: BLOG_DATA_MAX_BYTES,
+      recommendedPercent: Math.round((dataFileSize / BLOG_DATA_RECOMMENDED_BYTES) * 100),
+      maxPercent: Math.round((dataFileSize / BLOG_DATA_MAX_BYTES) * 100),
+    },
+    uploads: {
+      path: "assets/uploads",
+      count: null,
+      sizeBytes: null,
+      largestFile: null,
+    },
+    total: {
+      sizeBytes: dataFileSize,
+    },
+    status: dataFileSize >= BLOG_DATA_RECOMMENDED_BYTES ? "warning" : "safe",
+    statusLabel: dataImageMatches.length ? `로컬 추정 · data:image ${dataImageMatches.length}개` : "로컬 추정",
+  };
+}
+
+function renderStorageUsageHtml(usage) {
+  const dataFile = usage?.dataFile || {};
+  const uploads = usage?.uploads || {};
+  const maxPercent = Math.min(100, Math.max(0, Number(dataFile.maxPercent || 0)));
+  const statusClass = usage?.status ? `is-${escapeHtml(usage.status)}` : "is-safe";
+  const uploadLine =
+    typeof uploads.count === "number"
+      ? `${uploads.count}개, ${formatStorageBytes(uploads.sizeBytes || 0)}`
+      : "원격 연결 후 확인";
+  const totalLine =
+    typeof uploads.sizeBytes === "number"
+      ? formatStorageBytes(usage?.total?.sizeBytes || 0)
+      : `${formatStorageBytes(usage?.total?.sizeBytes || 0)} + 이미지 파일`;
+  const largestLine = uploads.largestFile
+    ? `<div><span>가장 큰 이미지: </span><strong>${formatStorageBytes(uploads.largestFile.sizeBytes)} · ${escapeHtml(
+        uploads.largestFile.path.split("/").pop() || ""
+      )}</strong></div>`
+    : "";
+
+  return `
+    <div class="storage-usage-summary ${statusClass}">
+      <div><span>데이터 파일: </span><strong>${formatStorageBytes(dataFile.sizeBytes || 0)} / 권장 ${formatStorageBytes(
+        dataFile.recommendedBytes || BLOG_DATA_RECOMMENDED_BYTES,
+        { forceMb: true }
+      )} / 최대 ${formatStorageBytes(dataFile.maxBytes || BLOG_DATA_MAX_BYTES, { forceMb: true })}</strong></div>
+      <div><span>업로드 이미지: </span><strong>${escapeHtml(uploadLine)}</strong></div>
+      <div><span>전체 콘텐츠 용량: </span><strong>${escapeHtml(totalLine)}</strong></div>
+      <div><span>상태: </span><strong>${escapeHtml(usage?.statusLabel || "확인됨")}</strong></div>
+      ${largestLine}
+    </div>
+    <div class="storage-usage-meter" aria-label="최대 저장 요청 용량 대비 사용률">
+      <span style="width: ${maxPercent}%"></span>
+    </div>
+    <p class="storage-usage-note">저장 요청 기준 최대값은 4.5MB입니다. 이미지는 별도 파일로 저장되어 데이터 파일 용량을 작게 유지합니다.</p>
+  `;
+}
+
+async function refreshStorageUsagePanel() {
+  const panel = siteSettingsPanel?.querySelector("#storage-usage-panel");
+  if (!panel) {
+    return;
+  }
+
+  panel.innerHTML = '<div class="storage-usage-loading">저장용량을 확인하는 중입니다.</div>';
+  try {
+    const usage = (await loadRemoteStorageUsage()) || getLocalStorageUsage();
+    panel.innerHTML = renderStorageUsageHtml(usage);
+  } catch (error) {
+    panel.innerHTML = `
+      <div class="storage-usage-error">
+        저장용량을 불러오지 못했습니다.
+        <small>${escapeHtml(error?.message || "잠시 후 다시 시도하세요.")}</small>
+      </div>
+    `;
+  }
+}
+
 function renderPostPreviewTitle(title) {
   const value = String(title || "");
   const match = value.match(/^(.+?업무 소개:)\s*(.+)$/);
@@ -2414,6 +2577,24 @@ function normalizeSiteSettings(value = {}) {
         .replaceAll("자리배치도", "배치도")
         .replaceAll("각종 서식 다운로드", "서식 자동 발급")
         .replaceAll("서식 다운로드", "서식 자동 발급"),
+    };
+  });
+
+  const sourceTaxonomy = source.taxonomy && typeof source.taxonomy === "object" ? source.taxonomy : {};
+  settings.taxonomy = {};
+  blogCategories.forEach((category) => {
+    const baseGroups = category.groups || hrTaxonomy[category.slug] || [];
+    const sourceCategoryTaxonomy =
+      sourceTaxonomy[category.slug] && typeof sourceTaxonomy[category.slug] === "object" ? sourceTaxonomy[category.slug] : {};
+    const sourceGroups = Array.isArray(sourceCategoryTaxonomy.groups) ? sourceCategoryTaxonomy.groups : [];
+    settings.taxonomy[category.slug] = {
+      groups: baseGroups.map((group, index) => {
+        const fallbackGroup = defaultSiteSettings.taxonomy?.[category.slug]?.groups?.[index] || group;
+        const sourceGroup = sourceGroups[index] && typeof sourceGroups[index] === "object" ? sourceGroups[index] : {};
+        return {
+          label: normalizeSettingText(sourceGroup.label, fallbackGroup.label || group.label),
+        };
+      }),
     };
   });
 
@@ -2649,11 +2830,26 @@ function getCategoryBySlug(slug) {
 
 function getCategoryTaxonomy(slug) {
   const category = getCategoryBySlug(slug);
-  return category.groups || hrTaxonomy[category.slug] || [];
+  const settings = getSiteSettings();
+  const groupSettings = settings.taxonomy?.[category.slug]?.groups || [];
+  return (category.groups || hrTaxonomy[category.slug] || []).map((group, index) => ({
+    ...group,
+    displayLabel: groupSettings[index]?.label || group.label,
+  }));
 }
 
 function getTaxonomyGroups(slug) {
   return getCategoryTaxonomy(slug).map((group) => group.label);
+}
+
+function getTaxonomyGroupDisplayLabel(slug, groupLabel) {
+  const group = getCategoryTaxonomy(slug).find((item) => item.label === groupLabel);
+  return group?.displayLabel || groupLabel || "";
+}
+
+function getPostGroupDisplay(post) {
+  const categorySlug = post?.category || currentBlogCategory;
+  return getTaxonomyGroupDisplayLabel(categorySlug, getPostGroup(post));
 }
 
 function getTaxonomyItems(slug, groupLabel) {
@@ -2959,7 +3155,7 @@ function getPostThumbnailImage(post) {
 
 function getPostTags(post) {
   const category = getCategoryBySlug(post?.category || currentBlogCategory);
-  const group = getPostGroup(post);
+  const group = getPostGroupDisplay(post);
   const subcategory = getPostSubcategory(post);
   return [
     ...new Set(
@@ -3131,6 +3327,32 @@ const safeArticleClasses = new Set([
   "article-work-map-research",
   "article-work-tags",
   "article-work-title",
+  "core-value-card",
+  "core-value-card-collaboration",
+  "core-value-card-data",
+  "core-value-card-ownership",
+  "core-value-guide",
+  "core-value-guide-title",
+  "core-value-korean",
+  "core-value-label",
+  "core-value-meaning",
+  "core-value-number",
+  "core-value-title",
+  "core-values-action-board",
+  "core-values-action-item",
+  "core-values-action-title",
+  "core-values-badge",
+  "core-values-equation",
+  "core-values-equation-arrow",
+  "core-values-equation-item",
+  "core-values-flow",
+  "core-values-flow-index",
+  "core-values-flow-label",
+  "core-values-flow-step",
+  "core-values-hero",
+  "core-values-hero-copy",
+  "core-values-map",
+  "core-values-summary",
 ]);
 
 function sanitizeStyle(value) {
@@ -3326,11 +3548,16 @@ function normalizeBlogState(state) {
     ...(sourceVersion < 32 ? ["culture-team-intro"] : []),
     ...(sourceVersion < 33 ? ["culture-team-intro"] : []),
     ...(sourceVersion < 34 ? ["culture-sales-marketing-part", "culture-management-support-part"] : []),
+    ...(sourceVersion < 36 ? ["culture-core-values"] : []),
   ]);
   const existingPostIds = new Set(safeState.posts.map((post) => String(post.id || "")));
-  const sourcePosts = shouldBackfillDefaults
-    ? [...safeState.posts, ...defaultBlogState.posts.filter((post) => !existingPostIds.has(String(post.id)))]
-    : safeState.posts;
+  const sourcePosts = [
+    ...safeState.posts,
+    ...defaultBlogState.posts.filter((post) => {
+      const postId = String(post.id || "");
+      return !existingPostIds.has(postId) && (shouldBackfillDefaults || refreshedDefaultPostIds.has(postId));
+    }),
+  ];
   const normalizedPosts = sourcePosts.map((post) => {
     const defaultPost = defaultBlogState.posts.find((item) => item.id === post.id);
     let sourcePost = refreshedDefaultPostIds.has(String(post.id || "")) && defaultPost ? { ...post, ...defaultPost } : post;
@@ -3403,7 +3630,7 @@ function normalizeBlogState(state) {
   }
 
   return {
-    version: 34,
+    version: 36,
     updatedAt: new Date().toISOString(),
     siteSettings,
     posts,
@@ -3510,6 +3737,7 @@ function persistBlogState() {
             ? `GitHub에 저장하고 이미지 ${result.migratedImageCount}개를 파일로 정리했습니다.`
             : "GitHub에 저장했습니다. Vercel 반영까지 잠시 걸릴 수 있습니다."
         );
+        refreshStorageUsagePanel();
         return result;
       })
       .catch((error) => {
@@ -3654,6 +3882,7 @@ function applySiteSettings() {
   setTextIfPresent("#quick .section-head .eyebrow", settings.sections.mainCategoryEyebrow);
   setTextIfPresent("#quick-title", settings.sections.mainCategoryTitle);
   setTextIfPresent(".blog-head .eyebrow", settings.sections.blogEyebrow);
+  setTextIfPresent(".blog-sidebar-title", settings.sections.sidebarTitle);
 
   blogCategories.forEach((baseCategory, index) => {
     const category = getCategoryBySlug(baseCategory.slug);
@@ -3776,7 +4005,7 @@ function renderFeaturedPostSettings(settings) {
                 />
                 <span>
                   <strong>${escapeHtml(post.title)}</strong>
-                  <small>${escapeHtml(getPostGroup(post))} · ${formatPostDate(post.updatedAt)}</small>
+                  <small>${escapeHtml(getPostGroupDisplay(post))} · ${formatPostDate(post.updatedAt)}</small>
                 </span>
               </label>`,
             )
@@ -3825,7 +4054,7 @@ function renderPopularPostSettings(settings) {
             />
             <span>
               <strong>${renderPostPreviewTitle(post.title)}</strong>
-              <small>${escapeHtml(getCategoryBySlug(post.category).label)} · ${escapeHtml(getPostGroup(post))} · ${formatPostDate(post.updatedAt)}</small>
+              <small>${escapeHtml(getCategoryBySlug(post.category).label)} · ${escapeHtml(getPostGroupDisplay(post))} · ${formatPostDate(post.updatedAt)}</small>
             </span>
           </label>`,
         )
@@ -3862,6 +4091,49 @@ function renderHrCalendarSettings(settings) {
             </label>
           `,
         )
+        .join("")}
+    </div>
+  `;
+}
+
+function renderNavigationSettings(settings) {
+  return `
+    <div class="site-settings-grid">
+      ${renderSiteSettingField(settings, "sections.sidebarTitle", "좌측 목차 제목")}
+      ${blogCategories
+        .map(
+          (category) => `
+            ${renderSiteSettingField(settings, `categories.${category.slug}.label`, `${category.label} 상단 메뉴명`)}
+            ${renderSiteSettingField(settings, `categories.${category.slug}.description`, `${category.label} 설명`, {
+              type: "textarea",
+              rows: 3,
+              wide: true,
+            })}
+          `,
+        )
+        .join("")}
+    </div>
+    <div class="navigation-settings-grid">
+      ${blogCategories
+        .map((category) => {
+          const displayCategory = getCategoryBySlug(category.slug);
+          const groups = getCategoryTaxonomy(category.slug);
+          return `
+            <article class="navigation-setting-card">
+              <div class="featured-setting-head">
+                <strong>${escapeHtml(displayCategory.label)}</strong>
+                <small>좌측 목차와 상단 드롭다운에 보이는 폴더명을 수정합니다.</small>
+              </div>
+              <div class="site-settings-grid">
+                ${groups
+                  .map((group, index) =>
+                    renderSiteSettingField(settings, `taxonomy.${category.slug}.groups.${index}.label`, `${group.label} 표시명`),
+                  )
+                  .join("")}
+              </div>
+            </article>
+          `;
+        })
         .join("")}
     </div>
   `;
@@ -3904,6 +4176,7 @@ function renderSiteSettingsPanel() {
         </div>
         <div class="site-settings-top-actions">
           <button class="editor-button" type="button" data-settings-cancel>${escapeHtml(settings.buttons.settingsCancel)}</button>
+          <button class="editor-button" type="button" data-refresh-storage-usage>용량 새로고침</button>
           <button class="editor-button" type="button" data-export-blog-data>JSON 내보내기</button>
           <button class="editor-button primary" type="button" data-settings-save>${escapeHtml(settings.buttons.settingsSave)}</button>
         </div>
@@ -3911,6 +4184,21 @@ function renderSiteSettingsPanel() {
 
       <div class="site-settings-shell">
         <div class="site-settings-form">
+          <section class="site-settings-section storage-usage-section">
+            <div class="site-settings-section-head">
+              <h4>저장용량 현황</h4>
+              <button class="editor-button compact" type="button" data-refresh-storage-usage>새로고침</button>
+            </div>
+            <div class="storage-usage-panel" id="storage-usage-panel" aria-live="polite"></div>
+          </section>
+
+          <section class="site-settings-section" data-settings-section="navigation">
+            <div class="site-settings-section-head">
+              <h4>상단/좌측 메뉴</h4>
+            </div>
+            ${renderNavigationSettings(settings)}
+          </section>
+
           <section class="site-settings-section">
             <div class="site-settings-section-head">
               <h4>메인 화면</h4>
@@ -3992,26 +4280,6 @@ function renderSiteSettingsPanel() {
 
           <section class="site-settings-section">
             <div class="site-settings-section-head">
-              <h4>메뉴와 카테고리</h4>
-            </div>
-            <div class="site-settings-grid">
-              ${blogCategories
-                .map(
-                  (category) => `
-                    ${renderSiteSettingField(settings, `categories.${category.slug}.label`, `${category.label} 메뉴명`)}
-                    ${renderSiteSettingField(settings, `categories.${category.slug}.description`, `${category.label} 설명`, {
-                      type: "textarea",
-                      rows: 3,
-                      wide: true,
-                    })}
-                  `,
-                )
-                .join("")}
-            </div>
-          </section>
-
-          <section class="site-settings-section">
-            <div class="site-settings-section-head">
               <h4>FAQ</h4>
             </div>
             <div class="site-settings-grid">
@@ -4053,6 +4321,7 @@ function renderSiteSettingsPanel() {
       </div>
     </div>
   `;
+  window.setTimeout(refreshStorageUsagePanel, 0);
 }
 
 function collectSiteSettingsFromPanel() {
@@ -4132,6 +4401,28 @@ function showSiteSettingsPanel() {
   }
 }
 
+function focusSiteSettingsSection(sectionName) {
+  const section = siteSettingsPanel?.querySelector(`[data-settings-section="${sectionName}"]`);
+  if (!section) {
+    return;
+  }
+  const panelTopbarHeight = siteSettingsPanel?.querySelector(".site-settings-topbar")?.getBoundingClientRect().height || 110;
+  const targetTop = Math.max(0, section.offsetTop - panelTopbarHeight - 28);
+  siteSettingsPanel?.scrollTo({ top: targetTop, behavior: "smooth" });
+  window.setTimeout(() => {
+    section.querySelector("input, textarea, select, button")?.focus({ preventScroll: true });
+  }, 180);
+}
+
+function showNavigationSettingsPanel() {
+  hideTableResizeOverlay({ force: true });
+  if (!requestEditorAccess(showNavigationSettingsPanel)) {
+    return;
+  }
+  showSiteSettingsPanel();
+  window.setTimeout(() => focusSiteSettingsSection("navigation"), 80);
+}
+
 function hideSiteSettingsPanel() {
   if (siteSettingsPanel) {
     siteSettingsPanel.hidden = true;
@@ -4186,8 +4477,9 @@ function renderBlogCategories() {
             .map(
               (group) => {
                 const active = selected && activeBlogTopic === group.label;
+                const groupDisplayLabel = group.displayLabel || group.label;
                 return `<a class="blog-category-folder-link${active ? " is-current" : ""}" href="${escapeAttribute(buildBlogHash(category.slug, group.label))}" aria-current="${active ? "page" : "false"}">
-                <span>${escapeHtml(group.label)}</span>
+                <span>${escapeHtml(groupDisplayLabel)}</span>
               </a>`;
               },
             )
@@ -4267,8 +4559,10 @@ function renderTopicFilter(posts) {
 
   topicFilter.innerHTML = topics
     .map(
-      (topic) =>
-        `<button class="topic-chip" type="button" aria-pressed="${topic === activeBlogTopic}" data-topic="${escapeHtml(topic)}">#${escapeHtml(topic)}</button>`,
+      (topic) => {
+        const displayTopic = getTaxonomyGroupDisplayLabel(currentBlogCategory, topic);
+        return `<button class="topic-chip" type="button" aria-pressed="${topic === activeBlogTopic}" data-topic="${escapeHtml(topic)}">#${escapeHtml(displayTopic)}</button>`;
+      },
     )
     .join("");
 
@@ -4298,11 +4592,12 @@ function renderTaxonomyGuide() {
 
   if (isFolderOpen) {
     const activeGroup = getActiveTaxonomyGroup();
+    const activeGroupDisplayLabel = activeGroup?.displayLabel || activeBlogTopic;
     const activeItem = activeGroup?.items?.find((item) => item.title === activeBlogSubtopic);
-    const folderLabel = activeBlogSubtopic === "all" ? activeBlogTopic : activeBlogSubtopic;
+    const folderLabel = activeBlogSubtopic === "all" ? activeGroupDisplayLabel : activeBlogSubtopic;
     const folderNote =
       activeBlogSubtopic === "all"
-        ? `${activeBlogTopic} 폴더 안의 전체 글을 확인합니다.`
+        ? `${activeGroupDisplayLabel} 폴더 안의 전체 글을 확인합니다.`
         : activeItem?.note || `${activeBlogSubtopic} 폴더 안의 글을 확인합니다.`;
     const folderCount = getFolderPostCount(category.slug, activeBlogTopic, activeBlogSubtopic);
     taxonomyGuide.innerHTML = `
@@ -4310,7 +4605,7 @@ function renderTaxonomyGuide() {
         <nav class="taxonomy-folder-breadcrumb" aria-label="폴더 경로">
           <a href="${escapeAttribute(buildBlogHash(category.slug))}">${escapeHtml(category.label)} 전체 폴더</a>
           <span>/</span>
-          <a href="${escapeAttribute(buildBlogHash(category.slug, activeBlogTopic))}">${escapeHtml(activeBlogTopic)}</a>
+          <a href="${escapeAttribute(buildBlogHash(category.slug, activeBlogTopic))}">${escapeHtml(activeGroupDisplayLabel)}</a>
           ${
             activeBlogSubtopic !== "all"
               ? `<span>/</span><strong>${escapeHtml(activeBlogSubtopic)}</strong>`
@@ -4324,7 +4619,7 @@ function renderTaxonomyGuide() {
           </div>
         </div>
         <p>${escapeHtml(folderNote)}</p>
-        <div class="taxonomy-subfolder-list" aria-label="${escapeAttribute(activeBlogTopic)} 하위 폴더">
+        <div class="taxonomy-subfolder-list" aria-label="${escapeAttribute(activeGroupDisplayLabel)} 하위 폴더">
           <a class="${activeBlogSubtopic === "all" ? "is-active" : ""}" href="${escapeAttribute(buildBlogHash(category.slug, activeBlogTopic))}">전체</a>
           ${(activeGroup?.items || [])
             .map(
@@ -4369,6 +4664,7 @@ function matchesPostSearch(post, query) {
     post.summary,
     post.author,
     getPostGroup(post),
+    getPostGroupDisplay(post),
     getPostSubcategory(post),
     getPostTaxonomyNote(post),
     ...getPostTags(post),
@@ -4409,10 +4705,11 @@ function getBlogListScopeLabel() {
   if (activeBlogTopic === "all") {
     return `${category.label} / 전체`;
   }
+  const topicLabel = getTaxonomyGroupDisplayLabel(currentBlogCategory, activeBlogTopic);
   if (activeBlogSubtopic === "all") {
-    return `${category.label} / ${activeBlogTopic}`;
+    return `${category.label} / ${topicLabel}`;
   }
-  return `${category.label} / ${activeBlogTopic} / ${activeBlogSubtopic}`;
+  return `${category.label} / ${topicLabel} / ${activeBlogSubtopic}`;
 }
 
 function getBlogListSortLabel() {
@@ -4690,12 +4987,13 @@ function renderPostList() {
   } else {
     renderTopicFilter(allPosts);
     renderTaxonomyGuide();
+    const activeGroupDisplayLabel = activeBlogTopic === "all" ? "" : getTaxonomyGroupDisplayLabel(currentBlogCategory, activeBlogTopic);
     if (postListTitle) {
       postListTitle.textContent =
         activeBlogTopic === "all"
           ? settings.sections.postListTitle
           : activeBlogSubtopic === "all"
-            ? `${activeBlogTopic} 폴더`
+            ? `${activeGroupDisplayLabel} 폴더`
             : `${activeBlogSubtopic} 폴더`;
     }
     if (contentSectionDivider) {
@@ -4704,7 +5002,7 @@ function renderPostList() {
         activeBlogTopic === "all"
           ? `${category.label} 게시글`
           : activeBlogSubtopic === "all"
-            ? `${activeBlogTopic} 게시글`
+            ? `${activeGroupDisplayLabel} 게시글`
             : `${activeBlogSubtopic} 게시글`;
       contentSectionDivider.innerHTML = `<span>${escapeHtml(scopeLabel)}</span>`;
     }
@@ -4723,7 +5021,7 @@ function renderPostList() {
         .map(
           (post) => {
             const image = getPostThumbnailImage(post);
-            const group = getPostGroup(post);
+            const group = getPostGroupDisplay(post);
             const subcategory = getPostSubcategory(post);
             const category = getCategoryBySlug(post.category || currentBlogCategory);
             const author = getPostAuthor(post);
@@ -5053,7 +5351,7 @@ function renderClassificationOptions(post) {
   const groups = getCategoryTaxonomy(categorySlug);
   const selectedGroup = normalizePostGroup(post || {}, categorySlug);
   postGroupSelect.innerHTML = groups
-    .map((group) => `<option value="${escapeAttribute(group.label)}">${escapeHtml(group.label)}</option>`)
+    .map((group) => `<option value="${escapeAttribute(group.label)}">${escapeHtml(group.displayLabel || group.label)}</option>`)
     .join("");
   postGroupSelect.value = selectedGroup;
   renderSubcategoryOptions(categorySlug, selectedGroup, post ? normalizePostSubcategory(post, categorySlug, selectedGroup) : "");
@@ -5104,7 +5402,7 @@ function renderPostDetail(post) {
 
   const image = getPostThumbnailImage(post);
   const category = getCategoryBySlug(post.category);
-  const group = getPostGroup(post);
+  const group = getPostGroupDisplay(post);
   const subcategory = getPostSubcategory(post);
   const tags = getPostTags(post);
   const shouldGateOnboarding = isOnboardingPost(post) && !hasOnboardingAccess(post);
@@ -6896,7 +7194,7 @@ function renderEditorPreview() {
   editorPreview.innerHTML = `
     <div class="preview-label">미리보기</div>
     <article class="article-view is-preview">
-      <div class="article-kicker">${escapeHtml(getCategoryBySlug(draft.category).label)} · ${escapeHtml(getPostGroup(draft))} · ${escapeHtml(getPostSubcategory(draft))}</div>
+      <div class="article-kicker">${escapeHtml(getCategoryBySlug(draft.category).label)} · ${escapeHtml(getPostGroupDisplay(draft))} · ${escapeHtml(getPostSubcategory(draft))}</div>
       <h1>${escapeHtml(draft.title)}</h1>
       <p class="post-detail-summary">${escapeHtml(draft.summary || "")}</p>
       <div class="article-meta">
@@ -7115,6 +7413,11 @@ function bindEditorTools() {
   deleteDetailPostButton?.addEventListener("click", deleteCurrentPost);
   newPostButton.addEventListener("click", startNewPost);
   siteSettingsButton?.addEventListener("click", showSiteSettingsPanel);
+  document.addEventListener("click", (event) => {
+    if (event.target.closest("[data-admin-menu-edit]")) {
+      showNavigationSettingsPanel();
+    }
+  });
   siteSettingsPanel?.addEventListener("click", (event) => {
     if (event.target.closest("[data-settings-save]")) {
       saveSiteSettingsFromPanel();
@@ -7126,6 +7429,10 @@ function bindEditorTools() {
     }
     if (event.target.closest("[data-export-blog-data]")) {
       exportBlogDataFile();
+      return;
+    }
+    if (event.target.closest("[data-refresh-storage-usage]")) {
+      refreshStorageUsagePanel();
       return;
     }
     if (event.target.closest("[data-settings-cancel]")) {
@@ -7220,8 +7527,9 @@ function renderNavDropdowns() {
       ...groups.map((group) => {
         const firstItem = group.items[0];
         const href = buildBlogHash(category.slug, group.label);
+        const groupDisplayLabel = group.displayLabel || group.label;
         return `<a href="${href}">
-          <span>${escapeHtml(group.label)}</span>
+          <span>${escapeHtml(groupDisplayLabel)}</span>
           <small>${escapeHtml(firstItem?.title || firstItem?.note || "세부 항목 보기")}</small>
         </a>`;
       }),
