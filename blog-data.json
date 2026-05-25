@@ -1,6 +1,6 @@
 {
   "version": 36,
-  "updatedAt": "2026-05-25T03:55:04.753Z",
+  "updatedAt": "2026-05-25T04:24:47.253Z",
   "siteSettings": {
     "hero": {
       "eyebrow": "Internal HR Portal",
@@ -682,7 +682,9 @@
         "매출성과",
         "병원네트워크",
         "해외파트너십",
-        "마케팅"
+        "마케팅",
+        "팀",
+        "소개"
       ],
       "takeaways": [
         "영업마케팅파트는 제품별 매출 성과와 고객 접점 확대를 중심으로 움직입니다.",
@@ -690,12 +692,12 @@
         "시장 반응을 내부 유관 부서와 연결해 제품 개선과 자료 준비가 이어지도록 지원합니다."
       ],
       "relatedPostIds": [
-        "culture-team-intro",
-        "culture-production-strategy-group"
+        "culture-production-strategy-group",
+        "culture-team-intro"
       ],
-      "image": "./assets/sales-marketing-part.png",
+      "image": "./assets/uploads/20260525/image-682a29174b7bf52f.jpg",
       "order": 3,
-      "updatedAt": "2026-05-22T00:00:00+09:00",
+      "updatedAt": "2026-05-25T04:24:43.988Z",
       "content": "\n  <p class=\"article-lead\">영업마케팅파트는 제품이 시장에서 실제 매출과 고객 접점으로 이어질 수 있도록 영업 전략, 병원 및 대리점 네트워크, 해외 파트너십, 마케팅 활동을 함께 관리하는 조직입니다. 제품별 매출 목표를 관리하면서 시장 커뮤니케이션과 영업 운영 프로세스를 정리해 회사의 성장 동력을 넓혀갑니다.</p>\n  <div class=\"article-pill-row\">\n    <span class=\"article-pill\">#영업마케팅파트</span>\n    <span class=\"article-pill\">#매출성과</span>\n    <span class=\"article-pill\">#병원네트워크</span>\n    <span class=\"article-pill\">#해외파트너십</span>\n    <span class=\"article-pill\">#마케팅콘텐츠</span>\n  </div>\n  <p class=\"article-source-note\">해당 글은 2026년도 사전목표신고서를 기반으로 작성되었습니다.</p>\n  <h2>영업마케팅파트 조직 구성</h2>\n  <div class=\"article-org-chart article-org-chart-compact\">\n    <div class=\"article-org-node article-org-root\">\n      <span class=\"article-org-role\">영업마케팅파트</span>\n      <strong>강호철 상무</strong>\n      <span class=\"article-org-name\">겸직</span>\n    </div>\n    <div class=\"article-org-branches\">\n      <div class=\"article-org-node\">\n        <span class=\"article-org-role\">파트 구성원</span>\n        <ul class=\"article-org-members\">\n          <li>유미 선임</li>\n          <li>김다솜 선임</li>\n        </ul>\n      </div>\n    </div>\n  </div>\n  <h2>파트 목표 구조</h2>\n  <p>사전 목표신고서 기준으로 영업마케팅파트는 제품별 매출 성과 달성이 가장 큰 비중을 차지하고, 거래처 및 병원 네트워크 확장, 해외 수출 및 파트너십, 마케팅 활동, 운영 프로세스 개선이 함께 묶여 있습니다. 단순히 판매 결과만 보는 것이 아니라, 판매가 반복될 수 있는 시장 기반을 만드는 데 초점이 있습니다.</p>\n  <div class=\"article-metric-grid\">\n    <div class=\"article-metric\">\n      <strong>01.</strong>\n      <span>제품별 매출 성과</span>\n      <p>연간 총 매출액과 제품별 매출 목표를 관리하고, 신규 판매처와 핵심 제품의 성과를 추적합니다.</p>\n    </div>\n    <div class=\"article-metric\">\n      <strong>02.</strong>\n      <span>거래처·병원 네트워크</span>\n      <p>대리점과 병원 코드 신규 등록, 고객 접점 확대, 영업 기반 확장을 관리합니다.</p>\n    </div>\n    <div class=\"article-metric\">\n      <strong>03.</strong>\n      <span>마케팅 활동</span>\n      <p>전시회, 학술 활동, 교육 세션, 마케팅 콘텐츠를 통해 제품 인지도와 시장 접점을 강화합니다.</p>\n    </div>\n    <div class=\"article-metric\">\n      <strong>04.</strong>\n      <span>운영 프로세스</span>\n      <p>영업과 마케팅 운영 시스템을 정리하고, 고객 대응과 내부 보고 흐름을 개선합니다.</p>\n    </div>\n    <div class=\"article-metric\">\n      <strong>05.</strong>\n      <span>해외 수출·파트너십</span>\n      <p>국외 판매 실적과 해외 파트너십 기회를 관리해 시장 확장의 가능성을 넓힙니다.</p>\n    </div>\n  </div>\n  <h2>영업마케팅파트는 이런 일을 합니다</h2>\n  <table>\n    <tbody>\n      <tr><th>업무 영역</th><th>주요 KPI</th><th>목표 방향</th></tr>\n      <tr><td>매출 성과 관리</td><td>연간 총 매출액, 제품별 매출 목표</td><td>주력 제품과 신규 제품의 판매 성과를 월별로 확인하고 목표 대비 진행률을 관리합니다.</td></tr>\n      <tr><td>네트워크 확장</td><td>대리점 및 병원 코드 신규 등록 건수</td><td>판매 가능 채널을 넓히고, 병원과 거래처 기반을 꾸준히 확대합니다.</td></tr>\n      <tr><td>해외 수출 및 파트너십</td><td>국외 판매 실적 수, 해외 파트너 협의</td><td>해외 시장 진입 가능성을 확인하고 파트너십 기반을 단계적으로 만듭니다.</td></tr>\n      <tr><td>마케팅 활동</td><td>마케팅 활동 수, 마케팅 콘텐츠 개발 수</td><td>전시회와 학술 활동, 제품 콘텐츠를 통해 제품 인지도와 고객 이해도를 높입니다.</td></tr>\n      <tr><td>운영 프로세스 개선</td><td>영업/마케팅 운영시스템 수립</td><td>고객 응대, 보고, 콘텐츠 관리, 영업 지원 흐름을 표준화합니다.</td></tr>\n    </tbody>\n  </table>\n  <h2>구성원별 주요 업무</h2>\n  <div class=\"article-card-grid article-member-card-grid\">\n    <div class=\"article-card\">\n      <strong>강호철 상무</strong>\n      <p>영업마케팅파트를 겸직하며 매출 목표, 시장 확장 방향, 주요 고객과 파트너십의 우선순위를 정렬합니다.</p>\n      <span class=\"article-card-meta\">겸직 · 목표 정렬 · 시장 전략</span>\n    </div>\n    <div class=\"article-card\">\n      <strong>유미 선임</strong>\n      <p>영업관리 프로세스 수립, 고객 클레임 사후 처리, 마케팅 관리 프로세스 구축, 담당 업무 역량 강화를 중심으로 영업 운영 기반을 정리합니다.</p>\n      <span class=\"article-card-meta\">영업관리 · 고객 대응 · 프로세스</span>\n    </div>\n    <div class=\"article-card\">\n      <strong>김다솜 선임</strong>\n      <p>전시회와 행사 기획, 콘텐츠 기획과 시장조사, 신규 사업 기획 및 관리, 영업/마케팅 프로세스 지원을 담당합니다.</p>\n      <span class=\"article-card-meta\">마케팅 기획 · 콘텐츠 · 시장조사</span>\n    </div>\n  </div>\n"
     },
     {
