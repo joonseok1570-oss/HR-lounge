@@ -1,6 +1,6 @@
 {
   "version": 36,
-  "updatedAt": "2026-05-25T07:26:41.224Z",
+  "updatedAt": "2026-05-26T02:35:51.545Z",
   "siteSettings": {
     "hero": {
       "eyebrow": "Internal HR Portal",
@@ -236,8 +236,8 @@
         "사진첩"
       ],
       "postIds": [
-        "culture-team-intro",
         "b7e2639c-9154-4e37-89c4-0acee50ba712",
+        "culture-team-intro",
         "culture-production-strategy-group"
       ]
     },
