@@ -1,6 +1,6 @@
 {
   "version": 36,
-  "updatedAt": "2026-05-27T06:49:20.834Z",
+  "updatedAt": "2026-05-27T06:49:57.498Z",
   "siteSettings": {
     "hero": {
       "eyebrow": "Internal HR Portal",
@@ -792,12 +792,18 @@
       "title": "태아검진휴가",
       "summary": "",
       "author": "People Team",
-      "tags": [],
+      "tags": [
+        "제도",
+        "안내",
+        "취업규칙",
+        "HRGuide",
+        "HR"
+      ],
       "takeaways": [],
       "relatedPostIds": [],
       "image": "./assets/uploads/20260527/image-83d1c8713d735526.jpg",
       "order": 1,
-      "updatedAt": "2026-05-27T06:49:19.785Z",
+      "updatedAt": "2026-05-27T06:49:55.995Z",
       "content": "<h2><br></h2>"
     }
   ]
