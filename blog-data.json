@@ -1,6 +1,6 @@
 {
   "version": 36,
-  "updatedAt": "2026-05-27T08:03:13.470Z",
+  "updatedAt": "2026-05-27T08:04:01.366Z",
   "siteSettings": {
     "hero": {
       "eyebrow": "Internal HR Portal",
@@ -236,13 +236,13 @@
         "사진첩"
       ],
       "postIds": [
-        "b7e2639c-9154-4e37-89c4-0acee50ba712",
         "culture-team-intro",
-        "culture-production-strategy-group"
+        "culture-production-strategy-group",
+        "b7e2639c-9154-4e37-89c4-0acee50ba712"
       ]
     },
     "onboardingAccess": {
-      "emails": ""
+      "emails": "jsji@solmedix.com"
     },
     "notifications": {
       "enabled": false,
