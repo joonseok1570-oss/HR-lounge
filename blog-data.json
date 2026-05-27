@@ -1,6 +1,6 @@
 {
   "version": 36,
-  "updatedAt": "2026-05-27T08:07:03.418Z",
+  "updatedAt": "2026-05-27T08:08:16.295Z",
   "siteSettings": {
     "hero": {
       "eyebrow": "Internal HR Portal",
@@ -753,8 +753,8 @@
       "category": "hr-guide",
       "group": "제도 안내",
       "subcategory": "취업규���",
-      "note": "연차 운영 및 퇴직 시 연차 정산 안�������",
-      "title": "연차제도 안내(취업규칙)",
+      "note": "원페이퍼 PPT 또는 인포그래픽 형태로 제작",
+      "title": "연차제도 안내",
       "summary": "",
       "author": "People Team",
       "tags": [
@@ -762,13 +762,14 @@
         "안내",
         "연차",
         "HRGuide",
-        "HR"
+        "HR",
+        "취업규칙"
       ],
       "takeaways": [],
       "relatedPostIds": [],
       "image": "./assets/uploads/20260527/image-5fb15c16209568e0.jpg",
       "order": 3,
-      "updatedAt": "2026-05-27T07:11:04.214Z",
+      "updatedAt": "2026-05-27T08:08:14.988Z",
       "content": "<h2><br></h2>"
     },
     {
