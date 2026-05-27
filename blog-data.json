@@ -1,6 +1,6 @@
 {
   "version": 36,
-  "updatedAt": "2026-05-27T08:06:48.447Z",
+  "updatedAt": "2026-05-27T08:06:57.205Z",
   "siteSettings": {
     "hero": {
       "eyebrow": "Internal HR Portal",
@@ -428,7 +428,7 @@
       "takeaways": [],
       "relatedPostIds": [],
       "image": "./assets/uploads/migrated/1b358656-2c51-43b6-bb8f-dbca38522e2f-cover-b321a362c3312290.jpg",
-      "order": 7,
+      "order": 6,
       "updatedAt": "2026-05-22T14:32:22.242Z",
       "content": "<p></p>"
     },
@@ -454,7 +454,7 @@
       "takeaways": [],
       "relatedPostIds": [],
       "image": "./assets/uploads/migrated/2b777ad9-7985-4c10-b04b-7d3f6af215c1-cover-12e84adce8f55d53.jpg",
-      "order": 9,
+      "order": 8,
       "updatedAt": "2026-05-22T14:32:10.360Z",
       "content": "<h2><br></h2>"
     },
@@ -645,7 +645,7 @@
       "takeaways": [],
       "relatedPostIds": [],
       "image": "./assets/uploads/migrated/d02f9214-45cf-41ec-b9e9-9d1bcfb5aaa2-cover-6571407b05fe7ea4.jpg",
-      "order": 8,
+      "order": 7,
       "updatedAt": "2026-05-23T03:50:28.396Z",
       "content": "<h2><br></h2>"
     },
@@ -753,7 +753,7 @@
       "category": "hr-guide",
       "group": "제도 안내",
       "subcategory": "취업규칙",
-      "note": "연차 운영 및 퇴직 시 연차 정산 안���",
+      "note": "연차 운영 및 퇴직 시 연차 정산 안�����",
       "title": "연차제도 안내(취업규칙)",
       "summary": "",
       "author": "People Team",
@@ -784,7 +784,7 @@
       "takeaways": [],
       "relatedPostIds": [],
       "image": "./assets/uploads/20260527/image-a70b5a56d9684c48.jpg",
-      "order": 6,
+      "order": 9,
       "updatedAt": "2026-05-27T07:26:36.340Z",
       "content": "<h2><br></h2>"
     },
