@@ -1,6 +1,6 @@
 {
   "version": 36,
-  "updatedAt": "2026-05-27T07:11:34.432Z",
+  "updatedAt": "2026-05-27T07:11:53.255Z",
   "siteSettings": {
     "hero": {
       "eyebrow": "Internal HR Portal",
@@ -665,7 +665,7 @@
       "group": "제도 안내",
       "subcategory": "취업규칙",
       "note": "원페이퍼 PPT 또는 인포그래픽 형태로 제작",
-      "title": "임신기간 근로시간 단축 제도",
+      "title": "임신기간 근로시간 단축 제도(취업규칙)",
       "summary": "",
       "author": "People Team",
       "tags": [
@@ -679,7 +679,7 @@
       "relatedPostIds": [],
       "image": "./assets/uploads/migrated/b7e2639c-9154-4e37-89c4-0acee50ba712-cover-352b1426d8b43113.jpg",
       "order": 5,
-      "updatedAt": "2026-05-25T05:25:15.887Z",
+      "updatedAt": "2026-05-27T07:11:51.636Z",
       "content": "<p></p><div style=\"text-align: center\"><span style=\"font-size: 1.02rem\"><b>고용노동부에 게시된 임신기간 근로시간 단축 계산기 자료입니다. 참고해주세요.</b></span></div><p><a class=\"article-link-preview\" href=\"https://www.moel.go.kr/policy/policydata/view.do?bbs_seq=20250201644\" target=\"_blank\" rel=\"noreferrer\"><span class=\"article-link-preview-icon\">M</span><span class=\"article-link-preview-body\"><strong class=\"article-link-preview-title\">moel.go.kr</strong><small class=\"article-link-preview-meta\">moel.go.kr · policy / policydata</small></span><span class=\"article-link-preview-action\">열기</span></a></p>"
     },
     {
