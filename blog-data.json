@@ -1,6 +1,6 @@
 {
   "version": 36,
-  "updatedAt": "2026-05-28T05:06:25.019Z",
+  "updatedAt": "2026-05-28T07:16:31.002Z",
   "siteSettings": {
     "hero": {
       "eyebrow": "Internal HR Portal",
@@ -506,7 +506,7 @@
       ],
       "relatedPostIds": [],
       "image": "./assets/hr-year-calendar.svg?v=20260523-calendar-edit",
-      "order": 8,
+      "order": 9,
       "updatedAt": "2026-05-24T00:21:06.926Z",
       "content": "<figure class=\"article-figure\"><img src=\"./assets/hr-year-calendar.svg?v=20260523-calendar-edit\" alt=\"HR Calendar 월별 일정표\"><figcaption>연말정산, 평가, 보상, 연차촉진, 법정교육, 건강검진, 조직 운영 일정을 월별로 정리한 HR 캘린더입니다.</figcaption></figure><h2>월별 운영 포인트</h2><table><tbody><tr><th>월</th><th>주요 일정</th><th>확인 포인트</th></tr><tr><td>1월</td><td>연말정산 간소화, 전년도 근태 마감, 연간 HR 계획</td><td>자료 제출 경로, 근태 확정, 연간 공지 일정</td></tr><tr><td>2월</td><td>연봉계약 갱신, 보상안 커뮤니케이션, 조직·인력 계획</td><td>계약서 서명, 보상 메시지, 인력 수요</td></tr><tr><td>3월</td><td>연봉인상 반영, 평가 목표 오픈, 신규·전환 배치</td><td>급여 반영, 목표 작성 기준, 배치 안내</td></tr><tr><td>4월</td><td>사전신고서 마감, 1분기 온보딩 점검, 법정교육 계획</td><td>평가 목표 확정, 입사자 적응, 교육 일정</td></tr><tr><td>5월</td><td>평가 기준 리마인드, 건강검진 안내, 휴가 성수기 계획</td><td>평가 기준 재확인, 수검 대상, 휴가 분산</td></tr><tr><td>6월</td><td>상반기 이슈 정리, 급여 데이터 점검, 조직문화 펄스</td><td>상반기 회고, 급여 오류 예방, 구성원 의견</td></tr><tr><td>7월</td><td>연차촉진 1차, 하반기 목표 정렬, 법정교육 시작</td><td>미사용 연차 안내, 목표 보정, 교육 이수율</td></tr><tr><td>8월</td><td>중간점검 시작, 평가 시즌 알림, 리더 피드백 가이드</td><td>면담 일정, 평가 운영 공지, 피드백 품질</td></tr><tr><td>9월</td><td>중간점검 마감, 보상 후보 리뷰, 채용·온보딩 회고</td><td>중간 결과 정리, 후보군 검토, 채용 경험</td></tr><tr><td>10월</td><td>연차촉진 2차, 퇴직연금 교육, 건강검진 독려</td><td>사용 시기 지정, 교육 이수, 미수검자 확인</td></tr><tr><td>11월</td><td>최종평가 준비, 내년 인력 계획, 연말 근태 점검</td><td>평가 자료, 조직별 인력안, 근태 누락</td></tr><tr><td>12월</td><td>최종평가, 연차촉진 3차, 연말정산 사전안내, 조직개편 준비</td><td>성과 확정, 연차 마감, 서류 안내, 발령 준비</td></tr></tbody></table><h2>운영 메모</h2><p>정확한 시행일은 매년 공지 일정과 회사 운영 기준에 따라 조정될 수 있습니다. HR 캘린더는 세부 날짜보다 구성원이 미리 준비해야 할 흐름을 빠르게 확인하는 기준 화면으로 사용합니다.</p>"
     },
@@ -628,7 +628,7 @@
       "takeaways": [],
       "relatedPostIds": [],
       "image": "./assets/uploads/migrated/b7e2639c-9154-4e37-89c4-0acee50ba712-cover-352b1426d8b43113.jpg",
-      "order": 7,
+      "order": 8,
       "updatedAt": "2026-05-27T07:11:51.636Z",
       "content": "<p></p><div style=\"text-align: center\"><span style=\"font-size: 1.02rem\"><b>고용노동부에 게시된 임신기간 근로시간 단축 계산기 자료입니다. 참고해주세요.</b></span></div><p><a class=\"article-link-preview\" href=\"https://www.moel.go.kr/policy/policydata/view.do?bbs_seq=20250201644\" target=\"_blank\" rel=\"noreferrer\"><span class=\"article-link-preview-icon\">M</span><span class=\"article-link-preview-body\"><strong class=\"article-link-preview-title\">moel.go.kr</strong><small class=\"article-link-preview-meta\">moel.go.kr · policy / policydata</small></span><span class=\"article-link-preview-action\">열기</span></a></p>"
     },
@@ -702,7 +702,7 @@
       "takeaways": [],
       "relatedPostIds": [],
       "image": "./assets/uploads/20260527/image-83d1c8713d735526.jpg",
-      "order": 6,
+      "order": 7,
       "updatedAt": "2026-05-27T07:11:33.179Z",
       "content": "<h2><br></h2>"
     },
@@ -727,7 +727,7 @@
       "takeaways": [],
       "relatedPostIds": [],
       "image": "./assets/uploads/20260527/image-ad625e96046d88ef.jpg",
-      "order": 5,
+      "order": 6,
       "updatedAt": "2026-05-27T07:11:20.582Z",
       "content": "<h2><br></h2>"
     },
@@ -744,7 +744,7 @@
       "takeaways": [],
       "relatedPostIds": [],
       "image": "./assets/uploads/20260527/image-a444cf624ebc8979.jpg",
-      "order": 3,
+      "order": 4,
       "updatedAt": "2026-05-27T06:55:12.020Z",
       "content": "<h2><br></h2>"
     },
@@ -752,7 +752,7 @@
       "id": "00866c7d-063b-40b5-8d44-c74a44253683",
       "category": "hr-guide",
       "group": "제도 안내",
-      "subcategory": "취업��칙",
+      "subcategory": "취업규칙",
       "note": "원페이퍼 PPT 또는 인포그래픽 형�����로 제작",
       "title": "연차제도 안내",
       "summary": "",
@@ -768,7 +768,7 @@
       "takeaways": [],
       "relatedPostIds": [],
       "image": "./assets/uploads/20260527/image-5fb15c16209568e0.jpg",
-      "order": 2,
+      "order": 3,
       "updatedAt": "2026-05-27T08:08:14.988Z",
       "content": "<h2><br></h2>"
     },
@@ -781,19 +781,13 @@
       "title": "가족친화인증",
       "summary": "",
       "author": "People Team",
-      "tags": [
-        "비즈니스",
-        "공유",
-        "인증",
-        "Culture",
-        "HR"
-      ],
+      "tags": [],
       "takeaways": [],
       "relatedPostIds": [],
       "image": "./assets/uploads/20260527/image-a70b5a56d9684c48.jpg",
       "order": 10,
-      "updatedAt": "2026-05-28T05:06:22.969Z",
-      "content": "<h2><a class=\"article-link-preview\" href=\"https://www.ibabynews.com/news/articleView.html?idxno=145222\" target=\"_blank\" rel=\"noreferrer\"><span class=\"article-link-preview-icon\">I</span><span class=\"article-link-preview-body\"><strong class=\"article-link-preview-title\">ibabynews.com</strong><small class=\"article-link-preview-meta\">ibabynews.com · news / articleView.html</small></span><span class=\"article-link-preview-action\">열기</span></a><p><br></p></h2>"
+      "updatedAt": "2026-05-27T07:26:36.340Z",
+      "content": "<h2><br></h2>"
     },
     {
       "id": "d19df486-06cd-46d0-9292-47feb476f7e3",
@@ -808,7 +802,7 @@
       "takeaways": [],
       "relatedPostIds": [],
       "image": "./assets/uploads/20260527/image-156781a41a9ab579.jpg",
-      "order": 1,
+      "order": 2,
       "updatedAt": "2026-05-27T07:30:45.591Z",
       "content": "<h2><br></h2>"
     },
@@ -876,8 +870,25 @@
       "takeaways": [],
       "relatedPostIds": [],
       "image": "./assets/uploads/20260527/image-4ee5c93b7824b012.jpg",
-      "order": 4,
+      "order": 5,
       "updatedAt": "2026-05-27T08:03:12.462Z",
+      "content": "<h2><br></h2>"
+    },
+    {
+      "id": "564ff16c-8ca4-4fb3-a115-766313bc609c",
+      "category": "hr-guide",
+      "group": "온보딩",
+      "subcategory": "조직도",
+      "note": "조직 구조와 보고 라인",
+      "title": "조직도",
+      "summary": "",
+      "author": "People Team",
+      "tags": [],
+      "takeaways": [],
+      "relatedPostIds": [],
+      "image": "./assets/uploads/20260528/260527-74838893ab86685b.jpg",
+      "order": 1,
+      "updatedAt": "2026-05-28T07:16:29.535Z",
       "content": "<h2><br></h2>"
     }
   ]
