@@ -1,6 +1,6 @@
 {
   "version": 36,
-  "updatedAt": "2026-05-27T12:05:45.297Z",
+  "updatedAt": "2026-05-28T05:06:25.019Z",
   "siteSettings": {
     "hero": {
       "eyebrow": "Internal HR Portal",
@@ -752,7 +752,7 @@
       "id": "00866c7d-063b-40b5-8d44-c74a44253683",
       "category": "hr-guide",
       "group": "제도 안내",
-      "subcategory": "취업규칙",
+      "subcategory": "취업��칙",
       "note": "원페이퍼 PPT 또는 인포그래픽 형�����로 제작",
       "title": "연차제도 안내",
       "summary": "",
@@ -781,13 +781,19 @@
       "title": "가족친화인증",
       "summary": "",
       "author": "People Team",
-      "tags": [],
+      "tags": [
+        "비즈니스",
+        "공유",
+        "인증",
+        "Culture",
+        "HR"
+      ],
       "takeaways": [],
       "relatedPostIds": [],
       "image": "./assets/uploads/20260527/image-a70b5a56d9684c48.jpg",
       "order": 10,
-      "updatedAt": "2026-05-27T07:26:36.340Z",
-      "content": "<h2><br></h2>"
+      "updatedAt": "2026-05-28T05:06:22.969Z",
+      "content": "<h2><a class=\"article-link-preview\" href=\"https://www.ibabynews.com/news/articleView.html?idxno=145222\" target=\"_blank\" rel=\"noreferrer\"><span class=\"article-link-preview-icon\">I</span><span class=\"article-link-preview-body\"><strong class=\"article-link-preview-title\">ibabynews.com</strong><small class=\"article-link-preview-meta\">ibabynews.com · news / articleView.html</small></span><span class=\"article-link-preview-action\">열기</span></a><p><br></p></h2>"
     },
     {
       "id": "d19df486-06cd-46d0-9292-47feb476f7e3",
