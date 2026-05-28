@@ -1,6 +1,6 @@
 {
   "version": 36,
-  "updatedAt": "2026-05-28T08:04:59.101Z",
+  "updatedAt": "2026-05-28T08:05:56.898Z",
   "siteSettings": {
     "hero": {
       "eyebrow": "Internal HR Portal",
@@ -702,7 +702,7 @@
       "takeaways": [],
       "relatedPostIds": [],
       "image": "./assets/uploads/20260527/image-83d1c8713d735526.jpg",
-      "order": 8,
+      "order": 7,
       "updatedAt": "2026-05-27T07:11:33.179Z",
       "content": "<h2><br></h2>"
     },
@@ -727,7 +727,7 @@
       "takeaways": [],
       "relatedPostIds": [],
       "image": "./assets/uploads/20260527/image-ad625e96046d88ef.jpg",
-      "order": 7,
+      "order": 6,
       "updatedAt": "2026-05-27T07:11:20.582Z",
       "content": "<h2><br></h2>"
     },
@@ -870,7 +870,7 @@
       "takeaways": [],
       "relatedPostIds": [],
       "image": "./assets/uploads/20260527/image-4ee5c93b7824b012.jpg",
-      "order": 6,
+      "order": 5,
       "updatedAt": "2026-05-27T08:03:12.462Z",
       "content": "<h2><br></h2>"
     },
@@ -904,7 +904,7 @@
       "takeaways": [],
       "relatedPostIds": [],
       "image": "./assets/uploads/20260528/260528-002c090af372b46b.jpg",
-      "order": 5,
+      "order": 8,
       "updatedAt": "2026-05-28T08:04:38.798Z",
       "content": "<h2><br></h2>"
     }
