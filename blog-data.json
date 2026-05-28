@@ -1,6 +1,6 @@
 {
   "version": 36,
-  "updatedAt": "2026-05-28T08:04:52.346Z",
+  "updatedAt": "2026-05-28T08:04:56.259Z",
   "siteSettings": {
     "hero": {
       "eyebrow": "Internal HR Portal",
@@ -744,7 +744,7 @@
       "takeaways": [],
       "relatedPostIds": [],
       "image": "./assets/uploads/20260527/image-a444cf624ebc8979.jpg",
-      "order": 5,
+      "order": 4,
       "updatedAt": "2026-05-27T06:55:12.020Z",
       "content": "<h2><br></h2>"
     },
@@ -753,7 +753,7 @@
       "category": "hr-guide",
       "group": "제도 안내",
       "subcategory": "취업규칙",
-      "note": "원페이퍼 PPT 또는 인포그래픽 형���������로 제작",
+      "note": "원페이퍼 PPT 또는 인포그래픽 형�����������로 제작",
       "title": "연차제도 안내",
       "summary": "",
       "author": "People Team",
@@ -904,7 +904,7 @@
       "takeaways": [],
       "relatedPostIds": [],
       "image": "./assets/uploads/20260528/260528-002c090af372b46b.jpg",
-      "order": 4,
+      "order": 5,
       "updatedAt": "2026-05-28T08:04:38.798Z",
       "content": "<h2><br></h2>"
     }
