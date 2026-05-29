@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SOLMEDIX PRODUCT PORTFOLIO</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div id="app" class="product-atlas">
+      <header class="topbar">
+        <div>
+          <h1 class="portfolio-title" data-edit-key="ui.title">SOLMEDIX PRODUCT PORTFOLIO</h1>
+        </div>
+      </header>
+
+      <main class="workspace">
+        <aside class="rail" aria-label="제품 선택">
+          <div class="filter-bar" role="tablist" aria-label="제품 영역 필터">
+            <button class="filter-button is-active" data-filter="all" data-edit-key="filter.all" type="button">전체</button>
+            <button class="filter-button" data-filter="head" data-edit-key="filter.head" type="button">두경부</button>
+            <button class="filter-button" data-filter="sports" data-edit-key="filter.sports" type="button">스포츠</button>
+            <button class="filter-button" data-filter="vascular" data-edit-key="filter.vascular" type="button">혈관</button>
+            <button class="filter-button" data-filter="monitoring" data-edit-key="filter.monitoring" type="button">모니터링</button>
+          </div>
+          <div id="product-list" class="product-list"></div>
+        </aside>
+
+        <section class="stage" aria-label="3D 인체 제품 맵">
+          <canvas id="scene-canvas"></canvas>
+          <div class="scene-vignette" aria-hidden="true"></div>
+          <svg id="target-arrows" class="target-arrows" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"></svg>
+          <div id="body-hotspots" class="body-hotspots" aria-label="제품 위치 선택"></div>
+          <div id="photo-cards" class="photo-cards" aria-hidden="true"></div>
+          <div id="scene-labels" class="scene-labels" aria-hidden="true"></div>
+          <div id="video-widget" class="video-widget" aria-label="YouTube video player">
+            <div id="video-frame" class="video-frame" role="button" tabindex="0" aria-label="동영상 재생"></div>
+            <div class="video-controls">
+              <input
+                id="video-url-input"
+                type="url"
+                placeholder="선택 제품 YouTube URL"
+                aria-label="YouTube URL"
+              />
+              <button id="video-connect-button" class="video-connect-button" data-edit-key="video.connect" type="button">연결</button>
+              <a id="video-open-link" class="video-open-link" data-edit-key="video.open" href="https://www.youtube.com/watch?v=KTCUSoH5Nic" target="_blank" rel="noopener">YouTube</a>
+            </div>
+            <p id="video-message" class="video-message" aria-live="polite"></p>
+          </div>
+          <div class="scene-status">
+            <span id="active-region" data-edit-key="product.lightin.region">Larynx</span>
+            <strong id="active-product" data-edit-key="product.lightin.name">Lightin</strong>
+          </div>
+        </section>
+
+        <aside class="detail-panel" aria-live="polite">
+          <p class="medical-note" data-edit-key="ui.medicalNote">
+            본 제품 설명은 온보딩용으로 제작된 요약이며, 회사 공식 홈페이지에 공개된 제품 정보 및 브로셔를 참고했습니다.
+            제품별 구체적인 세부 정보는 각 제품 담당자를 찾아 문의해 주세요.
+          </p>
+          <p id="detail-kicker" class="eyebrow" data-edit-key="product.lightin.subtitle">Light Guided Injection System</p>
+          <h2 id="detail-name" data-edit-key="product.lightin.name">Lightin</h2>
+          <div class="detail-image-wrap">
+            <img id="detail-image" src="./assets/product-photos/lightin.png" alt="" />
+          </div>
+          <p id="detail-summary" class="detail-summary"></p>
+          <div id="detail-metrics" class="metric-grid"></div>
+          <div class="flow-box">
+            <p class="flow-title" data-edit-key="ui.flowTitle">작용 흐름</p>
+            <ol id="detail-flow" class="flow-list"></ol>
+          </div>
+        </aside>
+      </main>
+    </div>
+
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://cdn.jsdelivr.net/npm/three@0.165.0/build/three.module.js",
+          "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.165.0/examples/jsm/"
+        }
+      }
+    </script>
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>

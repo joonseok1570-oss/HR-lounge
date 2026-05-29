@@ -1527,7 +1527,7 @@ const managementSupportPartContent = `
 `;
 
 const defaultBlogState = {
-  version: 36,
+  version: 38,
   updatedAt: new Date().toISOString(),
   siteSettings: defaultSiteSettings,
   posts: [
@@ -3025,6 +3025,14 @@ function isSafeImageUrl(value) {
   return !value || /^(https?:|data:image\/|\.\/|\/)/i.test(value);
 }
 
+function isSafeInteractiveEmbedUrl(value) {
+  const url = String(value || "").trim();
+  if (!url) {
+    return false;
+  }
+  return /^(?:\.\/|\/)?assets\/[\w가-힣%()./@ -]+\.html(?:[?#].*)?$/i.test(url);
+}
+
 function escapeAttribute(value) {
   return escapeHtml(value).replaceAll("`", "&#096;");
 }
@@ -3256,6 +3264,27 @@ function renderArticleAutoToc(articleBody, post) {
       </div>
       <div class="article-smart-toc-links">${links}</div>
     </nav>
+  `;
+}
+
+function renderInteractiveEmbed(post) {
+  const embedUrl = String(post?.interactiveEmbed || "").trim();
+  if (!isSafeInteractiveEmbedUrl(embedUrl)) {
+    return "";
+  }
+
+  return `
+    <section class="article-interactive-embed" aria-label="${escapeAttribute(post.title)} 인터랙티브 자료">
+      <iframe
+        src="${escapeAttribute(embedUrl)}"
+        title="${escapeAttribute(post.title)}"
+        loading="lazy"
+        referrerpolicy="no-referrer"
+      ></iframe>
+      <div class="article-interactive-actions">
+        <a href="${escapeAttribute(embedUrl)}" target="_blank" rel="noreferrer">새 창으로 열기</a>
+      </div>
+    </section>
   `;
 }
 
@@ -3586,6 +3615,8 @@ function normalizeBlogState(state) {
       takeaways: normalizeTakeaways(sourcePost.takeaways, sourcePost.summary ? [String(sourcePost.summary)] : []),
       relatedPostIds: normalizeRelatedPostIds(sourcePost.relatedPostIds, String(sourcePost.id || "")),
       image: isSafeImageUrl(sourcePost.image) ? String(sourcePost.image || "") : "",
+      interactiveEmbed: isSafeInteractiveEmbedUrl(sourcePost.interactiveEmbed) ? String(sourcePost.interactiveEmbed || "").trim() : "",
+      openMode: sourcePost.openMode === "new-window" ? "new-window" : "",
       order: normalizePostOrder(sourcePost.order),
       updatedAt: sourcePost.updatedAt || new Date().toISOString(),
       content: sanitizeHtml(sourcePost.content || "<p></p>"),
@@ -3630,7 +3661,7 @@ function normalizeBlogState(state) {
   }
 
   return {
-    version: 36,
+    version: 38,
     updatedAt: new Date().toISOString(),
     siteSettings,
     posts,
@@ -5026,13 +5057,18 @@ function renderPostList() {
             const category = getCategoryBySlug(post.category || currentBlogCategory);
             const author = getPostAuthor(post);
             const readingTime = estimateReadingMinutes(post.content);
+            const opensNewWindow = shouldOpenPostInNewWindow(post);
+            const postItemTag = opensNewWindow ? "a" : "button";
+            const postItemActionAttributes = opensNewWindow
+              ? `href="${escapeHtml(post.interactiveEmbed)}" target="_blank" rel="noreferrer" data-external-post="true"`
+              : 'type="button"';
             const tags = getPostTags(post)
               .slice(0, 3)
               .map((tag) => `#${escapeHtml(tag)}`)
               .join(" ");
             const summary = String(post.summary || "").trim();
             return `
-            <button class="post-item${image ? "" : " has-no-thumb"}${canSortPosts ? " is-sortable" : ""}" type="button" data-post-id="${escapeHtml(post.id)}" draggable="false" aria-selected="${post.id === currentPostId}">
+            <${postItemTag} class="post-item${image ? "" : " has-no-thumb"}${canSortPosts ? " is-sortable" : ""}" ${postItemActionAttributes} data-post-id="${escapeHtml(post.id)}" draggable="false" aria-selected="${post.id === currentPostId}">
               ${canSortPosts ? '<span class="post-drag-handle" aria-hidden="true"></span>' : ""}
               ${image ? `<span class="post-thumb" style="background-image: url('${escapeHtml(image)}')" aria-hidden="true"></span>` : ""}
               <span class="post-text">
@@ -5047,7 +5083,7 @@ function renderPostList() {
                 <span class="post-tags">${tags}</span>
               </span>
               <span class="post-arrow" aria-hidden="true">›</span>
-            </button>
+            </${postItemTag}>
           `;
           },
         )
@@ -5062,6 +5098,9 @@ function renderPostList() {
 
   postList.querySelectorAll("[data-post-id]").forEach((button) => {
     button.addEventListener("click", () => {
+      if (button.dataset.externalPost === "true") {
+        return;
+      }
       if (Date.now() < suppressPostSelectUntil) {
         return;
       }
@@ -5409,9 +5448,10 @@ function renderPostDetail(post) {
   const articleBody = shouldGateOnboarding ? { html: renderOnboardingAccessGate(post) } : prepareArticleBody(post.content);
   const articleToc = shouldGateOnboarding ? "" : renderArticleAutoToc(articleBody, post);
   const relatedPosts = shouldGateOnboarding ? [] : getRelatedPosts(post);
+  const interactiveEmbed = shouldGateOnboarding ? "" : renderInteractiveEmbed(post);
   postDetailPanel.hidden = false;
   postDetail.innerHTML = `
-    <article class="article-view${articleToc ? " has-side-toc" : ""}">
+    <article class="article-view${articleToc ? " has-side-toc" : ""}${interactiveEmbed ? " has-interactive-embed" : ""}">
       <div class="article-kicker">${escapeHtml(category.label)} · ${escapeHtml(group)} · ${escapeHtml(subcategory)}</div>
       <h1>${escapeHtml(post.title)}</h1>
       <p class="post-detail-summary">${escapeHtml(post.summary || "")}</p>
@@ -5425,6 +5465,7 @@ function renderPostDetail(post) {
       ${articleBody.sourceNoteHtml || ""}
       ${articleToc}
       <div class="post-detail-body">${articleBody.html}</div>
+      ${interactiveEmbed}
       ${
         relatedPosts.length
           ? `<section class="article-related"><h2>함께 보면 좋은 글</h2>${relatedPosts
@@ -5684,12 +5725,32 @@ function selectPost(postId) {
   if (!postId) {
     return;
   }
+  const post = blogState.posts.find((item) => item.id === postId);
+  if (shouldOpenPostInNewWindow(post)) {
+    openPostInNewWindow(post);
+    return;
+  }
   const nextHash = `#post/${encodeURIComponent(postId)}`;
   if (window.location.hash === nextHash) {
     showPostPage(postId);
     return;
   }
   window.location.hash = nextHash;
+}
+
+function shouldOpenPostInNewWindow(post) {
+  return post?.openMode === "new-window" && isSafeInteractiveEmbedUrl(post.interactiveEmbed);
+}
+
+function openPostInNewWindow(post) {
+  const url = String(post?.interactiveEmbed || "").trim();
+  if (!url) {
+    return;
+  }
+  const opened = window.open(url, "_blank", "noopener,noreferrer");
+  if (!opened) {
+    window.location.href = url;
+  }
 }
 
 function getPostBackFallbackHash() {
@@ -7161,6 +7222,7 @@ function applyArticleTemplate(type) {
 function getDraftPost() {
   const summary = postSummaryInput.value.trim();
   const classification = getSelectedClassification();
+  const existingPost = getCurrentPost();
   return {
     id: currentPostId || "draft",
     category: currentBlogCategory,
@@ -7174,6 +7236,7 @@ function getDraftPost() {
     takeaways: [],
     relatedPostIds: normalizeRelatedPostIds(getSelectedRelatedPostIds(), currentPostId || ""),
     image: isSafeImageUrl(postImageInput.value.trim()) ? postImageInput.value.trim() : "",
+    interactiveEmbed: isSafeInteractiveEmbedUrl(existingPost?.interactiveEmbed) ? String(existingPost.interactiveEmbed || "").trim() : "",
     updatedAt: new Date().toISOString(),
     content: sanitizeHtml(postEditor.innerHTML),
   };
@@ -7190,10 +7253,11 @@ function renderEditorPreview() {
   const articleToc = renderArticleAutoToc(articleBody, draft);
   const tags = getPostTags(draft);
   const relatedPosts = getRelatedPosts(draft);
+  const interactiveEmbed = renderInteractiveEmbed(draft);
   editorPreview.hidden = false;
   editorPreview.innerHTML = `
     <div class="preview-label">미리보기</div>
-    <article class="article-view is-preview">
+    <article class="article-view is-preview${interactiveEmbed ? " has-interactive-embed" : ""}">
       <div class="article-kicker">${escapeHtml(getCategoryBySlug(draft.category).label)} · ${escapeHtml(getPostGroupDisplay(draft))} · ${escapeHtml(getPostSubcategory(draft))}</div>
       <h1>${escapeHtml(draft.title)}</h1>
       <p class="post-detail-summary">${escapeHtml(draft.summary || "")}</p>
@@ -7207,6 +7271,7 @@ function renderEditorPreview() {
       ${articleBody.sourceNoteHtml || ""}
       ${articleToc}
       <div class="post-detail-body">${articleBody.html}</div>
+      ${interactiveEmbed}
       ${
         relatedPosts.length
           ? `<section class="article-related"><h2>함께 보면 좋은 글</h2>${relatedPosts
@@ -7609,6 +7674,10 @@ function showPostPage(postId) {
   if (!post) {
     showToast("글을 찾을 수 없습니다.");
     showBlogPage(currentBlogCategory);
+    return;
+  }
+  if (shouldOpenPostInNewWindow(post)) {
+    showBlogPage(post.category, getPostGroup(post), getPostSubcategory(post));
     return;
   }
 
