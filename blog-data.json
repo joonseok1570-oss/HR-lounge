@@ -1,6 +1,6 @@
 {
   "version": 38,
-  "updatedAt": "2026-05-29T08:15:32.378Z",
+  "updatedAt": "2026-05-29T08:33:37.729Z",
   "siteSettings": {
     "hero": {
       "eyebrow": "Internal HR Portal",
@@ -918,15 +918,22 @@
       "title": "온보딩 - 신규 입사자 기본가이즈",
       "summary": "",
       "author": "People Team",
-      "tags": [],
+      "tags": [
+        "온보딩",
+        "신규입사자",
+        "기본",
+        "가이드",
+        "HRGuide",
+        "HR"
+      ],
       "takeaways": [],
       "relatedPostIds": [],
       "image": "./assets/uploads/20260527/image-4ee5c93b7824b012.jpg",
       "interactiveEmbed": "",
       "openMode": "",
       "order": 4,
-      "updatedAt": "2026-05-27T08:03:12.462Z",
-      "content": "<h2><br></h2>"
+      "updatedAt": "2026-05-29T08:33:34.408Z",
+      "content": "<h2>test</h2>"
     },
     {
       "id": "hr-guide-solmedix-product-portfolio",
