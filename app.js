@@ -1875,6 +1875,8 @@ const postTagsInput = document.querySelector("#post-tags-input");
 const postGroupSelect = document.querySelector("#post-group-select");
 const postSubcategorySelect = document.querySelector("#post-subcategory-select");
 const postImageInput = document.querySelector("#post-image-input");
+const postVideoUrlInput = document.querySelector("#post-video-url-input");
+const postVideoThumbnailInput = document.querySelector("#post-video-thumbnail-input");
 const coverImageFileInput = document.querySelector("#cover-image-file-input");
 const coverUploadButton = document.querySelector("#cover-upload-button");
 const clearCoverButton = document.querySelector("#clear-cover-button");
@@ -3033,6 +3035,62 @@ function isSafeInteractiveEmbedUrl(value) {
   return /^(?:\.\/|\/)?assets\/[\w가-힣%()./@ -]+\.html(?:[?#].*)?$/i.test(url);
 }
 
+function parseYouTubeUrl(rawUrl) {
+  const value = String(rawUrl || "").trim();
+  if (!value) {
+    return null;
+  }
+
+  if (/^[a-zA-Z0-9_-]{11}$/.test(value)) {
+    return createYouTubeVideo(value);
+  }
+
+  const normalizedValue = /^https?:\/\//i.test(value) ? value : `https://${value}`;
+  let parsed;
+  try {
+    parsed = new URL(normalizedValue);
+  } catch (error) {
+    return null;
+  }
+
+  const host = parsed.hostname.replace(/^www\./i, "");
+  const pathParts = parsed.pathname.split("/").filter(Boolean);
+  let videoId = null;
+
+  if (host === "youtu.be") {
+    videoId = pathParts[0];
+  } else if (["youtube.com", "m.youtube.com", "youtube-nocookie.com"].includes(host)) {
+    if (parsed.searchParams.has("v")) {
+      videoId = parsed.searchParams.get("v");
+    } else if (["embed", "shorts", "live"].includes(pathParts[0])) {
+      videoId = pathParts[1];
+    }
+  }
+
+  if (!/^[a-zA-Z0-9_-]{11}$/.test(videoId || "")) {
+    return null;
+  }
+
+  return createYouTubeVideo(videoId);
+}
+
+function createYouTubeVideo(videoId) {
+  const origin =
+    window.location && window.location.protocol !== "file:" && window.location.origin
+      ? `&origin=${encodeURIComponent(window.location.origin)}`
+      : "";
+  return {
+    id: videoId,
+    watchUrl: `https://www.youtube.com/watch?v=${videoId}`,
+    embedUrl: `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1&playsinline=1${origin}`,
+    thumbnailUrl: `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`,
+  };
+}
+
+function normalizeYouTubeWatchUrl(value) {
+  return parseYouTubeUrl(value)?.watchUrl || "";
+}
+
 function escapeAttribute(value) {
   return escapeHtml(value).replaceAll("`", "&#096;");
 }
@@ -3154,11 +3212,41 @@ function getPostImage(post) {
   return isSafeImageUrl(post?.image) && post.image ? post.image : getDefaultCoverImage();
 }
 
-function getPostThumbnailImage(post) {
+function getPostVideo(post) {
+  const video = parseYouTubeUrl(post?.videoUrl);
+  if (!video) {
+    return null;
+  }
+  const thumbnail = isSafeImageUrl(post?.videoThumbnail) && post.videoThumbnail
+    ? String(post.videoThumbnail).trim()
+    : isSafeImageUrl(post?.image) && post.image
+      ? String(post.image).trim()
+      : video.thumbnailUrl;
+  return {
+    ...video,
+    thumbnailUrl: thumbnail || video.thumbnailUrl,
+  };
+}
+
+function getPostVideoThumbnailImage(post) {
+  return getPostVideo(post)?.thumbnailUrl || "";
+}
+
+function getPostDetailCoverImage(post) {
   if (post?.id === "hr-guide-year-calendar") {
     return getHrCalendarImageDataUrl();
   }
   return isSafeImageUrl(post?.image) && post.image ? post.image : "";
+}
+
+function getPostThumbnailImage(post) {
+  if (post?.id === "hr-guide-year-calendar") {
+    return getHrCalendarImageDataUrl();
+  }
+  if (isSafeImageUrl(post?.image) && post.image) {
+    return post.image;
+  }
+  return getPostVideoThumbnailImage(post);
 }
 
 function getPostTags(post) {
@@ -3285,6 +3373,71 @@ function renderInteractiveEmbed(post) {
         <a href="${escapeAttribute(embedUrl)}" target="_blank" rel="noreferrer">새 창으로 열기</a>
       </div>
     </section>
+  `;
+}
+
+function renderPostVideo(post) {
+  const video = getPostVideo(post);
+  if (!video) {
+    return "";
+  }
+  const title = String(post?.title || "YouTube");
+  return `
+    <section class="article-video-card" aria-label="${escapeAttribute(title)} 영상">
+      <div
+        class="article-video-preview"
+        role="button"
+        tabindex="0"
+        data-youtube-embed="${escapeAttribute(video.embedUrl)}"
+        data-youtube-watch="${escapeAttribute(video.watchUrl)}"
+        aria-label="${escapeAttribute(title)} 재생"
+      >
+        <img src="${escapeAttribute(video.thumbnailUrl)}" alt="" loading="lazy" />
+        <span class="article-video-play" aria-hidden="true"></span>
+      </div>
+      <div class="article-video-footer">
+        <span>Video</span>
+        <strong>${escapeHtml(title)}</strong>
+        <a class="article-video-youtube" href="${escapeAttribute(video.watchUrl)}" rel="noreferrer">YouTube</a>
+      </div>
+    </section>
+  `;
+}
+
+function bindArticleVideos(container) {
+  container?.querySelectorAll?.("[data-youtube-embed]").forEach((preview) => {
+    const play = () => playArticleVideo(preview);
+    preview.addEventListener("click", play);
+    preview.addEventListener("keydown", (event) => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        play();
+      }
+    });
+  });
+}
+
+function playArticleVideo(preview) {
+  const embedUrl = String(preview?.dataset?.youtubeEmbed || "");
+  const watchUrl = String(preview?.dataset?.youtubeWatch || "");
+  if (!embedUrl) {
+    return;
+  }
+  if (window.location.protocol === "file:" && watchUrl) {
+    window.location.href = watchUrl;
+    return;
+  }
+  preview.classList.add("is-playing");
+  preview.removeAttribute("role");
+  preview.removeAttribute("tabindex");
+  preview.removeAttribute("aria-label");
+  preview.innerHTML = `
+    <iframe
+      src="${escapeAttribute(embedUrl)}"
+      title="YouTube video player"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      allowfullscreen
+    ></iframe>
   `;
 }
 
@@ -3615,6 +3768,8 @@ function normalizeBlogState(state) {
       takeaways: normalizeTakeaways(sourcePost.takeaways, sourcePost.summary ? [String(sourcePost.summary)] : []),
       relatedPostIds: normalizeRelatedPostIds(sourcePost.relatedPostIds, String(sourcePost.id || "")),
       image: isSafeImageUrl(sourcePost.image) ? String(sourcePost.image || "") : "",
+      videoUrl: normalizeYouTubeWatchUrl(sourcePost.videoUrl),
+      videoThumbnail: isSafeImageUrl(sourcePost.videoThumbnail) ? String(sourcePost.videoThumbnail || "").trim() : "",
       interactiveEmbed: isSafeInteractiveEmbedUrl(sourcePost.interactiveEmbed) ? String(sourcePost.interactiveEmbed || "").trim() : "",
       openMode: sourcePost.openMode === "new-window" ? "new-window" : "",
       order: normalizePostOrder(sourcePost.order),
@@ -5416,6 +5571,12 @@ function renderEditor(post) {
   postAuthorInput.value = post ? getPostAuthor(post) : "People Team";
   postTagsInput.value = post ? getPostTags(post).map((tag) => `#${tag}`).join(" ") : "";
   postImageInput.value = post ? post.image || "" : "";
+  if (postVideoUrlInput) {
+    postVideoUrlInput.value = post ? post.videoUrl || "" : "";
+  }
+  if (postVideoThumbnailInput) {
+    postVideoThumbnailInput.value = post ? post.videoThumbnail || "" : "";
+  }
   renderClassificationOptions(post);
   updateCoverPreview(postImageInput.value);
   renderRelatedPostOptions(post);
@@ -5439,7 +5600,7 @@ function renderPostDetail(post) {
     return;
   }
 
-  const image = getPostThumbnailImage(post);
+  const image = getPostDetailCoverImage(post);
   const category = getCategoryBySlug(post.category);
   const group = getPostGroupDisplay(post);
   const subcategory = getPostSubcategory(post);
@@ -5448,10 +5609,11 @@ function renderPostDetail(post) {
   const articleBody = shouldGateOnboarding ? { html: renderOnboardingAccessGate(post) } : prepareArticleBody(post.content);
   const articleToc = shouldGateOnboarding ? "" : renderArticleAutoToc(articleBody, post);
   const relatedPosts = shouldGateOnboarding ? [] : getRelatedPosts(post);
+  const postVideo = shouldGateOnboarding ? "" : renderPostVideo(post);
   const interactiveEmbed = shouldGateOnboarding ? "" : renderInteractiveEmbed(post);
   postDetailPanel.hidden = false;
   postDetail.innerHTML = `
-    <article class="article-view${articleToc ? " has-side-toc" : ""}${interactiveEmbed ? " has-interactive-embed" : ""}">
+    <article class="article-view${articleToc ? " has-side-toc" : ""}${postVideo ? " has-video-embed" : ""}${interactiveEmbed ? " has-interactive-embed" : ""}">
       <div class="article-kicker">${escapeHtml(category.label)} · ${escapeHtml(group)} · ${escapeHtml(subcategory)}</div>
       <h1>${escapeHtml(post.title)}</h1>
       <p class="post-detail-summary">${escapeHtml(post.summary || "")}</p>
@@ -5462,6 +5624,7 @@ function renderPostDetail(post) {
       </div>
       <div class="article-tags">${tags.map((tag) => `<span>#${escapeHtml(tag)}</span>`).join("")}</div>
       ${image ? `<img class="post-detail-cover" src="${escapeHtml(image)}" alt="" />` : ""}
+      ${postVideo}
       ${articleBody.sourceNoteHtml || ""}
       ${articleToc}
       <div class="post-detail-body">${articleBody.html}</div>
@@ -5485,6 +5648,7 @@ function renderPostDetail(post) {
     button.addEventListener("click", () => selectPost(button.dataset.relatedPost));
   });
   hydrateHrCalendarImages(postDetail);
+  bindArticleVideos(postDetail);
   bindArticleTocLinks(postDetail);
   bindInlineImageZoom(postDetail);
   bindOnboardingAccessGate(post);
@@ -5801,6 +5965,20 @@ function saveCurrentPost() {
   const classification = getSelectedClassification();
   const relatedPostIds = normalizeRelatedPostIds(getSelectedRelatedPostIds(), currentPostId || "");
   const image = isSafeImageUrl(postImageInput.value.trim()) ? postImageInput.value.trim() : "";
+  const rawVideoUrl = postVideoUrlInput?.value.trim() || "";
+  const videoUrl = normalizeYouTubeWatchUrl(rawVideoUrl);
+  if (rawVideoUrl && !videoUrl) {
+    showToast("YouTube URL만 연결할 수 있습니다.");
+    postVideoUrlInput?.focus();
+    return;
+  }
+  const rawVideoThumbnail = postVideoThumbnailInput?.value.trim() || "";
+  const videoThumbnail = isSafeImageUrl(rawVideoThumbnail) ? rawVideoThumbnail : "";
+  if (rawVideoThumbnail && !videoThumbnail) {
+    showToast("썸네일은 https URL, data:image, / 또는 ./assets 경로만 사용할 수 있습니다.");
+    postVideoThumbnailInput?.focus();
+    return;
+  }
   const content = sanitizeHtml(postEditor.innerHTML);
   const now = new Date().toISOString();
   const existingPost = getCurrentPost();
@@ -5815,6 +5993,8 @@ function saveCurrentPost() {
     existingPost.note = classification.note;
     existingPost.relatedPostIds = relatedPostIds;
     existingPost.image = image;
+    existingPost.videoUrl = videoUrl;
+    existingPost.videoThumbnail = videoThumbnail;
     existingPost.content = content;
     existingPost.updatedAt = now;
   } else {
@@ -5831,6 +6011,8 @@ function saveCurrentPost() {
       takeaways: [],
       relatedPostIds,
       image,
+      videoUrl,
+      videoThumbnail,
       order: getNewPostOrder(currentBlogCategory),
       content,
       updatedAt: now,
@@ -7223,6 +7405,7 @@ function getDraftPost() {
   const summary = postSummaryInput.value.trim();
   const classification = getSelectedClassification();
   const existingPost = getCurrentPost();
+  const rawVideoThumbnail = postVideoThumbnailInput?.value.trim() || "";
   return {
     id: currentPostId || "draft",
     category: currentBlogCategory,
@@ -7236,6 +7419,8 @@ function getDraftPost() {
     takeaways: [],
     relatedPostIds: normalizeRelatedPostIds(getSelectedRelatedPostIds(), currentPostId || ""),
     image: isSafeImageUrl(postImageInput.value.trim()) ? postImageInput.value.trim() : "",
+    videoUrl: normalizeYouTubeWatchUrl(postVideoUrlInput?.value.trim() || ""),
+    videoThumbnail: isSafeImageUrl(rawVideoThumbnail) ? rawVideoThumbnail : "",
     interactiveEmbed: isSafeInteractiveEmbedUrl(existingPost?.interactiveEmbed) ? String(existingPost.interactiveEmbed || "").trim() : "",
     updatedAt: new Date().toISOString(),
     content: sanitizeHtml(postEditor.innerHTML),
@@ -7248,16 +7433,17 @@ function renderEditorPreview() {
   }
 
   const draft = getDraftPost();
-  const image = getPostThumbnailImage(draft);
+  const image = getPostDetailCoverImage(draft);
   const articleBody = prepareArticleBody(draft.content);
   const articleToc = renderArticleAutoToc(articleBody, draft);
   const tags = getPostTags(draft);
   const relatedPosts = getRelatedPosts(draft);
+  const postVideo = renderPostVideo(draft);
   const interactiveEmbed = renderInteractiveEmbed(draft);
   editorPreview.hidden = false;
   editorPreview.innerHTML = `
     <div class="preview-label">미리보기</div>
-    <article class="article-view is-preview${interactiveEmbed ? " has-interactive-embed" : ""}">
+    <article class="article-view is-preview${postVideo ? " has-video-embed" : ""}${interactiveEmbed ? " has-interactive-embed" : ""}">
       <div class="article-kicker">${escapeHtml(getCategoryBySlug(draft.category).label)} · ${escapeHtml(getPostGroupDisplay(draft))} · ${escapeHtml(getPostSubcategory(draft))}</div>
       <h1>${escapeHtml(draft.title)}</h1>
       <p class="post-detail-summary">${escapeHtml(draft.summary || "")}</p>
@@ -7268,6 +7454,7 @@ function renderEditorPreview() {
       </div>
       <div class="article-tags">${tags.map((tag) => `<span>#${escapeHtml(tag)}</span>`).join("")}</div>
       ${image ? `<img class="post-detail-cover" src="${escapeHtml(image)}" alt="" />` : ""}
+      ${postVideo}
       ${articleBody.sourceNoteHtml || ""}
       ${articleToc}
       <div class="post-detail-body">${articleBody.html}</div>
@@ -7286,6 +7473,7 @@ function renderEditorPreview() {
       }
     </article>
   `;
+  bindArticleVideos(editorPreview);
   bindArticleTocLinks(editorPreview);
   bindInlineImageZoom(editorPreview);
   editorPreview.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -7559,13 +7747,15 @@ function bindEditorTools() {
     renderPostDetail(getCurrentPost());
   });
 
-  [postTitleInput, postSummaryInput, postAuthorInput, postTagsInput, postImageInput, postEditor].forEach((input) => {
-    input.addEventListener("input", () => {
-      window.clearTimeout(saveTimer);
-      setBlogStatus("수정 중");
-      saveTimer = window.setTimeout(syncEditorAccessStatus, 1800);
+  [postTitleInput, postSummaryInput, postAuthorInput, postTagsInput, postImageInput, postVideoUrlInput, postVideoThumbnailInput, postEditor]
+    .filter(Boolean)
+    .forEach((input) => {
+      input.addEventListener("input", () => {
+        window.clearTimeout(saveTimer);
+        setBlogStatus("수정 중");
+        saveTimer = window.setTimeout(syncEditorAccessStatus, 1800);
+      });
     });
-  });
   relatedPostOptions?.addEventListener("change", () => {
     window.clearTimeout(saveTimer);
     setBlogStatus("추천 글 수정 중");
