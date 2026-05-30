@@ -1,6 +1,6 @@
 {
   "version": 38,
-  "updatedAt": "2026-05-29T08:33:37.729Z",
+  "updatedAt": "2026-05-30T01:17:51.151Z",
   "siteSettings": {
     "hero": {
       "eyebrow": "Internal HR Portal",
@@ -223,11 +223,7 @@
         "culture-production-strategy-group",
         "culture-sales-marketing-part"
       ],
-      "hr-guide": [
-        "d19df486-06cd-46d0-9292-47feb476f7e3",
-        "2d2a179c-5669-4bc0-956c-91efba6581cd",
-        "hr-guide-solmedix-product-portfolio"
-      ],
+      "hr-guide": [],
       "work-tool": [],
       "help-desk": []
     },
@@ -932,7 +928,7 @@
       "interactiveEmbed": "",
       "openMode": "",
       "order": 4,
-      "updatedAt": "2026-05-29T08:33:34.408Z",
+      "updatedAt": "2026-05-30T01:17:49.562Z",
       "content": "<h2>test</h2>"
     },
     {
