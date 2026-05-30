@@ -33,6 +33,18 @@ This keeps the current Vercel deployment usable while Cloudflare is being config
 
 Cloudflare recommends `exit 0` for static HTML projects that still need Pages Functions.
 
+The repo also includes `wrangler.toml` so Cloudflare has an explicit Pages
+Functions runtime configuration:
+
+```toml
+name = "hr-lounge"
+pages_build_output_dir = "."
+compatibility_date = "2026-05-30"
+```
+
+Do not add `nodejs_compat` unless a later dependency really needs Node.js
+runtime APIs. The current Cloudflare Functions code uses Web APIs instead.
+
 ## Required environment variables
 
 Set these in `Workers & Pages > hr-lounge > Settings > Environment variables`.
@@ -152,6 +164,10 @@ After Cloudflare deployment is ready:
   - Check `HR_LOUNGE_GOOGLE_CLIENT_ID` and `HR_LOUNGE_SESSION_SECRET`.
 - Google login fails with origin/client errors:
   - Add the `*.pages.dev` URL and custom domain to Google OAuth Authorized JavaScript origins.
+- Build fails while deploying and the log mentions `nodejs_compat`:
+  - Remove `nodejs_compat` from `Settings > Functions > Compatibility flags`, then retry.
+  - Or keep it only if `Compatibility date` is `2024-09-23` or later.
+  - The current repo does not require `nodejs_compat`.
 - Admin save fails:
   - Check `GITHUB_TOKEN`, `GITHUB_OWNER`, `GITHUB_REPO`, and `GITHUB_BRANCH`.
   - Confirm the GitHub token has contents read/write permission.

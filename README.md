@@ -16,6 +16,7 @@ Cloudflare equivalents:
 - `functions/_middleware.js`
 - `functions/api/auth.js`
 - `functions/api/blog-data.js`
+- `wrangler.toml`
 
 사내 URL 배포를 염두에 둔 HR 홈페이지입니다. 별도 빌드 과정 없이 `index.html`, `styles.css`, `app.js`, `blog-data.json`, `assets/`, `api/` 폴더를 같은 위치에 배포하면 됩니다.
 
