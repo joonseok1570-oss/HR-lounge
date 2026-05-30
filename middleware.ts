@@ -21,29 +21,6 @@ function getAllowedDomain() {
     .toLowerCase();
 }
 
-function normalizeEmail(value) {
-  return String(value || "").trim().toLowerCase();
-}
-
-function getAllowedEmails() {
-  return String(process.env.HR_LOUNGE_ALLOWED_EMAILS || process.env.HR_LOUNGE_APPROVED_EMAILS || "")
-    .split(/[\s,;]+/)
-    .map(normalizeEmail)
-    .filter((email, index, emails) => email.includes("@") && emails.indexOf(email) === index);
-}
-
-function isAllowedUserEmail(email, hostedDomain) {
-  const allowedDomain = getAllowedDomain();
-  const normalizedEmail = normalizeEmail(email);
-  const normalizedHostedDomain = String(hostedDomain || "")
-    .trim()
-    .replace(/^@+/, "")
-    .toLowerCase();
-  const isWorkspaceUser =
-    normalizedEmail.endsWith(`@${allowedDomain}`) && normalizedHostedDomain === allowedDomain;
-  return Boolean(normalizedEmail && (isWorkspaceUser || getAllowedEmails().includes(normalizedEmail)));
-}
-
 function getSessionSecret() {
   return process.env.HR_LOUNGE_SESSION_SECRET || process.env.ADMIN_SESSION_SECRET || "";
 }
@@ -120,13 +97,15 @@ async function verifyAccessToken(token) {
 
   try {
     const session = JSON.parse(new TextDecoder().decode(base64UrlToBytes(payload)));
+    const allowedDomain = getAllowedDomain();
     const email = String(session?.user?.email || "").toLowerCase();
     const hostedDomain = String(session?.user?.hd || "").toLowerCase();
     if (
       session.kind !== TOKEN_KIND ||
       !session.exp ||
       session.exp < Math.floor(Date.now() / 1000) ||
-      !isAllowedUserEmail(email, hostedDomain)
+      !email.endsWith(`@${allowedDomain}`) ||
+      hostedDomain !== allowedDomain
     ) {
       return null;
     }

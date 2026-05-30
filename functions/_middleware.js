@@ -1,8 +1,8 @@
 import {
   SITE_COOKIE_NAME,
   SITE_TOKEN_KIND,
+  getAllowedDomain,
   getSessionSecret,
-  isAllowedUserEmail,
   jsonResponse,
   parseCookies,
   verifySignedToken,
@@ -33,7 +33,14 @@ function redirectToLogin(request) {
 }
 
 function isValidSiteSession(session, env) {
-  return session?.kind === SITE_TOKEN_KIND && isAllowedUserEmail(session?.user?.email, session?.user?.hd, env);
+  const allowedDomain = getAllowedDomain(env);
+  const email = String(session?.user?.email || "").toLowerCase();
+  const hostedDomain = String(session?.user?.hd || "").toLowerCase();
+  return (
+    session?.kind === SITE_TOKEN_KIND &&
+    email.endsWith(`@${allowedDomain}`) &&
+    hostedDomain === allowedDomain
+  );
 }
 
 export async function onRequest(context) {
@@ -51,7 +58,7 @@ export async function onRequest(context) {
   }
 
   if (url.pathname.startsWith("/api/")) {
-    return jsonResponse({ error: "Company Google sign-in or approved account is required." }, 401, {
+    return jsonResponse({ error: "Company Google sign-in is required." }, 401, {
       "Cache-Control": "no-store",
     });
   }

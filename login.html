@@ -431,7 +431,7 @@
         <section class="auth-panel" aria-labelledby="auth-title">
           <p class="panel-label">Company Access</p>
           <h2 id="auth-title">Solmedix 계정으로 계속</h2>
-          <span class="domain-pill" id="domain-pill">@solmedix.com 또는 승인된 계정</span>
+          <span class="domain-pill" id="domain-pill">@solmedix.com only</span>
           <div class="google-slot" id="google-button" aria-label="Google 로그인 버튼"></div>
           <p class="auth-status" id="auth-status" role="status" aria-live="polite"></p>
         </section>
@@ -507,6 +507,7 @@
           use_fedcm_for_button: true,
           cancel_on_tap_outside: false,
           context: "signin",
+          hd: authConfig.allowedDomain,
         });
 
         const googleButtonWidth = Math.max(
@@ -537,7 +538,7 @@
             return;
           }
           const domain = authConfig.allowedDomain || "solmedix.com";
-          domainPill.textContent = `@${domain} 또는 승인된 계정`;
+          domainPill.textContent = `@${domain} only`;
           if (!authConfig.configured || !authConfig.clientId) {
             setStatus("배포 환경변수 HR_LOUNGE_GOOGLE_CLIENT_ID 설정이 필요합니다.", true);
             return;

@@ -57,7 +57,6 @@ Set them for `Production` first. For `Preview`, either omit the GitHub write tok
 | `HR_LOUNGE_SESSION_SECRET` | Yes | Yes | Long random session signing secret. Use the same value as Vercel during transition if possible. |
 | `HR_LOUNGE_GOOGLE_CLIENT_ID` | Yes | No | Google OAuth Web Client ID. |
 | `HR_LOUNGE_ALLOWED_DOMAIN` | Recommended | No | Use `solmedix.com`. Defaults to `solmedix.com` if omitted. |
-| `HR_LOUNGE_ALLOWED_EMAILS` | Optional | Yes | Comma, space, or newline separated exact email exceptions such as `person@gmail.com,person@naver.com`. These users still sign in through Google, so the email must be usable as a Google account. |
 | `GITHUB_TOKEN` | Yes | Yes | Fine-grained token with contents read/write access to this repo. |
 | `GITHUB_OWNER` | Yes | No | `joonseok1570-oss` |
 | `GITHUB_REPO` | Yes | No | `HR-lounge` |
@@ -83,7 +82,6 @@ In Google Cloud Console:
 5. Save.
 
 This project uses Google Identity Services ID tokens, so an authorized redirect URI is not needed for the current login flow.
-If `HR_LOUNGE_ALLOWED_EMAILS` includes personal addresses outside `solmedix.com`, make sure the OAuth app audience allows those Google accounts. If the Google app is limited to the company workspace, personal Gmail or Google-connected Naver emails will be blocked before HR Lounge can approve them.
 
 ## Runtime security settings
 
@@ -137,19 +135,17 @@ After Cloudflare deployment is ready:
    - `ok: true`
    - `configured: true`
    - `allowedDomain: "solmedix.com"`
-   - `approvedEmailAccess: true` if `HR_LOUNGE_ALLOWED_EMAILS` is configured
 3. Open `https://<cloudflare-project>.pages.dev/`.
 4. Confirm it redirects to `/login.html`.
 5. Log in with a `@solmedix.com` Google account.
-6. If exceptions are configured, log out and test one approved personal Google account.
-7. Confirm the main HR Lounge page loads.
-8. Open the admin editor.
-9. Log in with the admin password.
-10. Check storage usage.
-11. Save a small test change.
-12. Confirm GitHub receives a new commit.
-13. Confirm Cloudflare Pages creates a new production deployment from that commit.
-14. Run `node scripts/check-blog-data-weight.js` locally after pulling the new commit.
+6. Confirm the main HR Lounge page loads.
+7. Open the admin editor.
+8. Log in with the admin password.
+9. Check storage usage.
+10. Save a small test change.
+11. Confirm GitHub receives a new commit.
+12. Confirm Cloudflare Pages creates a new production deployment from that commit.
+13. Run `node scripts/check-blog-data-weight.js` locally after pulling the new commit.
 
 ## Important operational notes
 
@@ -168,9 +164,6 @@ After Cloudflare deployment is ready:
   - Check `HR_LOUNGE_GOOGLE_CLIENT_ID` and `HR_LOUNGE_SESSION_SECRET`.
 - Google login fails with origin/client errors:
   - Add the `*.pages.dev` URL and custom domain to Google OAuth Authorized JavaScript origins.
-- Approved personal email still cannot log in:
-  - Add the exact lowercase address to `HR_LOUNGE_ALLOWED_EMAILS`, redeploy, and confirm that the email can be selected in Google Sign-In.
-  - A pure Naver account that has never been connected to Google cannot use this Google OAuth flow. Use a Google account that owns that email, or add a separate email-code login flow later.
 - Browser shows too many redirects between `/login.html` and `/login`:
   - Cloudflare Pages uses clean URLs and redirects `login.html` to `/login`.
   - `functions/_middleware.js` must allow both `/login.html` and `/login` as public paths.

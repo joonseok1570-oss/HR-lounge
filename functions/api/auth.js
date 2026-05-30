@@ -4,11 +4,9 @@ import {
   buildCookie,
   clearCookie,
   createSignedToken,
-  getAllowedEmails,
   getAllowedDomain,
   getEnv,
   getSessionSecret,
-  isAllowedUserEmail,
   jsonResponse,
   parseCookies,
   readJsonBody,
@@ -27,7 +25,14 @@ function getCurrentSession(request, env) {
 }
 
 function isValidCurrentSession(session, env) {
-  return session?.kind === SITE_TOKEN_KIND && isAllowedUserEmail(session?.user?.email, session?.user?.hd, env);
+  const allowedDomain = getAllowedDomain(env);
+  const email = String(session?.user?.email || "").toLowerCase();
+  const hostedDomain = String(session?.user?.hd || "").toLowerCase();
+  return (
+    session?.kind === SITE_TOKEN_KIND &&
+    email.endsWith(`@${allowedDomain}`) &&
+    hostedDomain === allowedDomain
+  );
 }
 
 async function verifyGoogleCredential(credential, env) {
@@ -66,8 +71,8 @@ async function verifyGoogleCredential(credential, env) {
     error.statusCode = 401;
     throw error;
   }
-  if (!emailVerified || !isAllowedUserEmail(email, hostedDomain, env)) {
-    const error = new Error(`Only @${allowedDomain} Google Workspace accounts or approved emails can access HR Lounge.`);
+  if (!emailVerified || !email.endsWith(`@${allowedDomain}`) || hostedDomain !== allowedDomain) {
+    const error = new Error(`Only @${allowedDomain} Google Workspace accounts can access HR Lounge.`);
     error.statusCode = 403;
     throw error;
   }
@@ -91,8 +96,6 @@ async function handleConfig(request, env) {
       authenticated: validSession,
       clientId: getGoogleClientId(env),
       allowedDomain: getAllowedDomain(env),
-      approvedEmailAccess: getAllowedEmails(env).length > 0,
-      approvedEmailCount: getAllowedEmails(env).length,
       user: validSession ? session.user : null,
     },
     200,
