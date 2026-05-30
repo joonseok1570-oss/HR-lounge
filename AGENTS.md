@@ -17,6 +17,19 @@
 
 이 규칙은 PC가 바뀌어도 유지되어야 한다. 새 PC에서 작업할 때도 먼저 GitHub/Vercel 기준 최신 상태를 맞춘 뒤 같은 흐름으로 진행한다.
 
+## Mandatory Lightweight Data Workflow
+
+Vercel Hobby 기준으로 오래 운영하기 위해 `blog-data.json`은 항상 가볍게 유지한다. 이 규칙은 PC가 바뀌어도 기본값으로 적용한다.
+
+- `blog-data.json`에는 글/사이트 설정/메뉴/이미지 경로 같은 텍스트 메타데이터만 저장한다.
+- 이미지, 썸네일, 첨부성 시각 자료는 반드시 `assets/` 아래 파일로 저장하고, `blog-data.json`에는 `./assets/...` 상대 경로만 저장한다.
+- `blog-data.json`에 `data:image/`, base64 이미지, 긴 바이너리 문자열을 넣지 않는다.
+- 새 대표 이미지, 본문 이미지, 썸네일, 제품 이미지, 온보딩 이미지 작업은 `assets/uploads/` 또는 해당 기능 폴더의 `assets/`에 파일을 추가/교체하는 방식으로 처리한다.
+- 동영상 파일은 저장하지 않는다. 영상은 `videoUrl` 같은 URL 필드로만 연결하고, 썸네일이 필요하면 이미지 파일을 `assets/`에 둔다.
+- `blog-data.json` 권장 크기는 3MB 이하, 저장 요청 기준 한계는 4.5MB 이하로 본다. 3MB를 넘으면 새 이미지/본문 구조를 재검토하고, 4.5MB에 가까우면 완료로 보지 않는다.
+- 커밋 전 기본 검증으로 `node scripts/check-blog-data-weight.js`를 실행한다. 실패하면 `scripts/migrate-blog-images.js`로 이미지 분리 또는 수동 자산 분리를 먼저 끝낸 뒤 다시 검증한다.
+- 다른 PC에서 작업할 때도 GitHub의 `blog-data.json`과 `assets/`를 함께 최신화한 뒤 시작한다. JSON만 복사해서 이미지 경로가 깨진 상태로 작업하지 않는다.
+
 ## Current Architecture
 
 - 배포 대상은 Vercel의 `hr-lounge.vercel.app`이다.
@@ -75,6 +88,7 @@
 - `node --check app.js`
 - `node --check api/blog-data.js`
 - `node --check scripts/migrate-blog-images.js`
+- `node scripts/check-blog-data-weight.js`
 - `blog-data.json` should not contain `data:image/`.
 - Uploaded image paths referenced by `blog-data.json` should exist under `assets/uploads/`.
 - `/api/blog-data` on Vercel should return `configured: true` and `githubConfigured: true` after environment variables are set.
