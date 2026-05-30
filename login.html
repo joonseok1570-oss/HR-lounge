@@ -144,16 +144,6 @@
         display: block;
       }
 
-      .headline-copy {
-        max-width: 580px;
-        margin: 26px 0 0;
-        color: var(--muted);
-        font-size: clamp(1rem, 1.6vw, 1.24rem);
-        font-weight: 700;
-        line-height: 1.65;
-        word-break: keep-all;
-      }
-
       .auth-panel {
         width: 100%;
         padding: 30px;
@@ -216,40 +206,19 @@
       }
 
       .auth-status {
-        min-height: 42px;
+        display: none;
         margin-top: 18px;
         color: rgba(247, 239, 231, 0.74);
         font-size: 0.92rem;
         line-height: 1.5;
       }
 
+      .auth-status.is-visible {
+        display: block;
+      }
+
       .auth-status.is-error {
         color: #ffb7a8;
-      }
-
-      .panel-actions {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-        margin-top: 18px;
-      }
-
-      .ghost-button {
-        min-height: 40px;
-        padding: 0 15px;
-        border: 1px solid rgba(247, 239, 231, 0.24);
-        border-radius: 999px;
-        color: var(--ink);
-        font: inherit;
-        font-size: 0.9rem;
-        font-weight: 800;
-        background: rgba(255, 255, 255, 0.07);
-        cursor: pointer;
-      }
-
-      .ghost-button:hover {
-        border-color: rgba(255, 176, 0, 0.72);
-        color: #ffe2a7;
       }
 
       .signal-strip {
@@ -304,10 +273,6 @@
           font-size: clamp(3.7rem, 18vw, 6.2rem);
         }
 
-        .headline-copy {
-          margin-top: 18px;
-        }
-
         .auth-panel {
           padding: 20px;
         }
@@ -336,21 +301,14 @@
             <span>People</span>
             <span>Inside</span>
           </h1>
-          <p class="headline-copy">
-            솔메딕스 구성원만 들어오는 HR Lounge입니다. 회사 Google Workspace 계정으로 확인되면 바로 연결됩니다.
-          </p>
         </div>
 
         <section class="auth-panel" aria-labelledby="auth-title">
           <p class="panel-label">Company Access</p>
           <h2 id="auth-title">Solmedix 계정으로 계속</h2>
-          <p>Chrome에 회사 계정이 연결되어 있으면 계정 선택만으로 입장할 수 있습니다.</p>
           <span class="domain-pill" id="domain-pill">@solmedix.com only</span>
           <div class="google-slot" id="google-button" aria-label="Google 로그인 버튼"></div>
-          <p class="auth-status" id="auth-status" role="status">로그인 설정을 확인하고 있습니다.</p>
-          <div class="panel-actions">
-            <button class="ghost-button" id="switch-account-button" type="button">다른 Google 계정 선택</button>
-          </div>
+          <p class="auth-status" id="auth-status" role="status" aria-live="polite"></p>
         </section>
       </section>
       <div class="signal-strip" aria-hidden="true"><span></span>HR Lounge</div>
@@ -360,11 +318,11 @@
       const authStatus = document.querySelector("#auth-status");
       const googleButton = document.querySelector("#google-button");
       const domainPill = document.querySelector("#domain-pill");
-      const switchAccountButton = document.querySelector("#switch-account-button");
       let authConfig = null;
 
       function setStatus(message, isError = false) {
         authStatus.textContent = message;
+        authStatus.classList.toggle("is-visible", Boolean(message) && Boolean(isError));
         authStatus.classList.toggle("is-error", Boolean(isError));
       }
 
@@ -443,7 +401,6 @@
         });
 
         window.google.accounts.id.prompt();
-        setStatus("회사 Google 계정을 선택해 주세요.");
       }
 
       async function loadAuthConfig() {
@@ -465,14 +422,6 @@
           setStatus("로그인 설정을 불러오지 못했습니다. 잠시 후 다시 시도해 주세요.", true);
         }
       }
-
-      switchAccountButton.addEventListener("click", () => {
-        if (window.google?.accounts?.id) {
-          window.google.accounts.id.disableAutoSelect();
-          window.google.accounts.id.prompt();
-        }
-        setStatus("다른 회사 Google 계정을 선택해 주세요.");
-      });
 
       loadAuthConfig();
     </script>
