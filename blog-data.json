@@ -1,6 +1,6 @@
 {
   "version": 38,
-  "updatedAt": "2026-05-30T02:29:34.472Z",
+  "updatedAt": "2026-05-30T02:29:59.943Z",
   "siteSettings": {
     "hero": {
       "eyebrow": "Internal HR Portal",
@@ -1001,7 +1001,7 @@
       "videoThumbnail": "./assets/uploads/20260530/sbs-biz-champion-thumbnail.jpg",
       "interactiveEmbed": "",
       "openMode": "",
-      "order": 2,
+      "order": 1,
       "updatedAt": "2026-05-30T02:20:34.569Z",
       "content": "<h2><br></h2>"
     },
@@ -1022,7 +1022,7 @@
       "videoThumbnail": "",
       "interactiveEmbed": "",
       "openMode": "",
-      "order": 1,
+      "order": 2,
       "updatedAt": "2026-05-30T02:29:32.660Z",
       "content": "<h2><br></h2>"
     }
