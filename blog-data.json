@@ -1,6 +1,6 @@
 {
   "version": 38,
-  "updatedAt": "2026-05-30T02:14:43.803Z",
+  "updatedAt": "2026-05-30T02:20:34.569Z",
   "siteSettings": {
     "hero": {
       "eyebrow": "Internal HR Portal",
@@ -998,11 +998,11 @@
       "relatedPostIds": [],
       "image": "",
       "videoUrl": "https://www.youtube.com/watch?v=i04LQpauDM4",
-      "videoThumbnail": "",
+      "videoThumbnail": "./assets/uploads/20260530/sbs-biz-champion-thumbnail.jpg",
       "interactiveEmbed": "",
       "openMode": "",
       "order": 1,
-      "updatedAt": "2026-05-30T02:14:41.665Z",
+      "updatedAt": "2026-05-30T02:20:34.569Z",
       "content": "<h2><br></h2>"
     }
   ]
