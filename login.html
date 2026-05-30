@@ -220,49 +220,6 @@
         background: rgba(255, 176, 0, 0.1);
       }
 
-      .access-groups {
-        display: grid;
-        width: min(100%, 340px);
-        gap: 8px;
-        margin: 14px 0 0;
-        padding: 0;
-        list-style: none;
-      }
-
-      .access-groups li {
-        display: flex;
-        align-items: center;
-        min-height: 30px;
-        padding: 0 12px;
-        border: 1px solid rgba(247, 239, 231, 0.12);
-        border-radius: 999px;
-        color: rgba(247, 239, 231, 0.78);
-        font-size: 0.8rem;
-        font-weight: 800;
-        background: rgba(247, 239, 231, 0.055);
-      }
-
-      .access-groups li::before {
-        flex: 0 0 auto;
-        width: 6px;
-        height: 6px;
-        margin-right: 9px;
-        border-radius: 50%;
-        content: "";
-        background: var(--accent);
-        box-shadow: 0 0 0 4px rgba(255, 176, 0, 0.08);
-      }
-
-      .access-groups li:nth-child(2)::before {
-        background: #8ab4f8;
-        box-shadow: 0 0 0 4px rgba(138, 180, 248, 0.08);
-      }
-
-      .access-groups li:nth-child(3)::before {
-        background: #03c75a;
-        box-shadow: 0 0 0 4px rgba(3, 199, 90, 0.08);
-      }
-
       .google-slot {
         position: relative;
         display: none;
@@ -319,7 +276,7 @@
         font-size: 1rem;
         font-weight: 800;
         line-height: 1;
-        content: "계정 인증하고 계속하기";
+        content: "승인 계정으로 계속하기";
       }
 
       .google-slot > div {
@@ -475,12 +432,7 @@
           <p class="panel-label">Company Access</p>
           <h2 id="auth-title">Solmedix 계정으로 계속</h2>
           <span class="domain-pill" id="domain-pill">@solmedix.com 또는 승인된 계정</span>
-          <ul class="access-groups" aria-label="접속 가능한 계정 유형">
-            <li>회사 Google 계정</li>
-            <li>승인 Google 개인계정</li>
-            <li>승인 Naver 계정</li>
-          </ul>
-          <div class="google-slot" id="google-button" aria-label="Google 인증으로 회사 또는 승인 계정 로그인"></div>
+          <div class="google-slot" id="google-button" aria-label="Google 인증으로 승인 계정 로그인"></div>
           <p class="auth-status" id="auth-status" role="status" aria-live="polite"></p>
         </section>
       </section>
