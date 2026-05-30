@@ -168,7 +168,11 @@
       }
 
       .auth-panel {
+        align-self: end;
+        display: grid;
+        align-content: center;
         width: 100%;
+        min-height: 296px;
         padding: 30px;
         border: 1px solid var(--line);
         border-radius: 8px;
@@ -216,16 +220,29 @@
 
       .google-slot {
         display: block;
-        width: min(100%, 300px);
+        width: min(100%, 340px);
         min-height: 44px;
         margin-top: 24px;
-        overflow: visible;
+        overflow: hidden;
+        border-radius: 999px;
+        background: rgba(247, 239, 231, 0.08);
+      }
+
+      .google-slot:empty {
+        display: none;
       }
 
       .google-slot > div {
         display: block;
         width: 100% !important;
-        overflow: visible !important;
+        overflow: hidden !important;
+        border-radius: 999px !important;
+      }
+
+      .google-slot iframe {
+        overflow: hidden !important;
+        border-radius: 999px !important;
+        background: transparent !important;
       }
 
       .auth-status {
@@ -310,6 +327,8 @@
         }
 
         .auth-panel {
+          display: block;
+          min-height: 0;
           padding: 18px;
         }
 
@@ -435,13 +454,13 @@
         });
 
         const googleButtonWidth = Math.max(
-          200,
-          Math.min(300, Math.floor(googleButton.clientWidth || 300)),
+          240,
+          Math.min(340, Math.floor(googleButton.clientWidth || 340)),
         );
 
         window.google.accounts.id.renderButton(googleButton, {
           type: "standard",
-          theme: "outline",
+          theme: "filled_black",
           size: "large",
           shape: "pill",
           text: "continue_with",
