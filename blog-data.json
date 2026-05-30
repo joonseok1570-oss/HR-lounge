@@ -1,6 +1,6 @@
 {
   "version": 38,
-  "updatedAt": "2026-05-30T04:42:57.455Z",
+  "updatedAt": "2026-05-30T11:20:09.873Z",
   "siteSettings": {
     "hero": {
       "eyebrow": "Internal HR Portal",
@@ -949,8 +949,8 @@
       "interactiveEmbed": "",
       "openMode": "",
       "order": 4,
-      "updatedAt": "2026-05-30T04:42:54.077Z",
-      "content": "<p></p>"
+      "updatedAt": "2026-05-30T11:20:09.704Z",
+      "content": "test<p></p>"
     },
     {
       "id": "hr-guide-solmedix-product-portfolio",
