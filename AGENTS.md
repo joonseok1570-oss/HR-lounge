@@ -41,7 +41,7 @@ Vercel Hobby 기준으로 오래 운영하기 위해 `blog-data.json`은 항상 
 - 기존에 JSON 안에 들어간 `data:image`는 저장 API 또는 `scripts/migrate-blog-images.js`로 파일 분리한다.
 - 원격 관리자 세션이 없을 때 이미지 업로드 결과를 `data:image`로 로컬 저장하지 않는다. 이미지 업로드는 Vercel 주소에서 관리자 로그인 후 GitHub 저장 API로만 처리한다.
 - 동영상 글은 영상 파일을 직접 저장하지 않고 `videoUrl`에 YouTube 링크만 저장한다. 영상 미리보기 이미지는 `videoThumbnail`에 별도 저장하며, 값이 없으면 대표 이미지 또는 YouTube 기본 썸네일을 사용한다. 상세/미리보기 화면에서는 썸네일 카드를 먼저 보여주고, 사용자가 재생을 누를 때만 YouTube iframe을 로드한다. YouTube embed는 `https://www.youtube.com/embed/...`와 현재 `origin`을 사용하며, `file://`로 직접 열면 YouTube 정책상 inline 재생이 막힐 수 있으므로 새 탭으로 우회한다.
-- 회사 계정 접근 제어는 `login.html`, `api/auth.js`, `middleware.ts`를 기본 구조로 유지한다. Vercel 배포본은 Google Identity Services ID token을 서버에서 검증하고, `@solmedix.com` Google Workspace 계정에만 `hr_lounge_access` HttpOnly 쿠키를 발급한다. 정적 화면만 숨기는 방식으로 되돌리지 않는다.
+- 회사 계정 접근 제어는 `login.html`, `logout.html`, `api/auth.js`, `middleware.ts`를 기본 구조로 유지한다. Vercel 배포본은 Google Identity Services ID token을 서버에서 검증하고, `@solmedix.com` Google Workspace 계정에만 `hr_lounge_access` HttpOnly 쿠키를 발급한다. 정적 화면만 숨기는 방식으로 되돌리지 않는다.
 - 보안 운영 시 GitHub 저장소도 private로 유지한다. Vercel 로그인 화면은 배포 URL 접근을 막지만, public GitHub 저장소에 올라간 `blog-data.json`과 `assets/` 원본까지 숨기지는 못한다.
 - 관리자 `사이트 설정` 화면에는 `저장용량 현황`을 표시한다. 데이터 파일 기준 권장 3MB, 저장 요청 기준 최대 4.5MB를 함께 보여준다.
 - 상단 메뉴와 좌측 목차 표시명은 관리자 `사이트 설정 > 상단/좌측 메뉴`에서 수정한다. 카테고리 slug와 글의 내부 taxonomy 값은 필터/기존 글 연결용이므로 바꾸지 말고, 화면 표시명만 `siteSettings`로 덮어쓴다.
@@ -70,6 +70,7 @@ Vercel Hobby 기준으로 오래 운영하기 위해 `blog-data.json`은 항상 
 
 - `index.html`
 - `login.html`
+- `logout.html`
 - `middleware.ts`
 - `package.json`
 - `styles.css`

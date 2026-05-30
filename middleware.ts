@@ -6,7 +6,9 @@ const TOKEN_KIND = "hr-lounge-site-access";
 const LOGIN_PATH = "/login.html";
 const PUBLIC_PATHS = new Set([
   LOGIN_PATH,
+  "/logout.html",
   "/api/auth",
+  "/assets/auth-access-bg.jpg",
   "/assets/hr-office-bg.jpg",
   "/assets/solmedix-logo.png",
   "/favicon.ico",

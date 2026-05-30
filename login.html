@@ -57,7 +57,7 @@
         content: "";
         background:
           linear-gradient(90deg, rgba(10, 12, 13, 0.9), rgba(10, 12, 13, 0.44) 48%, rgba(10, 12, 13, 0.76)),
-          url("./assets/hr-office-bg.jpg") center / cover no-repeat;
+          url("./assets/auth-access-bg.jpg") center / cover no-repeat;
         transform: scale(1.03);
       }
 
@@ -144,6 +144,7 @@
         font-size: clamp(1rem, 1.6vw, 1.24rem);
         font-weight: 700;
         line-height: 1.65;
+        word-break: keep-all;
       }
 
       .auth-panel {
@@ -169,12 +170,14 @@
         margin: 0;
         font-size: 1.64rem;
         line-height: 1.22;
+        word-break: keep-all;
       }
 
       .auth-panel p {
         margin: 14px 0 0;
         color: var(--muted);
         line-height: 1.58;
+        word-break: keep-all;
       }
 
       .domain-pill {
@@ -281,6 +284,10 @@
 
         .auth-panel {
           padding: 24px;
+        }
+
+        .auth-panel h2 {
+          font-size: clamp(1.38rem, 6vw, 1.56rem);
         }
 
         .signal-strip {
