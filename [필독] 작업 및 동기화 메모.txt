@@ -1,0 +1,187 @@
+HR Lounge 작업 및 동기화 메모
+============================
+
+0. Codex 기본 작업 원칙
+----------------------
+
+앞으로 Codex가 이 프로젝트를 수정할 때의 기본값은 아래 전체 흐름이다.
+
+  로컬 수정
+  -> 로컬 미리보기 또는 파일 검증
+  -> GitHub main 브랜치에 커밋/푸시
+  -> Vercel Production 배포 READY 확인
+  -> 커밋 SHA와 Vercel 배포 링크 보고
+
+사용자가 "로컬에서만 해줘", "배포하지 마", "내가 직접 GitHub에 올릴게"라고 명시한 경우에만 GitHub/Vercel 반영을 생략한다.
+
+PC를 바꿔 작업하더라도 이 원칙을 우선한다. 작업 전에는 GitHub/Vercel 기준 최신 파일을 해당 PC의 로컬 폴더에 맞춘 뒤 시작한다.
+
+GitHub 커밋 작성자는 GitHub 계정과 매칭되는 아래 값을 사용한다.
+
+  joonseok1570-oss <joonseok1570@gmail.com>
+
+Vercel 배포가 BLOCKED, ERROR, CANCELED이면 완료로 보지 않는다.
+
+1. 로컬 확인 기준
+----------------
+
+이 프로젝트는 index.html을 더블클릭해서 확인하지 않는다.
+
+반드시 아래 파일을 더블클릭해서 확인한다.
+
+  로컬 미리보기 실행.bat
+
+열리는 주소:
+
+  http://127.0.0.1:8080/#home
+
+이 방식은 작은 로컬 웹서버를 띄워서 Vercel 웹사이트와 비슷한 방식으로 실행한다.
+index.html 더블클릭(file://)은 blog-data.json을 제대로 못 읽거나, 브라우저 저장값(localStorage) 때문에 실제 웹과 다르게 보일 수 있다.
+
+
+2. 파일 역할
+-----------
+
+index.html
+  화면의 기본 뼈대
+
+app.js
+  메뉴, 글 목록/상세, 관리자 기능, 저장 로직 등 주요 동작
+
+styles.css
+  화면 디자인
+
+blog-data.json
+  글, 사이트 설정, 메뉴 표시명 등 데이터
+
+assets/uploads/
+  관리자에서 업로드한 글 이미지 파일
+
+api/
+  Vercel 관리자 로그인 및 GitHub 자동 저장 API
+
+scripts/
+  이미지 마이그레이션 등 보조 스크립트
+
+
+3. 웹에서 글을 수정한 뒤 로컬에 반영하는 절차
+------------------------------------------
+
+웹 관리자에서 글을 작성/수정한 뒤 로컬과 맞추려면 아래 순서로 진행한다.
+
+1) 웹 관리자에서 저장한다.
+
+2) 관리자 화면에서 JSON 내보내기를 한다.
+
+3) 다운로드된 blog-data.json으로 로컬 폴더의 blog-data.json을 교체한다.
+
+   대상:
+     D:\OneDrive\업무 자동화\HR 전용 홈페이지\blog-data.json
+
+4) 이미지가 추가된 글이 있으면 assets/uploads도 맞춘다.
+
+   글 텍스트만 바뀐 경우:
+     blog-data.json만 교체하면 된다.
+
+   대표 이미지나 본문 이미지를 새로 올린 경우:
+     blog-data.json + assets/uploads 새 이미지 파일도 필요하다.
+
+5) 로컬 미리보기 실행.bat으로 열어서 확인한다.
+
+
+4. 이미지 저장 원칙
+------------------
+
+이미지는 blog-data.json에 data:image 형태로 넣지 않는다.
+
+정상 구조:
+
+  assets/uploads/20260527/image-xxxx.jpg
+  blog-data.json 안에는 ./assets/uploads/20260527/image-xxxx.jpg 경로만 저장
+
+확인 기준:
+
+  blog-data.json 안에 data:image/가 있으면 잘못된 상태다.
+
+
+5. 기능 수정 후 웹에 반영하는 절차
+--------------------------------
+
+Codex 또는 로컬에서 기능을 수정한 뒤에는 아래 순서로 진행한다.
+
+1) 로컬 파일 수정
+
+2) 로컬 미리보기 실행.bat으로 확인
+
+3) 정상 확인 후 GitHub main 브랜치에 수정 파일을 커밋/푸시
+
+4) Vercel Production 배포가 READY인지 확인
+
+5) https://hr-lounge.vercel.app 에서 최종 확인
+
+기능 수정 시 주로 업로드하는 파일:
+
+  index.html
+  app.js
+  styles.css
+  api/
+  scripts/
+
+글 데이터가 목적이 아니라면 보통 업로드하지 않는 파일:
+
+  blog-data.json
+  assets/uploads/
+
+단, 글 데이터나 이미지까지 같이 반영하려는 경우에는 blog-data.json과 assets/uploads도 포함한다.
+
+
+6. PC를 바꿔서 작업할 때
+----------------------
+
+PC가 바뀌어도 아래 파일 세트가 같으면 로컬 미리보기에서 같은 화면을 볼 수 있다.
+
+필요한 파일/폴더:
+
+  index.html
+  app.js
+  styles.css
+  blog-data.json
+  assets/uploads/
+  api/
+  scripts/
+  로컬 미리보기 실행.bat
+
+작업 전에는 GitHub/Vercel 기준 최신 파일을 해당 PC의 로컬 폴더에 맞춘 뒤 시작한다.
+
+
+7. localStorage 주의
+-------------------
+
+localStorage는 각 PC, 각 브라우저에 따로 저장된다.
+따라서 localStorage에 남아 있는 글 데이터 때문에 웹이나 로컬 미리보기가 다르게 보일 수 있다.
+
+화면이 이상하게 오래된 내용으로 보이면 브라우저 개발자도구 콘솔에서 실행한다.
+
+  localStorage.removeItem("hrLoungeBlogState");
+  location.reload();
+
+로컬 미리보기 실행.bat은 임시 Chrome 프로필로 열기 때문에 localStorage 영향을 줄이도록 만들어져 있다.
+
+
+8. 현재 운영 기준
+----------------
+
+현재 기준 원본은 아래 조합이다.
+
+  GitHub/Vercel에 배포된 index.html, app.js, styles.css
+  blog-data.json
+  assets/uploads/
+
+확인 기준:
+
+  로컬 확인: 로컬 미리보기 실행.bat
+  최종 확인: https://hr-lounge.vercel.app
+
+사용하지 않는 확인 방식:
+
+  index.html 더블클릭
