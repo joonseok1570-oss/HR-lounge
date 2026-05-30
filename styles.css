@@ -11855,6 +11855,10 @@ body {
   margin: -8px 0 18px;
 }
 
+.content-section-divider[hidden] {
+  display: none;
+}
+
 .content-section-divider span {
   min-height: 32px;
   padding: 0 14px;

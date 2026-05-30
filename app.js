@@ -1072,9 +1072,6 @@ const defaultSiteSettings = {
   popular: {
     searches: ["연차", "연차 퇴직정산", "퇴직금", "취업규칙", "사진첩"],
     postIds: ["culture-team-intro", "hr-guide-year-calendar", "culture-production-strategy-group"],
-    categoryPostIds: {
-      culture: ["culture-team-intro", "culture-production-strategy-group", "8a44a5fe-7213-40e7-ba92-49301d42ce59"],
-    },
   },
   onboardingAccess: {
     emails: "",
@@ -2613,17 +2610,7 @@ function normalizeSiteSettings(value = {}) {
   settings.popular = {
     searches: normalizePopularSearches(sourcePopular.searches),
     postIds: normalizePostIdList(sourcePopular.postIds, 3),
-    categoryPostIds: {},
   };
-  const sourceCategoryPopularPostIds =
-    sourcePopular.categoryPostIds && typeof sourcePopular.categoryPostIds === "object" ? sourcePopular.categoryPostIds : {};
-  blogCategories.forEach((category) => {
-    const fallbackIds =
-      category.slug === "culture" && !Object.prototype.hasOwnProperty.call(sourceCategoryPopularPostIds, category.slug)
-        ? sourcePopular.postIds
-        : defaultSiteSettings.popular.categoryPostIds?.[category.slug];
-    settings.popular.categoryPostIds[category.slug] = normalizePostIdList(sourceCategoryPopularPostIds[category.slug] || fallbackIds, 3);
-  });
 
   settings.hrCalendar = normalizeHrCalendarSettings(source.hrCalendar);
 
@@ -4271,41 +4258,6 @@ function renderPopularPostSettings(settings) {
   `;
 }
 
-function renderCategoryPopularPostSettings(settings, categorySlug) {
-  const category = getCategoryBySlug(categorySlug);
-  const posts = getPostsByCategory(category.slug);
-  const selectedIds = new Set(settings.popular?.categoryPostIds?.[category.slug] || []);
-  const options = posts.length
-    ? posts
-        .map(
-          (post) => `<label class="featured-post-option">
-            <input
-              type="checkbox"
-              data-category-popular-post
-              data-category-popular-category="${escapeAttribute(category.slug)}"
-              value="${escapeAttribute(post.id)}"
-              ${selectedIds.has(post.id) ? "checked" : ""}
-            />
-            <span>
-              <strong>${renderPostPreviewTitle(post.title)}</strong>
-              <small>${escapeHtml(getPostGroupDisplay(post))} · ${escapeHtml(getPostSubcategory(post))} · ${formatPostDate(post.updatedAt)}</small>
-            </span>
-          </label>`,
-        )
-        .join("")
-    : '<p class="related-post-empty">아직 선택할 글이 없습니다.</p>';
-
-  return `
-    <article class="featured-setting-card is-wide">
-      <div class="featured-setting-head">
-        <strong>${escapeHtml(category.label)} 상단 인기글</strong>
-        <small>${escapeHtml(category.label)} 전체 화면 맨 위에 크게 보여줄 글을 최대 3개까지 선택합니다.</small>
-      </div>
-      <div class="featured-post-options">${options}</div>
-    </article>
-  `;
-}
-
 function renderHrCalendarSettings(settings) {
   const calendar = normalizeHrCalendarSettings(settings.hrCalendar);
   return `
@@ -4468,15 +4420,6 @@ function renderSiteSettingsPanel() {
 
           <section class="site-settings-section">
             <div class="site-settings-section-head">
-              <h4>카테고리 상단 인기글</h4>
-            </div>
-            <div class="featured-settings-grid">
-              ${renderCategoryPopularPostSettings(settings, "culture")}
-            </div>
-          </section>
-
-          <section class="site-settings-section">
-            <div class="site-settings-section-head">
               <h4>HR 캘린더</h4>
             </div>
             ${renderHrCalendarSettings(settings)}
@@ -4585,15 +4528,7 @@ function collectSiteSettingsFromPanel() {
     postIds: [...(siteSettingsPanel?.querySelectorAll("[data-popular-post]:checked") || [])]
       .map((field) => field.value)
       .slice(0, 3),
-    categoryPostIds: {},
   };
-  blogCategories.forEach((category) => {
-    settings.popular.categoryPostIds[category.slug] = [
-      ...(siteSettingsPanel?.querySelectorAll(`[data-category-popular-post][data-category-popular-category="${category.slug}"]:checked`) || []),
-    ]
-      .map((field) => field.value)
-      .slice(0, 3);
-  });
   return normalizeSiteSettings(settings);
 }
 
@@ -5201,17 +5136,6 @@ function updateCoverPreview(value) {
   }
 }
 
-function getCategoryPopularPosts(categorySlug, settings = getSiteSettings(), limit = 3) {
-  const posts = getPostsByCategory(categorySlug);
-  const selectedIds = normalizePostIdList(settings.popular?.categoryPostIds?.[categorySlug], limit);
-  const selectedPosts = selectedIds.map((id) => posts.find((post) => post.id === id)).filter(Boolean);
-  const selectedPostIds = new Set(selectedPosts.map((post) => post.id));
-  if (selectedPosts.length >= limit) {
-    return selectedPosts.slice(0, limit);
-  }
-  return [...selectedPosts, ...posts.filter((post) => !selectedPostIds.has(post.id)).sort(comparePostsByPopular)].slice(0, limit);
-}
-
 function getPostListAction(post) {
   const opensNewWindow = shouldOpenPostInNewWindow(post);
   return {
@@ -5222,7 +5146,7 @@ function getPostListAction(post) {
   };
 }
 
-function renderCultureBoardCard(post, variant = "") {
+function renderCategoryBoardCard(post, variant = "") {
   const image = getPostThumbnailImage(post);
   const group = getPostGroupDisplay(post);
   const subcategory = getPostSubcategory(post);
@@ -5253,29 +5177,10 @@ function renderCultureBoardCard(post, variant = "") {
   `;
 }
 
-function renderCulturePopularBoard(settings) {
-  const posts = getCategoryPopularPosts("culture", settings, 3);
-  if (!posts.length) {
-    return "";
-  }
-
-  return `
-    <section class="culture-popular-board" aria-labelledby="culture-popular-title">
-      <div class="culture-board-head">
-        <span>Popular Picks</span>
-        <h3 id="culture-popular-title">인기글</h3>
-        <p>지금 먼저 보면 좋은 Culture 콘텐츠입니다.</p>
-      </div>
-      <div class="culture-popular-grid">
-        ${posts.map((post, index) => renderCultureBoardCard(post, index === 0 ? "is-primary" : "is-secondary")).join("")}
-      </div>
-    </section>
-  `;
-}
-
-function renderCultureTopicSections(posts) {
+function renderCategoryTopicSections(categorySlug, posts) {
   const accentColors = ["#d86657", "#247f82", "#657dff", "#6f9272", "#c98621"];
-  const sections = getCategoryTaxonomy("culture")
+  const category = getCategoryBySlug(categorySlug);
+  const sections = getCategoryTaxonomy(category.slug)
     .map((group, index) => {
       const groupPosts = sortPostsForBlogList(
         posts.filter((post) => getPostGroup(post) === group.label),
@@ -5286,7 +5191,7 @@ function renderCultureTopicSections(posts) {
     .filter((section) => section.posts.length);
 
   if (!sections.length) {
-    return '<p class="post-empty">아직 업로드된 Culture 글이 없습니다. 글 작성을 눌러 첫 게시글을 올려보세요.</p>';
+    return `<p class="post-empty">아직 업로드된 ${escapeHtml(category.label)} 글이 없습니다. 글 작성을 눌러 첫 게시글을 올려보세요.</p>`;
   }
 
   return sections
@@ -5298,35 +5203,27 @@ function renderCultureTopicSections(posts) {
         <section class="culture-topic-section" style="--culture-section-accent: ${accentColors[index % accentColors.length]}">
           <div class="culture-topic-head">
             <div>
-              <span>Culture Section</span>
+              <span>${escapeHtml(category.label)} Section</span>
               <h3>${escapeHtml(displayLabel)}</h3>
             </div>
-            <a href="${escapeAttribute(buildBlogHash("culture", group.label))}">
+            <a href="${escapeAttribute(buildBlogHash(category.slug, group.label))}">
               ${groupPosts.length}개 글 보기
             </a>
           </div>
           <div class="culture-topic-grid">
-            ${visiblePosts.map((post) => renderCultureBoardCard(post, "is-topic-card")).join("")}
+            ${visiblePosts.map((post) => renderCategoryBoardCard(post, "is-topic-card")).join("")}
           </div>
-          ${hasMore ? `<a class="culture-topic-more" href="${escapeAttribute(buildBlogHash("culture", group.label))}">${escapeHtml(displayLabel)} 전체 보기</a>` : ""}
+          ${hasMore ? `<a class="culture-topic-more" href="${escapeAttribute(buildBlogHash(category.slug, group.label))}">${escapeHtml(displayLabel)} 전체 보기</a>` : ""}
         </section>
       `;
     })
     .join("");
 }
 
-function renderCultureBoard(posts, settings) {
+function renderCategorySectionBoard(categorySlug, posts) {
   return `
     <div class="culture-board">
-      ${renderCulturePopularBoard(settings)}
-      <section class="culture-collection-board" aria-labelledby="culture-collection-title">
-        <div class="culture-board-head">
-          <span>Collections</span>
-          <h3 id="culture-collection-title">주제별 Culture</h3>
-          <p>팀 소개, 사진첩, 동영상, 비즈니스 공유를 흐름별로 모았습니다.</p>
-        </div>
-        ${renderCultureTopicSections(posts)}
-      </section>
+      ${renderCategoryTopicSections(categorySlug, posts)}
     </div>
   `;
 }
@@ -5343,7 +5240,8 @@ function renderPostList() {
   const scopedPosts = isSearchMode ? getSearchResultPosts(searchQuery) : getVisiblePostsByCategory(currentBlogCategory);
   const filteredPosts = filterPostsByBlogListQuery(scopedPosts);
   const posts = sortPostsForBlogList(filteredPosts, isSearchMode);
-  const isCultureBoard = !isSearchMode && currentBlogCategory === "culture" && activeBlogTopic === "all" && !activeBlogListQuery.trim();
+  const isCategorySectionBoard =
+    !isSearchMode && blogCategories.some((category) => category.slug === currentBlogCategory) && activeBlogTopic === "all" && !activeBlogListQuery.trim();
 
   if (isSearchMode) {
     if (topicFilter) {
@@ -5364,11 +5262,12 @@ function renderPostList() {
       postListTitle.textContent = "검색 결과";
     }
     if (contentSectionDivider) {
+      contentSectionDivider.hidden = false;
       contentSectionDivider.innerHTML = `<span>${escapeHtml(searchQuery)} 검색 결과</span>`;
     }
   } else {
     renderTopicFilter(allPosts);
-    if (isCultureBoard && taxonomyGuide) {
+    if (isCategorySectionBoard && taxonomyGuide) {
       taxonomyGuide.hidden = true;
       taxonomyGuide.classList.remove("is-folder-open");
       taxonomyGuide.innerHTML = "";
@@ -5386,15 +5285,16 @@ function renderPostList() {
     }
     if (contentSectionDivider) {
       const category = getCategoryBySlug(currentBlogCategory);
-      const scopeLabel =
-        isCultureBoard
-          ? "Culture 인기글과 주제별 글"
-          : activeBlogTopic === "all"
-          ? `${category.label} 게시글`
-          : activeBlogSubtopic === "all"
-            ? `${activeGroupDisplayLabel} 게시글`
-            : `${activeBlogSubtopic} 게시글`;
-      contentSectionDivider.innerHTML = `<span>${escapeHtml(scopeLabel)}</span>`;
+      contentSectionDivider.hidden = isCategorySectionBoard;
+      if (!isCategorySectionBoard) {
+        const scopeLabel =
+          activeBlogTopic === "all"
+            ? `${category.label} 게시글`
+            : activeBlogSubtopic === "all"
+              ? `${activeGroupDisplayLabel} 게시글`
+              : `${activeBlogSubtopic} 게시글`;
+        contentSectionDivider.innerHTML = `<span>${escapeHtml(scopeLabel)}</span>`;
+      }
     }
   }
   if (postCountLabel) {
@@ -5403,12 +5303,13 @@ function renderPostList() {
   renderBlogCurrentScope(scopedPosts.length, posts.length);
   syncBlogListControls();
 
-  const canSortPosts = !isCultureBoard && !isSearchMode && !activeBlogListQuery.trim() && activeBlogSort === "basic" && isEditorUnlocked && posts.length > 1;
+  const canSortPosts =
+    !isCategorySectionBoard && !isSearchMode && !activeBlogListQuery.trim() && activeBlogSort === "basic" && isEditorUnlocked && posts.length > 1;
   postList.classList.toggle("is-sortable", canSortPosts);
-  postList.classList.toggle("is-culture-board", isCultureBoard);
+  postList.classList.toggle("is-culture-board", isCategorySectionBoard);
 
-  postList.innerHTML = isCultureBoard
-    ? renderCultureBoard(posts, settings)
+  postList.innerHTML = isCategorySectionBoard
+    ? renderCategorySectionBoard(currentBlogCategory, posts)
     : posts.length
     ? posts
         .map(
@@ -6257,7 +6158,6 @@ function deleteCurrentPost() {
   const settings = getSiteSettings();
   blogCategories.forEach((category) => {
     settings.featuredPostIds[category.slug] = normalizePostIdList(settings.featuredPostIds?.[category.slug]).filter((id) => id !== post.id);
-    settings.popular.categoryPostIds[category.slug] = normalizePostIdList(settings.popular.categoryPostIds?.[category.slug]).filter((id) => id !== post.id);
   });
   settings.popular.postIds = normalizePostIdList(settings.popular.postIds).filter((id) => id !== post.id);
   blogState.siteSettings = settings;
@@ -7913,19 +7813,6 @@ function bindEditorTools() {
       if (checkedCount > 3) {
         popularPostCheckbox.checked = false;
         showToast("TOP3 인기글은 최대 3개까지 선택할 수 있습니다.");
-      }
-      return;
-    }
-
-    const categoryPopularPostCheckbox = event.target.closest("[data-category-popular-post]");
-    if (categoryPopularPostCheckbox && categoryPopularPostCheckbox.checked) {
-      const category = categoryPopularPostCheckbox.dataset.categoryPopularCategory;
-      const checkedCount = siteSettingsPanel.querySelectorAll(
-        `[data-category-popular-post][data-category-popular-category="${category}"]:checked`,
-      ).length;
-      if (checkedCount > 3) {
-        categoryPopularPostCheckbox.checked = false;
-        showToast("카테고리 상단 인기글은 최대 3개까지 선택할 수 있습니다.");
       }
       return;
     }
