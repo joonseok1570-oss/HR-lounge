@@ -1,6 +1,6 @@
 {
   "version": 38,
-  "updatedAt": "2026-05-30T02:29:59.943Z",
+  "updatedAt": "2026-05-30T04:42:57.455Z",
   "siteSettings": {
     "hero": {
       "eyebrow": "Internal HR Portal",
@@ -930,7 +930,7 @@
       "group": "온보딩",
       "subcategory": "신규입사자 기본 가이드",
       "note": "워크툴 계정정보, 와이파이/프린트 설정, 메일서명, 회의실 예약, 프로필 등록 및 확인서 작성",
-      "title": "온보딩 - 신규 입사자 기본가이즈",
+      "title": "온보딩 - 신규 입사자 기본가이드",
       "summary": "",
       "author": "People Team",
       "tags": [
@@ -949,8 +949,8 @@
       "interactiveEmbed": "",
       "openMode": "",
       "order": 4,
-      "updatedAt": "2026-05-30T01:19:00.185Z",
-      "content": "<h2>test1</h2>"
+      "updatedAt": "2026-05-30T04:42:54.077Z",
+      "content": "<p></p>"
     },
     {
       "id": "hr-guide-solmedix-product-portfolio",
