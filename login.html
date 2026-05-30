@@ -221,6 +221,7 @@
       .google-slot {
         display: block;
         width: min(100%, 340px);
+        height: 44px;
         min-height: 44px;
         margin-top: 24px;
         overflow: hidden;
@@ -235,14 +236,18 @@
       .google-slot > div {
         display: block;
         width: 100% !important;
+        height: 44px !important;
         overflow: hidden !important;
         border-radius: 999px !important;
       }
 
       .google-slot iframe {
+        display: block !important;
+        height: 46px !important;
         overflow: hidden !important;
         border-radius: 999px !important;
         background: transparent !important;
+        transform: translateY(-1px);
       }
 
       .auth-status {
