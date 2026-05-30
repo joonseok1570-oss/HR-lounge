@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="robots" content="noindex,nofollow" />
     <title>HR Lounge Secure Access</title>
-    <script src="https://accounts.google.com/gsi/client" async defer></script>
     <style>
       :root {
         color-scheme: dark;
@@ -191,11 +190,53 @@
         background: rgba(255, 176, 0, 0.1);
       }
 
-      .google-slot {
+      .email-form {
         display: grid;
-        place-items: center start;
-        min-height: 44px;
+        gap: 12px;
         margin-top: 24px;
+      }
+
+      .email-form label {
+        display: grid;
+        gap: 8px;
+        color: rgba(247, 239, 231, 0.74);
+        font-size: 0.84rem;
+        font-weight: 850;
+      }
+
+      .email-form input {
+        width: 100%;
+        min-height: 48px;
+        padding: 0 15px;
+        border: 1px solid rgba(247, 239, 231, 0.22);
+        border-radius: 8px;
+        color: var(--ink);
+        font: inherit;
+        font-size: 1rem;
+        font-weight: 800;
+        background: rgba(255, 255, 255, 0.08);
+        outline: none;
+      }
+
+      .email-form input:focus {
+        border-color: rgba(255, 176, 0, 0.82);
+        box-shadow: 0 0 0 3px rgba(255, 176, 0, 0.16);
+      }
+
+      .email-form button {
+        min-height: 48px;
+        border: 0;
+        border-radius: 8px;
+        color: #211b13;
+        font: inherit;
+        font-weight: 950;
+        background: linear-gradient(90deg, var(--accent), var(--accent-strong));
+        cursor: pointer;
+      }
+
+      .email-form button:disabled {
+        cursor: wait;
+        opacity: 0.68;
       }
 
       .auth-status {
@@ -208,31 +249,6 @@
 
       .auth-status.is-error {
         color: #ffb7a8;
-      }
-
-      .panel-actions {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-        margin-top: 18px;
-      }
-
-      .ghost-button {
-        min-height: 40px;
-        padding: 0 15px;
-        border: 1px solid rgba(247, 239, 231, 0.24);
-        border-radius: 999px;
-        color: var(--ink);
-        font: inherit;
-        font-size: 0.9rem;
-        font-weight: 800;
-        background: rgba(255, 255, 255, 0.07);
-        cursor: pointer;
-      }
-
-      .ghost-button:hover {
-        border-color: rgba(255, 176, 0, 0.72);
-        color: #ffe2a7;
       }
 
       .signal-strip {
@@ -298,26 +314,29 @@
             <img src="./assets/solmedix-logo.png" alt="Solmedix" />
             <span>Secure HR Lounge</span>
           </a>
-          <p class="headline-kicker">Workspace verified</p>
+          <p class="headline-kicker">Domain gate</p>
           <h1>
             <span>People</span>
             <span>Inside</span>
           </h1>
           <p class="headline-copy">
-            솔메딕스 구성원만 들어오는 HR Lounge입니다. 회사 Google Workspace 계정으로 확인되면 바로 연결됩니다.
+            솔메딕스 구성원용 HR Lounge입니다. 회사 이메일 도메인 확인 후 바로 입장합니다.
           </p>
         </div>
 
         <section class="auth-panel" aria-labelledby="auth-title">
           <p class="panel-label">Company Access</p>
-          <h2 id="auth-title">Solmedix 계정으로 계속</h2>
-          <p>Chrome에 회사 계정이 연결되어 있으면 계정 선택만으로 입장할 수 있습니다.</p>
+          <h2 id="auth-title">회사 이메일로 계속</h2>
+          <p>솔메딕스 회사 도메인 이메일만 접속할 수 있습니다.</p>
           <span class="domain-pill" id="domain-pill">@solmedix.com only</span>
-          <div class="google-slot" id="google-button" aria-label="Google 로그인 버튼"></div>
-          <p class="auth-status" id="auth-status" role="status">로그인 설정을 확인하고 있습니다.</p>
-          <div class="panel-actions">
-            <button class="ghost-button" id="switch-account-button" type="button">다른 Google 계정 선택</button>
-          </div>
+          <form class="email-form" id="email-form">
+            <label>
+              <span>회사 이메일</span>
+              <input id="email-input" type="email" autocomplete="email" inputmode="email" placeholder="name@solmedix.com" required />
+            </label>
+            <button id="login-button" type="submit">HR Lounge 입장</button>
+          </form>
+          <p class="auth-status" id="auth-status" role="status">접속 도메인을 확인하고 있습니다.</p>
         </section>
       </section>
       <div class="signal-strip" aria-hidden="true"><span></span>HR Lounge</div>
@@ -325,9 +344,10 @@
 
     <script>
       const authStatus = document.querySelector("#auth-status");
-      const googleButton = document.querySelector("#google-button");
       const domainPill = document.querySelector("#domain-pill");
-      const switchAccountButton = document.querySelector("#switch-account-button");
+      const emailForm = document.querySelector("#email-form");
+      const emailInput = document.querySelector("#email-input");
+      const loginButton = document.querySelector("#login-button");
       let authConfig = null;
 
       function setStatus(message, isError = false) {
@@ -357,57 +377,6 @@
         return result;
       }
 
-      async function handleCredentialResponse(response) {
-        if (!response || !response.credential) {
-          setStatus("Google 로그인 응답이 없습니다. 다시 시도해 주세요.", true);
-          return;
-        }
-
-        try {
-          setStatus("회사 계정 여부를 확인하고 있습니다.");
-          await postAuth({ action: "login", credential: response.credential });
-          setStatus("확인되었습니다. HR Lounge로 이동합니다.");
-          window.location.replace(getNextUrl());
-        } catch (error) {
-          setStatus(error.message || "회사 계정 확인에 실패했습니다.", true);
-          if (window.google?.accounts?.id) {
-            window.google.accounts.id.disableAutoSelect();
-          }
-        }
-      }
-
-      function initializeGoogle() {
-        if (!window.google?.accounts?.id || !authConfig?.clientId) {
-          window.setTimeout(initializeGoogle, 120);
-          return;
-        }
-
-        window.google.accounts.id.initialize({
-          client_id: authConfig.clientId,
-          callback: handleCredentialResponse,
-          auto_select: true,
-          button_auto_select: true,
-          use_fedcm_for_prompt: true,
-          use_fedcm_for_button: true,
-          cancel_on_tap_outside: false,
-          context: "signin",
-          hd: authConfig.allowedDomain,
-        });
-
-        window.google.accounts.id.renderButton(googleButton, {
-          type: "standard",
-          theme: "outline",
-          size: "large",
-          shape: "pill",
-          text: "continue_with",
-          logo_alignment: "left",
-          width: 320,
-        });
-
-        window.google.accounts.id.prompt();
-        setStatus("회사 Google 계정을 선택해 주세요.");
-      }
-
       async function loadAuthConfig() {
         try {
           const response = await fetch("/api/auth", { cache: "no-store" });
@@ -418,22 +387,39 @@
           }
           const domain = authConfig.allowedDomain || "solmedix.com";
           domainPill.textContent = `@${domain} only`;
-          if (!authConfig.configured || !authConfig.clientId) {
-            setStatus("Vercel 환경변수 HR_LOUNGE_GOOGLE_CLIENT_ID 설정이 필요합니다.", true);
+          emailInput.placeholder = `name@${domain}`;
+          if (!authConfig.configured) {
+            setStatus("Vercel 환경변수 HR_LOUNGE_SESSION_SECRET 설정이 필요합니다.", true);
+            loginButton.disabled = true;
             return;
           }
-          initializeGoogle();
+          setStatus(`@${domain} 이메일을 입력해 주세요.`);
         } catch (error) {
           setStatus("로그인 설정을 불러오지 못했습니다. 잠시 후 다시 시도해 주세요.", true);
+          loginButton.disabled = true;
         }
       }
 
-      switchAccountButton.addEventListener("click", () => {
-        if (window.google?.accounts?.id) {
-          window.google.accounts.id.disableAutoSelect();
-          window.google.accounts.id.prompt();
+      emailForm.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        const email = emailInput.value.trim();
+        if (!email) {
+          setStatus("회사 이메일을 입력해 주세요.", true);
+          emailInput.focus();
+          return;
         }
-        setStatus("다른 회사 Google 계정을 선택해 주세요.");
+
+        try {
+          loginButton.disabled = true;
+          setStatus("회사 도메인을 확인하고 있습니다.");
+          await postAuth({ action: "login", email });
+          setStatus("확인되었습니다. HR Lounge로 이동합니다.");
+          window.location.replace(getNextUrl());
+        } catch (error) {
+          setStatus(error.message || "회사 도메인 확인에 실패했습니다.", true);
+          loginButton.disabled = false;
+          emailInput.select();
+        }
       });
 
       loadAuthConfig();
