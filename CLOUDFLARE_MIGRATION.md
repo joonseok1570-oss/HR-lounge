@@ -164,6 +164,9 @@ After Cloudflare deployment is ready:
   - Check `HR_LOUNGE_GOOGLE_CLIENT_ID` and `HR_LOUNGE_SESSION_SECRET`.
 - Google login fails with origin/client errors:
   - Add the `*.pages.dev` URL and custom domain to Google OAuth Authorized JavaScript origins.
+- Browser shows too many redirects between `/login.html` and `/login`:
+  - Cloudflare Pages uses clean URLs and redirects `login.html` to `/login`.
+  - `functions/_middleware.js` must allow both `/login.html` and `/login` as public paths.
 - Build fails while deploying and the log mentions `nodejs_compat`:
   - Remove `nodejs_compat` from `Settings > Functions > Compatibility flags`, then retry.
   - Or keep it only if `Compatibility date` is `2024-09-23` or later.

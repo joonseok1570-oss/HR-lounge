@@ -8,9 +8,11 @@ import {
   verifySignedToken,
 } from "./_lib/session.js";
 
-const LOGIN_PATH = "/login.html";
+const LOGIN_PATH = "/login";
 const PUBLIC_PATHS = new Set([
   LOGIN_PATH,
+  "/login.html",
+  "/logout",
   "/logout.html",
   "/api/auth",
   "/assets/auth-access-bg.jpg",
