@@ -64,6 +64,29 @@ function getAllowedDomain() {
     .toLowerCase();
 }
 
+function normalizeEmail(value) {
+  return String(value || "").trim().toLowerCase();
+}
+
+function getAllowedEmails() {
+  return String(process.env.HR_LOUNGE_ALLOWED_EMAILS || process.env.HR_LOUNGE_APPROVED_EMAILS || "")
+    .split(/[\s,;]+/)
+    .map(normalizeEmail)
+    .filter((email, index, emails) => email.includes("@") && emails.indexOf(email) === index);
+}
+
+function isAllowedUserEmail(email, hostedDomain) {
+  const allowedDomain = getAllowedDomain();
+  const normalizedEmail = normalizeEmail(email);
+  const normalizedHostedDomain = String(hostedDomain || "")
+    .trim()
+    .replace(/^@+/, "")
+    .toLowerCase();
+  const isWorkspaceUser =
+    normalizedEmail.endsWith(`@${allowedDomain}`) && normalizedHostedDomain === allowedDomain;
+  return Boolean(normalizedEmail && (isWorkspaceUser || getAllowedEmails().includes(normalizedEmail)));
+}
+
 function signPayload(payload, secret) {
   return crypto
     .createHmac("sha256", secret)
@@ -110,7 +133,12 @@ function verifyAccessToken(token) {
 
   try {
     const session = JSON.parse(base64UrlDecode(payload));
-    if (session.kind !== TOKEN_KIND || !session.exp || session.exp < Math.floor(Date.now() / 1000)) {
+    if (
+      session.kind !== TOKEN_KIND ||
+      !session.exp ||
+      session.exp < Math.floor(Date.now() / 1000) ||
+      !isAllowedUserEmail(session?.user?.email, session?.user?.hd)
+    ) {
       return null;
     }
     return session;
@@ -182,8 +210,8 @@ async function verifyGoogleCredential(credential) {
     error.statusCode = 401;
     throw error;
   }
-  if (!emailVerified || !email.endsWith(`@${allowedDomain}`) || hostedDomain !== allowedDomain) {
-    const error = new Error(`@${allowedDomain} Google Workspace 계정만 접속할 수 있습니다.`);
+  if (!emailVerified || !isAllowedUserEmail(email, hostedDomain)) {
+    const error = new Error(`@${allowedDomain} Google Workspace 계정 또는 승인된 메일만 접속할 수 있습니다.`);
     error.statusCode = 403;
     throw error;
   }
@@ -210,6 +238,8 @@ async function handleConfig(request, response) {
     authenticated: Boolean(session?.user),
     clientId: getGoogleClientId(),
     allowedDomain: getAllowedDomain(),
+    approvedEmailAccess: getAllowedEmails().length > 0,
+    approvedEmailCount: getAllowedEmails().length,
     user: session?.user || null,
   });
 }

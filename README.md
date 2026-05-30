@@ -83,6 +83,7 @@ Vercel 배포본은 `middleware.ts`와 `api/auth.js`를 통해 회사 Google Wor
 
 - `HR_LOUNGE_GOOGLE_CLIENT_ID`: Google Cloud Console에서 만든 OAuth 2.0 Web Client ID
 - `HR_LOUNGE_ALLOWED_DOMAIN`: 생략 가능. 기본값은 `solmedix.com`
+- `HR_LOUNGE_ALLOWED_EMAILS`: 선택 사항. `person@gmail.com,person@naver.com`처럼 예외 승인 메일을 쉼표나 줄바꿈으로 입력합니다. 현재 로그인은 Google OAuth 기반이므로 해당 메일은 Google 계정으로 선택할 수 있어야 합니다.
 - `HR_LOUNGE_SESSION_SECRET`: 로그인 쿠키 서명에도 함께 사용합니다.
 
 Google OAuth Web Client에는 Authorized JavaScript origins로 `https://hr-lounge.vercel.app`과 운영 도메인을 등록하세요. GitHub 저장소가 public이면 배포 페이지를 보호하더라도 `blog-data.json`과 `assets/` 원본이 GitHub에서 보일 수 있으므로, 보안 운영 시에는 저장소도 private 상태로 유지하는 것이 원칙입니다.

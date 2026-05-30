@@ -26,6 +26,29 @@ export function getAllowedDomain(env) {
     .toLowerCase();
 }
 
+export function normalizeEmail(value) {
+  return String(value || "").trim().toLowerCase();
+}
+
+export function getAllowedEmails(env) {
+  return getEnv(env, ["HR_LOUNGE_ALLOWED_EMAILS", "HR_LOUNGE_APPROVED_EMAILS"])
+    .split(/[\s,;]+/)
+    .map(normalizeEmail)
+    .filter((email, index, emails) => email.includes("@") && emails.indexOf(email) === index);
+}
+
+export function isAllowedUserEmail(email, hostedDomain, env) {
+  const allowedDomain = getAllowedDomain(env);
+  const normalizedEmail = normalizeEmail(email);
+  const normalizedHostedDomain = String(hostedDomain || "")
+    .trim()
+    .replace(/^@+/, "")
+    .toLowerCase();
+  const isWorkspaceUser =
+    normalizedEmail.endsWith(`@${allowedDomain}`) && normalizedHostedDomain === allowedDomain;
+  return Boolean(normalizedEmail && (isWorkspaceUser || getAllowedEmails(env).includes(normalizedEmail)));
+}
+
 export function jsonResponse(payload, status = 200, headers = {}) {
   const responseHeaders = new Headers(headers);
   responseHeaders.set("Content-Type", "application/json; charset=utf-8");
