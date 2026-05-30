@@ -1,0 +1,442 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex,nofollow" />
+    <title>HR Lounge Secure Access</title>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <style>
+      :root {
+        color-scheme: dark;
+        --ink: #f7efe7;
+        --muted: rgba(247, 239, 231, 0.72);
+        --line: rgba(247, 239, 231, 0.2);
+        --panel: rgba(18, 21, 23, 0.64);
+        --accent: #ffb000;
+        --accent-strong: #ff6b35;
+        --deep: #121517;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        min-height: 100%;
+        margin: 0;
+      }
+
+      body {
+        overflow: hidden;
+        font-family:
+          "Pretendard",
+          "Apple SD Gothic Neo",
+          "Noto Sans KR",
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          sans-serif;
+        color: var(--ink);
+        background: var(--deep);
+      }
+
+      .auth-page {
+        position: relative;
+        display: grid;
+        min-height: 100vh;
+        padding: clamp(24px, 4vw, 56px);
+        isolation: isolate;
+      }
+
+      .auth-page::before {
+        position: absolute;
+        inset: 0;
+        z-index: -3;
+        content: "";
+        background:
+          linear-gradient(90deg, rgba(10, 12, 13, 0.9), rgba(10, 12, 13, 0.44) 48%, rgba(10, 12, 13, 0.76)),
+          url("./assets/hr-office-bg.jpg") center / cover no-repeat;
+        transform: scale(1.03);
+      }
+
+      .auth-page::after {
+        position: absolute;
+        inset: 0;
+        z-index: -2;
+        content: "";
+        background:
+          linear-gradient(120deg, rgba(255, 176, 0, 0.22), transparent 38%),
+          repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.06) 0 1px, transparent 1px 84px);
+        mix-blend-mode: screen;
+        opacity: 0.62;
+      }
+
+      .auth-shell {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(320px, 420px);
+        gap: clamp(28px, 6vw, 92px);
+        align-items: center;
+        width: min(1180px, 100%);
+        margin: auto;
+      }
+
+      .brand-mark {
+        display: inline-flex;
+        align-items: center;
+        gap: 14px;
+        min-height: 42px;
+        color: var(--ink);
+        font-size: 0.82rem;
+        font-weight: 900;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+      }
+
+      .brand-mark img {
+        width: 132px;
+        height: auto;
+        filter: brightness(0) invert(1);
+      }
+
+      .headline {
+        max-width: 740px;
+      }
+
+      .headline-kicker {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        margin: 0 0 18px;
+        color: rgba(255, 213, 128, 0.94);
+        font-size: 0.84rem;
+        font-weight: 900;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+      }
+
+      .headline-kicker::before {
+        width: 42px;
+        height: 2px;
+        content: "";
+        background: currentColor;
+      }
+
+      h1 {
+        max-width: 780px;
+        margin: 0;
+        font-size: clamp(4.1rem, 12vw, 9.7rem);
+        font-weight: 950;
+        line-height: 0.82;
+        letter-spacing: 0;
+        text-transform: uppercase;
+      }
+
+      h1 span {
+        display: block;
+      }
+
+      .headline-copy {
+        max-width: 580px;
+        margin: 26px 0 0;
+        color: var(--muted);
+        font-size: clamp(1rem, 1.6vw, 1.24rem);
+        font-weight: 700;
+        line-height: 1.65;
+      }
+
+      .auth-panel {
+        width: 100%;
+        padding: 30px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--panel);
+        box-shadow: 0 28px 80px rgba(0, 0, 0, 0.42);
+        backdrop-filter: blur(18px);
+      }
+
+      .panel-label {
+        margin: 0 0 10px;
+        color: var(--accent);
+        font-size: 0.74rem;
+        font-weight: 900;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+      }
+
+      .auth-panel h2 {
+        margin: 0;
+        font-size: 1.64rem;
+        line-height: 1.22;
+      }
+
+      .auth-panel p {
+        margin: 14px 0 0;
+        color: var(--muted);
+        line-height: 1.58;
+      }
+
+      .domain-pill {
+        display: inline-flex;
+        align-items: center;
+        min-height: 34px;
+        margin-top: 20px;
+        padding: 0 14px;
+        border: 1px solid rgba(255, 176, 0, 0.42);
+        border-radius: 999px;
+        color: #ffe2a7;
+        font-size: 0.88rem;
+        font-weight: 850;
+        background: rgba(255, 176, 0, 0.1);
+      }
+
+      .google-slot {
+        display: grid;
+        place-items: center start;
+        min-height: 44px;
+        margin-top: 24px;
+      }
+
+      .auth-status {
+        min-height: 42px;
+        margin-top: 18px;
+        color: rgba(247, 239, 231, 0.74);
+        font-size: 0.92rem;
+        line-height: 1.5;
+      }
+
+      .auth-status.is-error {
+        color: #ffb7a8;
+      }
+
+      .panel-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 18px;
+      }
+
+      .ghost-button {
+        min-height: 40px;
+        padding: 0 15px;
+        border: 1px solid rgba(247, 239, 231, 0.24);
+        border-radius: 999px;
+        color: var(--ink);
+        font: inherit;
+        font-size: 0.9rem;
+        font-weight: 800;
+        background: rgba(255, 255, 255, 0.07);
+        cursor: pointer;
+      }
+
+      .ghost-button:hover {
+        border-color: rgba(255, 176, 0, 0.72);
+        color: #ffe2a7;
+      }
+
+      .signal-strip {
+        position: absolute;
+        right: clamp(20px, 4vw, 56px);
+        bottom: clamp(20px, 4vw, 48px);
+        display: flex;
+        gap: 8px;
+        align-items: center;
+        color: rgba(247, 239, 231, 0.54);
+        font-size: 0.74rem;
+        font-weight: 900;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+
+      .signal-strip span {
+        width: 34px;
+        height: 3px;
+        background: linear-gradient(90deg, var(--accent), var(--accent-strong));
+      }
+
+      @media (max-width: 860px) {
+        body {
+          overflow: auto;
+        }
+
+        .auth-page {
+          min-height: 100svh;
+          padding: 24px;
+        }
+
+        .auth-shell {
+          grid-template-columns: 1fr;
+          gap: 34px;
+          align-content: center;
+        }
+
+        h1 {
+          font-size: clamp(3.7rem, 18vw, 6.2rem);
+        }
+
+        .headline-copy {
+          margin-top: 18px;
+        }
+
+        .auth-panel {
+          padding: 24px;
+        }
+
+        .signal-strip {
+          position: static;
+          margin-top: 28px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="auth-page">
+      <section class="auth-shell" aria-label="HR Lounge 보안 로그인">
+        <div class="headline">
+          <a class="brand-mark" href="/login.html" aria-label="Solmedix HR Lounge">
+            <img src="./assets/solmedix-logo.png" alt="Solmedix" />
+            <span>Secure HR Lounge</span>
+          </a>
+          <p class="headline-kicker">Workspace verified</p>
+          <h1>
+            <span>People</span>
+            <span>Inside</span>
+          </h1>
+          <p class="headline-copy">
+            솔메딕스 구성원만 들어오는 HR Lounge입니다. 회사 Google Workspace 계정으로 확인되면 바로 연결됩니다.
+          </p>
+        </div>
+
+        <section class="auth-panel" aria-labelledby="auth-title">
+          <p class="panel-label">Company Access</p>
+          <h2 id="auth-title">Solmedix 계정으로 계속</h2>
+          <p>Chrome에 회사 계정이 연결되어 있으면 계정 선택만으로 입장할 수 있습니다.</p>
+          <span class="domain-pill" id="domain-pill">@solmedix.com only</span>
+          <div class="google-slot" id="google-button" aria-label="Google 로그인 버튼"></div>
+          <p class="auth-status" id="auth-status" role="status">로그인 설정을 확인하고 있습니다.</p>
+          <div class="panel-actions">
+            <button class="ghost-button" id="switch-account-button" type="button">다른 Google 계정 선택</button>
+          </div>
+        </section>
+      </section>
+      <div class="signal-strip" aria-hidden="true"><span></span>HR Lounge</div>
+    </main>
+
+    <script>
+      const authStatus = document.querySelector("#auth-status");
+      const googleButton = document.querySelector("#google-button");
+      const domainPill = document.querySelector("#domain-pill");
+      const switchAccountButton = document.querySelector("#switch-account-button");
+      let authConfig = null;
+
+      function setStatus(message, isError = false) {
+        authStatus.textContent = message;
+        authStatus.classList.toggle("is-error", Boolean(isError));
+      }
+
+      function getNextUrl() {
+        const params = new URLSearchParams(window.location.search);
+        const next = params.get("next") || "/";
+        if (window.location.hash && !next.includes("#")) {
+          return `${next}${window.location.hash}`;
+        }
+        return next;
+      }
+
+      async function postAuth(payload) {
+        const response = await fetch("/api/auth", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        });
+        const result = await response.json().catch(() => ({}));
+        if (!response.ok) {
+          throw new Error(result.error || "로그인에 실패했습니다.");
+        }
+        return result;
+      }
+
+      async function handleCredentialResponse(response) {
+        if (!response || !response.credential) {
+          setStatus("Google 로그인 응답이 없습니다. 다시 시도해 주세요.", true);
+          return;
+        }
+
+        try {
+          setStatus("회사 계정 여부를 확인하고 있습니다.");
+          await postAuth({ action: "login", credential: response.credential });
+          setStatus("확인되었습니다. HR Lounge로 이동합니다.");
+          window.location.replace(getNextUrl());
+        } catch (error) {
+          setStatus(error.message || "회사 계정 확인에 실패했습니다.", true);
+          if (window.google?.accounts?.id) {
+            window.google.accounts.id.disableAutoSelect();
+          }
+        }
+      }
+
+      function initializeGoogle() {
+        if (!window.google?.accounts?.id || !authConfig?.clientId) {
+          window.setTimeout(initializeGoogle, 120);
+          return;
+        }
+
+        window.google.accounts.id.initialize({
+          client_id: authConfig.clientId,
+          callback: handleCredentialResponse,
+          auto_select: true,
+          button_auto_select: true,
+          use_fedcm_for_prompt: true,
+          use_fedcm_for_button: true,
+          cancel_on_tap_outside: false,
+          context: "signin",
+          hd: authConfig.allowedDomain,
+        });
+
+        window.google.accounts.id.renderButton(googleButton, {
+          type: "standard",
+          theme: "outline",
+          size: "large",
+          shape: "pill",
+          text: "continue_with",
+          logo_alignment: "left",
+          width: 320,
+        });
+
+        window.google.accounts.id.prompt();
+        setStatus("회사 Google 계정을 선택해 주세요.");
+      }
+
+      async function loadAuthConfig() {
+        try {
+          const response = await fetch("/api/auth", { cache: "no-store" });
+          authConfig = await response.json();
+          if (authConfig.authenticated) {
+            window.location.replace(getNextUrl());
+            return;
+          }
+          const domain = authConfig.allowedDomain || "solmedix.com";
+          domainPill.textContent = `@${domain} only`;
+          if (!authConfig.configured || !authConfig.clientId) {
+            setStatus("Vercel 환경변수 HR_LOUNGE_GOOGLE_CLIENT_ID 설정이 필요합니다.", true);
+            return;
+          }
+          initializeGoogle();
+        } catch (error) {
+          setStatus("로그인 설정을 불러오지 못했습니다. 잠시 후 다시 시도해 주세요.", true);
+        }
+      }
+
+      switchAccountButton.addEventListener("click", () => {
+        if (window.google?.accounts?.id) {
+          window.google.accounts.id.disableAutoSelect();
+          window.google.accounts.id.prompt();
+        }
+        setStatus("다른 회사 Google 계정을 선택해 주세요.");
+      });
+
+      loadAuthConfig();
+    </script>
+  </body>
+</html>
