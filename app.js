@@ -3921,7 +3921,7 @@ function persistBlogState() {
         showToast(
           result.migratedImageCount
             ? `GitHub에 저장하고 이미지 ${result.migratedImageCount}개를 파일로 정리했습니다.`
-            : "GitHub에 저장했습니다. Vercel 반영까지 잠시 걸릴 수 있습니다."
+            : "GitHub에 저장했습니다. Cloudflare 반영까지 잠시 걸릴 수 있습니다."
         );
         refreshStorageUsagePanel();
         return result;

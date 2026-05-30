@@ -540,7 +540,7 @@
           const domain = authConfig.allowedDomain || "solmedix.com";
           domainPill.textContent = `@${domain} only`;
           if (!authConfig.configured || !authConfig.clientId) {
-            setStatus("Vercel 환경변수 HR_LOUNGE_GOOGLE_CLIENT_ID 설정이 필요합니다.", true);
+            setStatus("배포 환경변수 HR_LOUNGE_GOOGLE_CLIENT_ID 설정이 필요합니다.", true);
             return;
           }
           initializeGoogle();
