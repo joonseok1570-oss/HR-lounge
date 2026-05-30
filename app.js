@@ -1857,8 +1857,10 @@ const blogStatus = document.querySelector("#blog-status");
 const postList = document.querySelector("#post-list");
 const postListTitle = document.querySelector("#post-list-title");
 const postCountLabel = document.querySelector("#post-count-label");
+const topicBar = document.querySelector(".topic-bar");
 const topicFilter = document.querySelector("#topic-filter");
 const blogCurrentScope = document.querySelector("#blog-current-scope");
+const blogListToolbar = document.querySelector(".blog-list-toolbar");
 const blogListSearchInput = document.querySelector("#blog-list-search-input");
 const blogSortButtons = document.querySelectorAll("[data-blog-sort]");
 const taxonomyGuide = document.querySelector("#taxonomy-guide");
@@ -5197,8 +5199,6 @@ function renderCategoryTopicSections(categorySlug, posts) {
   return sections
     .map(({ group, index, posts: groupPosts }) => {
       const displayLabel = group.displayLabel || group.label;
-      const visiblePosts = groupPosts.slice(0, 4);
-      const hasMore = groupPosts.length > visiblePosts.length;
       return `
         <section class="culture-topic-section" style="--culture-section-accent: ${accentColors[index % accentColors.length]}">
           <div class="culture-topic-head">
@@ -5206,14 +5206,19 @@ function renderCategoryTopicSections(categorySlug, posts) {
               <span>${escapeHtml(category.label)} Section</span>
               <h3>${escapeHtml(displayLabel)}</h3>
             </div>
-            <a href="${escapeAttribute(buildBlogHash(category.slug, group.label))}">
-              ${groupPosts.length}개 글 보기
-            </a>
+            <div class="culture-topic-actions">
+              <a href="${escapeAttribute(buildBlogHash(category.slug, group.label))}">
+                ${groupPosts.length}개 글 보기
+              </a>
+              <div class="culture-scroll-controls" aria-label="${escapeAttribute(displayLabel)} 글 넘기기">
+                <button type="button" data-section-scroll="-1" aria-label="${escapeAttribute(displayLabel)} 이전 글"></button>
+                <button type="button" data-section-scroll="1" aria-label="${escapeAttribute(displayLabel)} 다음 글"></button>
+              </div>
+            </div>
           </div>
-          <div class="culture-topic-grid">
-            ${visiblePosts.map((post) => renderCategoryBoardCard(post, "is-topic-card")).join("")}
+          <div class="culture-topic-grid" tabindex="0" aria-label="${escapeAttribute(displayLabel)} 글 목록">
+            ${groupPosts.map((post) => renderCategoryBoardCard(post, "is-topic-card")).join("")}
           </div>
-          ${hasMore ? `<a class="culture-topic-more" href="${escapeAttribute(buildBlogHash(category.slug, group.label))}">${escapeHtml(displayLabel)} 전체 보기</a>` : ""}
         </section>
       `;
     })
@@ -5226,6 +5231,51 @@ function renderCategorySectionBoard(categorySlug, posts) {
       ${renderCategoryTopicSections(categorySlug, posts)}
     </div>
   `;
+}
+
+function getCategoryScrollStep(scroller) {
+  const card = scroller?.querySelector(".culture-board-card");
+  if (!card) {
+    return scroller?.clientWidth || 0;
+  }
+  const styles = window.getComputedStyle(scroller);
+  const gap = Number.parseFloat(styles.columnGap || styles.gap || "0") || 0;
+  return card.getBoundingClientRect().width + gap;
+}
+
+function updateCategoryScrollControls(section) {
+  const scroller = section?.querySelector(".culture-topic-grid");
+  const controls = section ? [...section.querySelectorAll("[data-section-scroll]")] : [];
+  if (!scroller || !controls.length) {
+    return;
+  }
+  const maxScroll = Math.max(0, scroller.scrollWidth - scroller.clientWidth - 1);
+  const isScrollable = maxScroll > 1;
+  controls.forEach((button) => {
+    const direction = Number(button.dataset.sectionScroll || 0);
+    button.disabled = !isScrollable || (direction < 0 ? scroller.scrollLeft <= 1 : scroller.scrollLeft >= maxScroll);
+  });
+}
+
+function bindCategoryBoardScrollControls() {
+  postList.querySelectorAll(".culture-topic-section").forEach((section) => {
+    const scroller = section.querySelector(".culture-topic-grid");
+    if (!scroller) {
+      return;
+    }
+    const updateControls = () => updateCategoryScrollControls(section);
+    scroller.addEventListener("scroll", updateControls, { passive: true });
+    section.querySelectorAll("[data-section-scroll]").forEach((button) => {
+      button.addEventListener("click", (event) => {
+        event.preventDefault();
+        const direction = Number(button.dataset.sectionScroll || 0);
+        const step = getCategoryScrollStep(scroller);
+        scroller.scrollBy({ left: direction * step, behavior: "smooth" });
+        window.setTimeout(updateControls, 320);
+      });
+    });
+    updateControls();
+  });
 }
 
 function renderPostList() {
@@ -5242,6 +5292,15 @@ function renderPostList() {
   const posts = sortPostsForBlogList(filteredPosts, isSearchMode);
   const isCategorySectionBoard =
     !isSearchMode && blogCategories.some((category) => category.slug === currentBlogCategory) && activeBlogTopic === "all" && !activeBlogListQuery.trim();
+  if (topicBar) {
+    topicBar.hidden = isCategorySectionBoard;
+  }
+  if (blogCurrentScope) {
+    blogCurrentScope.hidden = isCategorySectionBoard;
+  }
+  if (blogListToolbar) {
+    blogListToolbar.hidden = isCategorySectionBoard;
+  }
 
   if (isSearchMode) {
     if (topicFilter) {
@@ -5370,6 +5429,9 @@ function renderPostList() {
       selectPost(button.dataset.postId);
     });
   });
+  if (isCategorySectionBoard) {
+    bindCategoryBoardScrollControls();
+  }
   bindPostDragSorting();
 }
 
