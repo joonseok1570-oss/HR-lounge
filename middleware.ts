@@ -25,14 +25,34 @@ function normalizeEmail(value) {
   return String(value || "").trim().toLowerCase();
 }
 
-function getAllowedEmails() {
-  return String(process.env.HR_LOUNGE_ALLOWED_EMAILS || process.env.HR_LOUNGE_APPROVED_EMAILS || "")
+function parseEmailList(value) {
+  return String(value || "")
     .split(/[\s,;]+/)
     .map(normalizeEmail)
     .filter((email, index, emails) => email.includes("@") && emails.indexOf(email) === index);
 }
 
-function isAllowedUserEmail(email, hostedDomain) {
+function uniqueEmails(...lists) {
+  return [...new Set(lists.flat().filter(Boolean))];
+}
+
+function getApprovedGoogleEmails() {
+  return parseEmailList(process.env.HR_LOUNGE_ALLOWED_GOOGLE_EMAILS || process.env.HR_LOUNGE_APPROVED_GOOGLE_EMAILS || "");
+}
+
+function getApprovedNaverEmails() {
+  return parseEmailList(process.env.HR_LOUNGE_ALLOWED_NAVER_EMAILS || process.env.HR_LOUNGE_APPROVED_NAVER_EMAILS || "");
+}
+
+function getGeneralApprovedEmails() {
+  return parseEmailList(process.env.HR_LOUNGE_ALLOWED_EMAILS || process.env.HR_LOUNGE_APPROVED_EMAILS || "");
+}
+
+function getAllowedEmails() {
+  return uniqueEmails(getGeneralApprovedEmails(), getApprovedGoogleEmails(), getApprovedNaverEmails());
+}
+
+function getUserAccessType(email, hostedDomain) {
   const allowedDomain = getAllowedDomain();
   const normalizedEmail = normalizeEmail(email);
   const normalizedHostedDomain = String(hostedDomain || "")
@@ -41,7 +61,23 @@ function isAllowedUserEmail(email, hostedDomain) {
     .toLowerCase();
   const isWorkspaceUser =
     normalizedEmail.endsWith(`@${allowedDomain}`) && normalizedHostedDomain === allowedDomain;
-  return Boolean(normalizedEmail && (isWorkspaceUser || getAllowedEmails().includes(normalizedEmail)));
+  if (isWorkspaceUser) {
+    return "company-google";
+  }
+  if (getApprovedGoogleEmails().includes(normalizedEmail)) {
+    return "approved-google";
+  }
+  if (getApprovedNaverEmails().includes(normalizedEmail)) {
+    return "approved-naver";
+  }
+  if (getGeneralApprovedEmails().includes(normalizedEmail)) {
+    return "approved-email";
+  }
+  return "";
+}
+
+function isAllowedUserEmail(email, hostedDomain) {
+  return Boolean(getUserAccessType(email, hostedDomain));
 }
 
 function getSessionSecret() {

@@ -6,8 +6,12 @@ import {
   createSignedToken,
   getAllowedEmails,
   getAllowedDomain,
+  getApprovedGoogleEmails,
+  getApprovedNaverEmails,
+  getGeneralApprovedEmails,
   getEnv,
   getSessionSecret,
+  getUserAccessType,
   isAllowedUserEmail,
   jsonResponse,
   parseCookies,
@@ -67,7 +71,9 @@ async function verifyGoogleCredential(credential, env) {
     throw error;
   }
   if (!emailVerified || !isAllowedUserEmail(email, hostedDomain, env)) {
-    const error = new Error(`Only @${allowedDomain} Google Workspace accounts or approved emails can access HR Lounge.`);
+    const error = new Error(
+      `Only @${allowedDomain} Google Workspace accounts, approved Google personal accounts, or approved Naver emails can access HR Lounge.`
+    );
     error.statusCode = 403;
     throw error;
   }
@@ -77,6 +83,7 @@ async function verifyGoogleCredential(credential, env) {
     name: tokenInfo.name || email.split("@")[0],
     picture: tokenInfo.picture || "",
     hd: hostedDomain,
+    accessType: getUserAccessType(email, hostedDomain, env),
     role: "employee",
   };
 }
@@ -93,6 +100,9 @@ async function handleConfig(request, env) {
       allowedDomain: getAllowedDomain(env),
       approvedEmailAccess: getAllowedEmails(env).length > 0,
       approvedEmailCount: getAllowedEmails(env).length,
+      approvedGoogleEmailCount: getApprovedGoogleEmails(env).length,
+      approvedNaverEmailCount: getApprovedNaverEmails(env).length,
+      generalApprovedEmailCount: getGeneralApprovedEmails(env).length,
       user: validSession ? session.user : null,
     },
     200,

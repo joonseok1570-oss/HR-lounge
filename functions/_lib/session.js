@@ -30,14 +30,34 @@ export function normalizeEmail(value) {
   return String(value || "").trim().toLowerCase();
 }
 
-export function getAllowedEmails(env) {
-  return getEnv(env, ["HR_LOUNGE_ALLOWED_EMAILS", "HR_LOUNGE_APPROVED_EMAILS"])
+function parseEmailList(value) {
+  return String(value || "")
     .split(/[\s,;]+/)
     .map(normalizeEmail)
     .filter((email, index, emails) => email.includes("@") && emails.indexOf(email) === index);
 }
 
-export function isAllowedUserEmail(email, hostedDomain, env) {
+function uniqueEmails(...lists) {
+  return [...new Set(lists.flat().filter(Boolean))];
+}
+
+export function getApprovedGoogleEmails(env) {
+  return parseEmailList(getEnv(env, ["HR_LOUNGE_ALLOWED_GOOGLE_EMAILS", "HR_LOUNGE_APPROVED_GOOGLE_EMAILS"]));
+}
+
+export function getApprovedNaverEmails(env) {
+  return parseEmailList(getEnv(env, ["HR_LOUNGE_ALLOWED_NAVER_EMAILS", "HR_LOUNGE_APPROVED_NAVER_EMAILS"]));
+}
+
+export function getGeneralApprovedEmails(env) {
+  return parseEmailList(getEnv(env, ["HR_LOUNGE_ALLOWED_EMAILS", "HR_LOUNGE_APPROVED_EMAILS"]));
+}
+
+export function getAllowedEmails(env) {
+  return uniqueEmails(getGeneralApprovedEmails(env), getApprovedGoogleEmails(env), getApprovedNaverEmails(env));
+}
+
+export function getUserAccessType(email, hostedDomain, env) {
   const allowedDomain = getAllowedDomain(env);
   const normalizedEmail = normalizeEmail(email);
   const normalizedHostedDomain = String(hostedDomain || "")
@@ -46,7 +66,23 @@ export function isAllowedUserEmail(email, hostedDomain, env) {
     .toLowerCase();
   const isWorkspaceUser =
     normalizedEmail.endsWith(`@${allowedDomain}`) && normalizedHostedDomain === allowedDomain;
-  return Boolean(normalizedEmail && (isWorkspaceUser || getAllowedEmails(env).includes(normalizedEmail)));
+  if (isWorkspaceUser) {
+    return "company-google";
+  }
+  if (getApprovedGoogleEmails(env).includes(normalizedEmail)) {
+    return "approved-google";
+  }
+  if (getApprovedNaverEmails(env).includes(normalizedEmail)) {
+    return "approved-naver";
+  }
+  if (getGeneralApprovedEmails(env).includes(normalizedEmail)) {
+    return "approved-email";
+  }
+  return "";
+}
+
+export function isAllowedUserEmail(email, hostedDomain, env) {
+  return Boolean(getUserAccessType(email, hostedDomain, env));
 }
 
 export function jsonResponse(payload, status = 200, headers = {}) {
