@@ -219,6 +219,7 @@
       }
 
       .google-slot {
+        position: relative;
         display: block;
         width: min(100%, 340px);
         height: 44px;
@@ -227,6 +228,26 @@
         overflow: hidden;
         border-radius: 999px;
         background: rgba(247, 239, 231, 0.08);
+      }
+
+      .google-slot::before,
+      .google-slot::after {
+        position: absolute;
+        right: 0;
+        left: 0;
+        z-index: 2;
+        height: 2px;
+        pointer-events: none;
+        content: "";
+        background: #202124;
+      }
+
+      .google-slot::before {
+        top: 0;
+      }
+
+      .google-slot::after {
+        bottom: 0;
       }
 
       .google-slot:empty {
@@ -243,11 +264,12 @@
 
       .google-slot iframe {
         display: block !important;
-        height: 46px !important;
+        position: relative !important;
+        z-index: 1 !important;
+        height: 44px !important;
         overflow: hidden !important;
         border-radius: 999px !important;
         background: transparent !important;
-        transform: translateY(-1px);
       }
 
       .auth-status {
