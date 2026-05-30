@@ -53,6 +53,10 @@ function getSessionSecret() {
   return process.env.HR_LOUNGE_SESSION_SECRET || process.env.ADMIN_SESSION_SECRET || "";
 }
 
+function getGoogleClientId() {
+  return process.env.HR_LOUNGE_GOOGLE_CLIENT_ID || process.env.GOOGLE_CLIENT_ID || "";
+}
+
 function getAllowedDomain() {
   return String(process.env.HR_LOUNGE_ALLOWED_DOMAIN || "solmedix.com")
     .trim()
@@ -142,31 +146,53 @@ function clearCookie() {
   return `${COOKIE_NAME}=; Path=/; Max-Age=0; HttpOnly; SameSite=Lax${secure}`;
 }
 
-function normalizeEmail(value) {
-  return String(value || "").trim().toLowerCase();
-}
-
-function createDomainUser(email) {
+async function verifyGoogleCredential(credential) {
+  const clientId = getGoogleClientId();
   const allowedDomain = getAllowedDomain();
-  const normalizedEmail = normalizeEmail(email);
-  const basicEmailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-  if (!basicEmailPattern.test(normalizedEmail)) {
-    const error = new Error("회사 이메일 주소를 입력해 주세요.");
-    error.statusCode = 400;
+  if (!clientId) {
+    const error = new Error("HR_LOUNGE_GOOGLE_CLIENT_ID 환경변수가 필요합니다.");
+    error.statusCode = 503;
     throw error;
   }
 
-  if (!normalizedEmail.endsWith(`@${allowedDomain}`)) {
-    const error = new Error(`@${allowedDomain} 이메일만 접속할 수 있습니다.`);
+  const response = await fetch(`https://oauth2.googleapis.com/tokeninfo?id_token=${encodeURIComponent(credential)}`, {
+    headers: { Accept: "application/json" },
+  });
+  const tokenInfo = await response.json().catch(() => ({}));
+
+  if (!response.ok) {
+    const error = new Error("Google 로그인 토큰을 확인할 수 없습니다.");
+    error.statusCode = 401;
+    throw error;
+  }
+
+  const issuer = String(tokenInfo.iss || "");
+  const email = String(tokenInfo.email || "").trim().toLowerCase();
+  const hostedDomain = String(tokenInfo.hd || "").trim().toLowerCase();
+  const emailVerified = tokenInfo.email_verified === true || tokenInfo.email_verified === "true";
+
+  if (!["accounts.google.com", "https://accounts.google.com"].includes(issuer)) {
+    const error = new Error("허용되지 않은 Google 토큰 발급자입니다.");
+    error.statusCode = 401;
+    throw error;
+  }
+  if (tokenInfo.aud !== clientId) {
+    const error = new Error("이 HR Lounge에 발급된 로그인 토큰이 아닙니다.");
+    error.statusCode = 401;
+    throw error;
+  }
+  if (!emailVerified || !email.endsWith(`@${allowedDomain}`) || hostedDomain !== allowedDomain) {
+    const error = new Error(`@${allowedDomain} Google Workspace 계정만 접속할 수 있습니다.`);
     error.statusCode = 403;
     throw error;
   }
 
   return {
-    email: normalizedEmail,
-    name: normalizedEmail.split("@")[0],
-    hd: allowedDomain,
+    email,
+    name: tokenInfo.name || email.split("@")[0],
+    picture: tokenInfo.picture || "",
+    hd: hostedDomain,
     role: "employee",
   };
 }
@@ -180,16 +206,22 @@ async function handleConfig(request, response) {
   const session = getCurrentSession(request);
   sendJson(response, 200, {
     ok: true,
-    configured: Boolean(getSessionSecret()),
+    configured: Boolean(getGoogleClientId() && getSessionSecret()),
     authenticated: Boolean(session?.user),
-    authMode: "email-domain",
+    clientId: getGoogleClientId(),
     allowedDomain: getAllowedDomain(),
     user: session?.user || null,
   });
 }
 
 async function handleLogin(body, response) {
-  const user = createDomainUser(body.email);
+  const credential = String(body.credential || "");
+  if (!credential) {
+    sendJson(response, 400, { error: "Google 로그인 응답이 없습니다." });
+    return;
+  }
+
+  const user = await verifyGoogleCredential(credential);
   const token = createAccessToken(user);
   sendJson(
     response,
