@@ -192,17 +192,31 @@
       }
 
       .google-slot {
-        display: grid;
+        display: inline-grid;
         place-items: center start;
-        max-width: 100%;
-        min-height: 44px;
+        width: min(100%, 344px);
+        min-height: 56px;
         margin-top: 24px;
-        overflow: hidden;
+        padding: 6px;
+        border: 1px solid rgba(255, 255, 255, 0.22);
+        border-radius: 8px;
+        background:
+          linear-gradient(135deg, rgba(255, 255, 255, 0.11), rgba(255, 255, 255, 0.035)),
+          rgba(8, 10, 11, 0.2);
+        box-shadow:
+          inset 0 1px 0 rgba(255, 255, 255, 0.16),
+          0 12px 28px rgba(0, 0, 0, 0.24);
+        overflow: visible;
       }
 
       .google-slot > div,
       .google-slot iframe {
         max-width: 100% !important;
+      }
+
+      .google-slot iframe {
+        display: block;
+        border-radius: 6px;
       }
 
       .auth-status {
@@ -274,7 +288,7 @@
         }
 
         .auth-panel {
-          padding: 20px;
+          padding: 18px;
         }
 
         .auth-panel h2 {
@@ -387,7 +401,7 @@
 
         const googleButtonWidth = Math.max(
           200,
-          Math.min(320, Math.floor(googleButton.getBoundingClientRect().width || 320)),
+          Math.min(320, Math.floor((googleButton.clientWidth || 332) - 12)),
         );
 
         window.google.accounts.id.renderButton(googleButton, {
