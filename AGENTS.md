@@ -1,5 +1,21 @@
 # HR Lounge Project Notes
 
+## Current Default Hosting Target
+
+As of 2026-05-30, the preferred production target is Cloudflare Pages, with
+Vercel kept only as a legacy/transition deployment until Cloudflare is fully
+verified.
+
+- Use local edits, commit to GitHub `main`, and let Cloudflare Pages deploy from
+  GitHub.
+- Cloudflare-specific runtime code lives in `functions/`.
+- Legacy Vercel runtime code remains in `middleware.ts` and `api/` so the old
+  deployment does not break during migration.
+- Keep `blog-data.json` lightweight. Images must stay under `assets/` and
+  `blog-data.json` should store only paths, never base64 `data:image` payloads.
+- Required post-change check remains `node scripts/check-blog-data-weight.js`.
+- Cloudflare setup details are documented in `CLOUDFLARE_MIGRATION.md`.
+
 이 프로젝트의 현재 기본 운영 방식은 Vercel + GitHub + JSON 데이터 + 이미지 파일 분리 저장이다. 새 채팅이나 다른 작업자가 이어서 작업할 때 아래 원칙을 우선한다.
 
 ## Mandatory Default Workflow

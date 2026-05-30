@@ -1,5 +1,22 @@
 # HR Lounge static homepage
 
+## Cloudflare Pages migration
+
+The project now includes Cloudflare Pages Functions under `functions/`.
+Use `CLOUDFLARE_MIGRATION.md` for the Cloudflare dashboard setup checklist.
+
+Legacy Vercel files are still kept during the transition:
+
+- `middleware.ts`
+- `api/auth.js`
+- `api/blog-data.js`
+
+Cloudflare equivalents:
+
+- `functions/_middleware.js`
+- `functions/api/auth.js`
+- `functions/api/blog-data.js`
+
 사내 URL 배포를 염두에 둔 HR 홈페이지입니다. 별도 빌드 과정 없이 `index.html`, `styles.css`, `app.js`, `blog-data.json`, `assets/`, `api/` 폴더를 같은 위치에 배포하면 됩니다.
 
 ## 파일 구성
