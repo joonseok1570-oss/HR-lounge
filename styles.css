@@ -12804,7 +12804,7 @@ body {
 }
 
 .culture-board-card.is-topic-card {
-  grid-template-rows: 132px auto;
+  grid-template-rows: 160px auto;
   min-height: 100%;
   scroll-snap-align: start;
   background:
@@ -12978,7 +12978,7 @@ body {
   .culture-board-card.is-secondary,
   .culture-board-card.is-topic-card {
     grid-template-columns: 1fr;
-    grid-template-rows: 180px auto;
+    grid-template-rows: 196px auto;
     min-height: 0;
   }
 
