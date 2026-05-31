@@ -1,6 +1,6 @@
 {
-  "version": 38,
-  "updatedAt": "2026-05-31T04:44:56.588Z",
+  "version": 39,
+  "updatedAt": "2026-05-31T06:09:24.173Z",
   "siteSettings": {
     "hero": {
       "eyebrow": "Internal HR Portal",
@@ -673,7 +673,7 @@
       "interactiveEmbed": "",
       "openMode": "",
       "order": 9,
-      "updatedAt": "2026-05-23T03:50:28.396Z",
+      "updatedAt": "2026-05-31T06:09:24.173Z",
       "content": "<h2><br></h2>"
     },
     {

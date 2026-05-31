@@ -1963,12 +1963,15 @@ const HEADING_HIGHLIGHT_CLASSES = [
 ];
 const ADMIN_AUTH_SESSION_KEY = "hr-lounge-admin-session-v1";
 const BLOG_STATE_STORAGE_KEY = "hrLoungeBlogState";
-const STATIC_BLOG_DATA_URL = "./blog-data.json?v=20260525-core-values-folder";
+const STATIC_BLOG_DATA_URL = "./blog-data.json?v=20260531-all-hands-cover";
 const REMOTE_BLOG_API_URL = "./api/blog-data";
 const LOCAL_PREVIEW_ADMIN_PASSWORD = "1966";
 const ONBOARDING_ACCESS_SESSION_KEY = "hr-lounge-onboarding-email";
 const BLOG_DATA_RECOMMENDED_BYTES = 3 * 1024 * 1024;
 const BLOG_DATA_MAX_BYTES = Math.floor(4.5 * 1024 * 1024);
+const ALL_HANDS_POST_ID = "d02f9214-45cf-41ec-b9e9-9d1bcfb5aaa2";
+const OLD_ALL_HANDS_COVER_IMAGE = "./assets/uploads/migrated/d02f9214-45cf-41ec-b9e9-9d1bcfb5aaa2-cover-6571407b05fe7ea4.jpg";
+const NEW_ALL_HANDS_COVER_IMAGE = "./assets/uploads/20260531/2024-all-hands-meeting-clear-cover.jpg";
 let isEditorUnlocked = false;
 let adminSession = null;
 let editorUnlockDialog = null;
@@ -3757,6 +3760,10 @@ function normalizeBlogState(state) {
     const category = blogCategories.some((item) => item.slug === sourcePost.category) ? sourcePost.category : "culture";
     const group = normalizePostGroup(sourcePost, category);
     const subcategory = normalizePostSubcategory(sourcePost, category, group);
+    let image = isSafeImageUrl(sourcePost.image) ? String(sourcePost.image || "") : "";
+    if (sourceVersion < 39 && String(sourcePost.id || "") === ALL_HANDS_POST_ID && (!image || image === OLD_ALL_HANDS_COVER_IMAGE)) {
+      image = NEW_ALL_HANDS_COVER_IMAGE;
+    }
     return {
       id: String(sourcePost.id || (globalThis.crypto?.randomUUID ? globalThis.crypto.randomUUID() : `post-${Date.now()}`)),
       category,
@@ -3769,7 +3776,7 @@ function normalizeBlogState(state) {
       tags: normalizeTags(sourcePost.tags, []),
       takeaways: normalizeTakeaways(sourcePost.takeaways, sourcePost.summary ? [String(sourcePost.summary)] : []),
       relatedPostIds: normalizeRelatedPostIds(sourcePost.relatedPostIds, String(sourcePost.id || "")),
-      image: isSafeImageUrl(sourcePost.image) ? String(sourcePost.image || "") : "",
+      image,
       videoUrl: normalizeYouTubeWatchUrl(sourcePost.videoUrl),
       videoThumbnail: isSafeImageUrl(sourcePost.videoThumbnail) ? String(sourcePost.videoThumbnail || "").trim() : "",
       interactiveEmbed: isSafeInteractiveEmbedUrl(sourcePost.interactiveEmbed) ? String(sourcePost.interactiveEmbed || "").trim() : "",
@@ -3818,7 +3825,7 @@ function normalizeBlogState(state) {
   }
 
   return {
-    version: 38,
+    version: 39,
     updatedAt: new Date().toISOString(),
     siteSettings,
     posts,
