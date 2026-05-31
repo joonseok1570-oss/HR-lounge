@@ -12713,11 +12713,9 @@ body {
 .culture-board-thumb {
   display: block;
   min-height: 0;
-  background:
-    linear-gradient(135deg, rgba(216, 102, 87, 0.2), rgba(36, 127, 130, 0.14)),
-    var(--thumb-image),
-    #f8f1e8;
+  background: var(--thumb-image), #fffdf8;
   background-position: center;
+  background-repeat: no-repeat;
   background-size: cover;
 }
 
