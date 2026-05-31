@@ -11523,6 +11523,7 @@ body {
   min-height: 246px;
   margin-bottom: 44px;
   padding: clamp(42px, 5vw, 56px) clamp(38px, 5vw, 54px) clamp(38px, 4.4vw, 48px);
+  isolation: isolate;
   overflow: hidden;
   background:
     linear-gradient(135deg, rgba(255, 253, 248, 0.88), rgba(255, 248, 238, 0.64)),
@@ -11537,25 +11538,29 @@ body {
 
 .blog-head::before {
   top: 0;
-  left: clamp(38px, 5vw, 54px);
+  left: 0;
+  z-index: 2;
   display: block;
-  width: min(310px, calc(100% - 108px));
-  height: 3px;
-  background: linear-gradient(90deg, var(--detail-accent), rgba(217, 179, 107, 0.42), transparent);
+  width: min(360px, 40%);
+  height: 4px;
+  background: linear-gradient(90deg, var(--detail-accent), rgba(217, 179, 107, 0.5), transparent);
   border: 0;
-  border-radius: 0 0 999px 999px;
+  border-radius: 24px 0 999px 0;
   box-shadow: none;
-  opacity: 0.72;
+  opacity: 0.76;
   transform: none;
 }
 
 .blog-head::after {
-  inset: 0 0 0 auto;
-  width: min(340px, 36%);
+  inset: 0;
+  z-index: 0;
+  width: 100%;
   height: 100%;
   background:
-    linear-gradient(110deg, transparent 0 18%, color-mix(in srgb, var(--detail-accent) 5%, rgba(255, 253, 248, 0.38)) 18.2% 100%);
-  opacity: 0.58;
+    linear-gradient(90deg, rgba(255, 253, 248, 0.96) 0%, rgba(255, 253, 248, 0.91) 42%, rgba(255, 248, 238, 0.72) 72%, rgba(237, 247, 242, 0.56) 100%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.2), rgba(255, 250, 243, 0.42));
+  opacity: 1;
+  pointer-events: none;
   transform: none;
 }
 
@@ -12132,16 +12137,14 @@ body {
 
 .blog-head {
   background:
-    linear-gradient(90deg, rgba(255, 253, 248, 0.91) 0%, rgba(255, 252, 247, 0.84) 46%, rgba(255, 248, 238, 0.6) 72%, rgba(237, 247, 242, 0.52) 100%),
-    linear-gradient(180deg, rgba(255, 253, 248, 0.3), rgba(255, 250, 243, 0.54)),
-    url("./assets/hr-office-bg.jpg") 46% 47% / 112% auto no-repeat,
+    url("./assets/hr-office-bg.jpg") center 44% / cover no-repeat,
     rgba(255, 252, 246, 0.86);
 }
 
 .blog-head::after {
   background:
-    linear-gradient(110deg, transparent 0 18%, color-mix(in srgb, var(--detail-accent) 5%, rgba(255, 253, 248, 0.38)) 18.2% 100%),
-    linear-gradient(90deg, rgba(255, 253, 248, 0), rgba(255, 253, 248, 0.18));
+    linear-gradient(90deg, rgba(255, 253, 248, 0.96) 0%, rgba(255, 253, 248, 0.91) 42%, rgba(255, 248, 238, 0.72) 72%, rgba(237, 247, 242, 0.56) 100%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.2), rgba(255, 250, 243, 0.42));
 }
 
 .post-list-actions {
