@@ -11537,18 +11537,7 @@ body {
 }
 
 .blog-head::before {
-  top: 0;
-  left: 0;
-  z-index: 2;
-  display: block;
-  width: min(360px, 40%);
-  height: 4px;
-  background: linear-gradient(90deg, var(--detail-accent), rgba(217, 179, 107, 0.5), transparent);
-  border: 0;
-  border-radius: 24px 0 999px 0;
-  box-shadow: none;
-  opacity: 0.76;
-  transform: none;
+  display: none;
 }
 
 .blog-head::after {
